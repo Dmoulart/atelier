@@ -1,13 +1,26 @@
 <template>
-  <div>
-    <!-- <NuxtWelcome /> -->
-    <el-button @click="ElMessage('hello')">button</el-button>
-    <ElButton :icon="ElIconEditPen" type="success">button</ElButton>
-    <LazyElButton type="warning">lazy button</LazyElButton>
-    <el-carousel indicator-position="outside">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
-  </div>
+  <div><Navbar /> <NuxtPage /></div>
 </template>
+<script setup lang="ts">
+useHead({
+  title: "L'Atelier de St Guénolé",
+  link: [
+    {
+      rel: "stylesheet",
+      href: "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;70",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css",
+      integrity:
+        "sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==",
+      crossorigin: "anonymous",
+      referrerpolicy: "no-referrer",
+    },
+  ],
+});
+</script>
