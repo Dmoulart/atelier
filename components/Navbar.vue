@@ -16,7 +16,7 @@
     <div id="navmenu" class="navbar-menu">
       <div class="navbar-start" />
       <div class="navbar-end">
-        <NuxtLink v-for="item in menu" :to="item.link" class="navbar-item mx-2">
+        <NuxtLink v-for="item in menu" :to="item.link" class="navbar-item">
           <span class="icon mr-1">
             <i :class="item.icon"></i>
           </span>
@@ -54,3 +54,9 @@ const menu: Readonly<MenuItem[]> = [
   },
 ];
 </script>
+
+<style lang="scss">
+// .navbar {
+//   font-size: 1.25rem;
+// }
+</style>

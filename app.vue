@@ -1,5 +1,8 @@
 <template>
-  <div><Navbar /> <NuxtPage /></div>
+  <main class="page">
+    <Navbar class="page__nav" />
+    <NuxtPage />
+  </main>
 </template>
 <script setup lang="ts">
 useHead({
@@ -24,3 +27,30 @@ useHead({
   ],
 });
 </script>
+<style lang="scss">
+body {
+  font-family: "Comfortaa", Arial, Helvetica, sans-serif;
+}
+
+.page {
+  display: grid;
+  grid-template-areas: "nav nav nav" "content content content" "footer footer footer";
+  grid-template-columns: minmax(20px, auto) minmax(auto, 1040px) minmax(
+      20px,
+      auto
+    );
+
+  &__nav {
+    grid-area: nav;
+  }
+
+  > .section {
+    grid-area: content;
+    grid-column: 2;
+
+    &--full-width {
+      grid-column: 1/-1;
+    }
+  }
+}
+</style>
