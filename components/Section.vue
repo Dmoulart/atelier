@@ -20,16 +20,14 @@ const {fullWidth = false} = defineProps<{fullWidth?: boolean}>();
     );
   width: 100%;
 
-  &--full-width {
-    grid-column: 1/-1;
-
-    > * {
-      grid-column: 2;
-    }
-  }
-
   > * {
     grid-column: 2;
+  }
+
+  &--full-width {
+    > * {
+      grid-column: 1/-1;
+    }
   }
 }
 

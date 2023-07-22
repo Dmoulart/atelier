@@ -13,7 +13,7 @@ useHead({
     },
     {
       rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;70",
+      href: "https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700",
     },
     {
       rel: "stylesheet",
@@ -28,6 +28,7 @@ useHead({
 </script>
 <style lang="scss">
 body {
-  font-family: "Comfortaa", Arial, Helvetica, sans-serif;
+  font-family: Comfortaa, Arial, Helvetica, sans-serif;
+  color: rgb(74, 74, 74);
 }
 </style>

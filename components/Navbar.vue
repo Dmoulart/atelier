@@ -17,7 +17,7 @@
       <div class="navbar-start" />
       <div class="navbar-end">
         <NuxtLink v-for="item in menu" :to="item.link" class="navbar-item">
-          <span class="icon mr-1">
+          <span class="icon mr-2">
             <i :class="item.icon"></i>
           </span>
           {{ item.label }}
@@ -75,3 +75,12 @@ onMounted(() => {
   });
 });
 </script>
+<style lang="scss">
+.navbar-item {
+  display: flex;
+  align-items: baseline;
+  font-variant-caps: petite-caps;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+</style>
