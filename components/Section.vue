@@ -12,7 +12,7 @@
 const {fullWidth = false} = defineProps<{fullWidth?: boolean}>();
 </script>
 <style lang="scss">
-section.section {
+.section {
   display: grid;
   grid-template-columns: minmax(20px, auto) minmax(auto, 1040px) minmax(
       20px,
