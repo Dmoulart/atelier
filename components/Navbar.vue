@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-transparent">
+  <nav class="navbar is-transparent navbar--absolute">
     <div class="navbar-brand">
       <div
         class="navbar-burger"
@@ -76,6 +76,15 @@ onMounted(() => {
 });
 </script>
 <style lang="scss">
+.navbar {
+  width: 100%;
+  &--absolute.navbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
 .navbar-item {
   display: flex;
   align-items: baseline;

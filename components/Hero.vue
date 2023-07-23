@@ -9,8 +9,6 @@
 <script setup lang="ts"></script>
 <style lang="scss">
 .hero-section {
-  height: 90vh;
-
   &__title {
     margin-top: 15vh;
     font-size: clamp(2rem, 10vw, 6rem);

@@ -19,6 +19,7 @@ const {fullWidth = false} = defineProps<{fullWidth?: boolean}>();
       auto
     );
   width: 100%;
+  height: 100vh;
 
   > * {
     grid-column: 2;
