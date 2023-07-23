@@ -31,9 +31,4 @@ const {fullWidth = false} = defineProps<{fullWidth?: boolean}>();
     }
   }
 }
-
-// override bulma padding. find a way to make this cleaner
-section.section {
-  padding: 0;
-}
 </style>
