@@ -49,51 +49,11 @@
       Vous avez une question, une suggestion ou souhaitez simplement prendre
       contact ? N'hésitez pas à m'envoyer un petit mot 🙃.
     </p>
-
-    <form
-      action="mailto:dorian.moulart@gmail.com?subject=ContactArtTherapie:"
-      method="get"
-      enctype="text/plain"
-      class="contact-form mx-auto mt-5"
-    >
-      <div class="field">
-        <label class="label" for="email">Email</label>
-        <div class="control has-icons-left has-icons-right">
-          <input
-            id="email"
-            class="input is-medium"
-            type="email"
-            placeholder="Votre adresse email"
-            required
-          />
-          <span class="icon is-medium is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-          <span class="icon is-medium is-right">
-            <i class="fas fa-check"></i>
-          </span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label" for="subject">Message</label>
-        <div class="control">
-          <textarea
-            id="subject"
-            class="textarea"
-            name="subject"
-            placeholder="Votre message"
-            required
-          ></textarea>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="control">
-          <button class="button is-link">Envoyer</button>
-        </div>
-      </div>
-    </form>
+    <ContactForm
+      mailto="dorian.moulart@gmail.com"
+      :subject="`L'atelier de St-Gué`"
+      class="mt-5"
+    />
   </Content>
 </template>
 <script setup lang="ts"></script>
