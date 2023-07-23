@@ -36,7 +36,7 @@ const props = defineProps<{align?: "left" | "right" | "center"}>();
 
   p {
     line-height: 2.5;
-    max-width: 780px;
+    max-width: 780px; // too wide paragraph hurt the head
   }
 
   @for $i from 1 to 6 {
