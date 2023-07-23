@@ -9,10 +9,6 @@ useHead({
   link: [
     {
       rel: "stylesheet",
-      href: "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css",
-    },
-    {
-      rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700",
     },
     {
@@ -28,7 +24,6 @@ useHead({
 </script>
 <style lang="scss">
 body {
-  font-family: Comfortaa, Arial, Helvetica, sans-serif;
   color: rgb(74, 74, 74);
 }
 </style>

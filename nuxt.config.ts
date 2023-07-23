@@ -1,6 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {enabled: true},
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+          @import "@/style/responsive.scss";
+          @import "@/style/global.scss";
+          `,
+        },
+      },
+    },
+  },
   // modules: ["@nuxtjs/tailwindcss"],
 
   // meta: {
