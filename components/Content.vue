@@ -7,7 +7,7 @@
     }"
   >
     <div class="content-block__body">
-      <div class="content-block__img">
+      <div v-if="$slots.image" class="content-block__img">
         <slot name="image" />
       </div>
       <div class="content-block__text">
