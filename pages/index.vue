@@ -21,5 +21,34 @@
       Penmarch.
     </p>
   </Content>
+
+  <Content align="left">
+    <template #image>
+      <figure class="image is-4-by-5">
+        <img alt="Tableau" src="brush-strokes.png" loading="lazy" />
+      </figure>
+    </template>
+    <h2>La galerie</h2>
+    <p>
+      Visiter l’Atelier est aussi l’occasion de découvrir les
+      <NuxtLink to="galerie"> créations originales de Marie-Laure</NuxtLink> ou
+      de lui passer une commande personnalisée.
+    </p>
+    <h2>L'art thérapie</h2>
+    <p>
+      Vous pouvez bénéficier à l’Atelier de
+      <NuxtLink to="art-therapie">séances d’art thérapie</NuxtLink> : un
+      accompagnement thérapeutique individualisé qui exploite votre potentiel
+      artistique pour retrouver sérénité et joie de vivre.
+    </p>
+  </Content>
+
+  <Content align="center">
+    <h2 id="contact">Contact</h2>
+    <p>
+      Vous avez une question, une suggestion ou souhaitez simplement prendre
+      contact ? N'hésitez pas à m'envoyer un petit mot 🙃.
+    </p>
+  </Content>
 </template>
 <script setup lang="ts"></script>

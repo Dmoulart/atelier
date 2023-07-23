@@ -22,8 +22,4 @@ useHead({
   ],
 });
 </script>
-<style lang="scss">
-body {
-  color: rgb(74, 74, 74);
-}
-</style>
+<style lang="scss"></style>
