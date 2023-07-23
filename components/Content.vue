@@ -2,11 +2,16 @@
   <Section
     class="content-block"
     :class="{
-      'content-block--left': props.align === 'left',
-      'content-block--center': props.align === 'center',
+      'content-block--align-left': props.align === 'left',
+      'content-block--align-center': props.align === 'center',
     }"
   >
-    <div class="content-block__body">
+    <div
+      class="content-block__body"
+      :class="{
+        'my-auto': props.centered,
+      }"
+    >
       <div v-if="$slots.image" class="content-block__img">
         <slot name="image" />
       </div>
@@ -17,7 +22,10 @@
   </Section>
 </template>
 <script setup lang="ts">
-const props = defineProps<{align?: "left" | "right" | "center"}>();
+const props = defineProps<{
+  align?: "left" | "right" | "center";
+  centered?: boolean;
+}>();
 </script>
 <style lang="scss">
 .content-block {
@@ -40,7 +48,7 @@ const props = defineProps<{align?: "left" | "right" | "center"}>();
   }
 
   @for $i from 1 to 6 {
-    &--center {
+    &--align-center {
       h#{$i},
       p {
         @extend .has-text-centered;
@@ -56,7 +64,7 @@ const props = defineProps<{align?: "left" | "right" | "center"}>();
     }
   }
 
-  &--center {
+  &--align-center {
     .content-block__body {
       justify-content: center;
     }
@@ -72,7 +80,7 @@ const props = defineProps<{align?: "left" | "right" | "center"}>();
       max-width: 50%;
     }
 
-    &--left {
+    &--align-left {
       .content-block__img {
         order: 0;
       }

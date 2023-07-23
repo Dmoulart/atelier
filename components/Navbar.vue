@@ -50,7 +50,7 @@ const menu: Readonly<MenuItem[]> = [
   {
     label: "Contact",
     icon: "fa-solid fa-envelope",
-    link: "/",
+    link: "/#contact",
   },
 ];
 
