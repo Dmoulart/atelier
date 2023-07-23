@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     ["./modules/gallery", {path: "public/images/gallery"}],
   ],
+
   devtools: {enabled: true},
   vite: {
     css: {
