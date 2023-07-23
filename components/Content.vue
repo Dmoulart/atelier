@@ -1,14 +1,11 @@
 <template>
-  <Section
-    class="text-img-block"
-    :class="{'text-img-block--left': props.align === 'left'}"
-  >
-    <div class="text-img-block__content">
-      <div class="text-img-block__img">
+  <Section class="content" :class="{'content--left': props.align === 'left'}">
+    <div class="content__body">
+      <div class="content__img">
         <slot name="image" />
       </div>
-      <div class="text-img-block__text">
-        <slot name="text" />
+      <div class="content__text">
+        <slot />
       </div>
     </div>
   </Section>
@@ -17,8 +14,8 @@
 const props = defineProps<{align?: "left" | "right"}>();
 </script>
 <style lang="scss">
-.text-img-block {
-  &__content {
+.content {
+  &__body {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -43,12 +40,12 @@ const props = defineProps<{align?: "left" | "right"}>();
   }
 
   @include sm {
-    &__content {
+    &__body {
       flex-direction: row;
     }
 
     &--left {
-      .text-img-block__img {
+      .content__img {
         order: 0;
       }
     }
