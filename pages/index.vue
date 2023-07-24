@@ -2,14 +2,12 @@
   <Hero />
   <Content centered>
     <template #image>
-      <figure class="image is-4-by-5">
-        <nuxt-img
-          alt="Marie-Laure Moulart Barcelo"
-          src="/mlmb.jpg"
-          format="webp"
-          loading="lazy"
-        />
-      </figure>
+      <nuxt-img
+        alt="Marie-Laure Moulart Barcelo"
+        src="/mlmb.jpg"
+        format="webp"
+        loading="lazy"
+      />
     </template>
     <h2>Venez rencontrer...</h2>
     <p>
@@ -29,16 +27,14 @@
 
   <Content align="left" centered>
     <template #image>
-      <figure class="image is-4-by-5">
-        <nuxt-img
-          alt="Tableau"
-          format="webp"
-          src="/brush-strokes.png"
-          loading="lazy"
-          width="500"
-          height="600"
-        />
-      </figure>
+      <nuxt-img
+        alt="Tableau"
+        format="webp"
+        src="/brush-strokes.png"
+        loading="lazy"
+        width="500"
+        height="600"
+      />
     </template>
     <h2>La galerie</h2>
     <p>

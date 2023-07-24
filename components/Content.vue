@@ -37,6 +37,7 @@ const props = defineProps<{
   &__body {
     display: flex;
     flex-direction: column;
+    height: 100%;
     gap: 24px;
   }
 
@@ -46,8 +47,13 @@ const props = defineProps<{
     order: 1;
     flex-grow: 1;
     min-width: 40%; // ??
+    height: 100%;
+
     img {
+      display: block;
+      height: 100%;
       max-height: 100vh;
+      object-fit: cover;
     }
   }
 
@@ -68,6 +74,7 @@ const props = defineProps<{
       }
     }
 
+    // automatic title bulma styling inside content
     h#{$i} {
       @extend .is-#{$i} !optional;
       @extend .title !optional;

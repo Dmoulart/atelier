@@ -1,14 +1,12 @@
 <template>
-  <Content centered class="mt-5">
+  <Content view="auto">
     <template #image>
-      <figure class="image is-4-by-5">
-        <nuxt-img
-          alt="Image d'un cours se déroulant à l'atelier"
-          src="gallery/Cours_atelier.jpg"
-          format="webp"
-          loading="lazy"
-        />
-      </figure>
+      <nuxt-img
+        alt="Image d'un cours se déroulant à l'atelier"
+        src="gallery/Cours_atelier.jpg"
+        format="webp"
+        loading="lazy"
+      />
     </template>
 
     <h2>Les cours et stages de mosaiques</h2>
