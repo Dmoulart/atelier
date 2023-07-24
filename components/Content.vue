@@ -5,6 +5,10 @@
       'content-block--align-left': props.align === 'left',
       'content-block--align-center': props.align === 'center',
     }"
+    :style="{
+      background,
+    }"
+    v-bind="$attrs"
   >
     <div
       class="content-block__body"
@@ -25,6 +29,7 @@
 const props = defineProps<{
   align?: "left" | "right" | "center";
   centered?: boolean;
+  background?: string;
 }>();
 </script>
 <style lang="scss">
@@ -36,15 +41,23 @@ const props = defineProps<{
   }
 
   &__img {
+    display: flex;
+    place-items: center;
     order: 1;
+    flex-grow: 1;
+    min-width: 40%; // ??
     img {
       max-height: 100vh;
     }
   }
 
+  &__text {
+    flex-grow: 1;
+  }
+
   p {
     line-height: 2.5;
-    max-width: 780px; // too wide paragraph hurt the head
+    // max-width: 780px; // too wide paragraph hurt the head
   }
 
   @for $i from 1 to 6 {

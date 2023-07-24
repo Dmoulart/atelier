@@ -3,13 +3,17 @@
     class="section"
     :class="{
       'section--full-width': fullWidth,
+      'section--view-auto': view === 'auto',
     }"
   >
     <slot />
   </section>
 </template>
 <script setup lang="ts">
-const {fullWidth = false} = defineProps<{fullWidth?: boolean}>();
+const {fullWidth = false} = defineProps<{
+  fullWidth?: boolean;
+  view?: "viewport" | "auto";
+}>();
 </script>
 <style lang="scss">
 .section {
@@ -20,6 +24,10 @@ const {fullWidth = false} = defineProps<{fullWidth?: boolean}>();
     );
   width: 100%;
   min-height: 100vh;
+
+  &--view-auto {
+    min-height: auto;
+  }
 
   > * {
     grid-column: 2;
