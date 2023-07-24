@@ -1,6 +1,6 @@
 <template>
   <Content view="auto">
-    <template #image>
+    <template #media>
       <nuxt-img
         alt="Image d'un cours se déroulant à l'atelier"
         src="gallery/Cours_atelier.jpg"
@@ -27,7 +27,7 @@
   </Content>
 
   <Content align="left" centered view="auto">
-    <template #image>
+    <template #media>
       <figure class="image is-4-by-5">
         <nuxt-img
           alt="Image d'un cours se déroulant à l'atelier"
@@ -76,7 +76,7 @@
   </Content>
 
   <Content centered view="auto" class="my-5">
-    <template #image>
+    <template #media>
       <PricesTable />
     </template>
 

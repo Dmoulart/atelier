@@ -16,8 +16,8 @@
         'my-auto': props.centered,
       }"
     >
-      <div v-if="$slots.image" class="content-block__img">
-        <slot name="image" />
+      <div v-if="$slots.media" class="content-block__media">
+        <slot name="media" />
       </div>
       <div class="content-block__text">
         <slot />
@@ -41,7 +41,7 @@ const props = defineProps<{
     gap: 24px;
   }
 
-  &__img {
+  &__media {
     display: flex;
     place-items: center;
     order: 1;
@@ -96,12 +96,12 @@ const props = defineProps<{
       gap: 48px;
     }
 
-    &__img {
+    &__media {
       max-width: 50%;
     }
 
     &--align-left {
-      .content-block__img {
+      .content-block__media {
         order: 0;
       }
     }

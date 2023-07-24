@@ -1,7 +1,7 @@
 <template>
   <Hero />
   <Content centered>
-    <template #image>
+    <template #media>
       <nuxt-img
         alt="Marie-Laure Moulart Barcelo"
         src="/mlmb.jpg"
@@ -26,12 +26,12 @@
   </Content>
 
   <Content align="left" centered>
-    <template #image>
+    <template #media>
       <nuxt-img
         alt="Tableau"
-        format="webp"
         src="/brush-strokes.png"
         loading="lazy"
+        format="webp"
         width="500"
         height="600"
       />

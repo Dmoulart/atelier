@@ -1,6 +1,6 @@
 <template>
   <Content centered align="left">
-    <template #image>
+    <template #media>
       <nuxt-img
         src="./gallery/ArtTherap1.jpg"
         alt="Oeuvre représentant des oiseaux"
