@@ -3,7 +3,7 @@
     class="section"
     :class="{
       'section--full-width': fullWidth,
-      'section--view-auto': view === 'auto',
+      'section--view-fill': view === 'fill',
     }"
   >
     <slot />
@@ -12,7 +12,7 @@
 <script setup lang="ts">
 const {fullWidth = false} = defineProps<{
   fullWidth?: boolean;
-  view?: "viewport" | "auto";
+  view?: "fill";
 }>();
 </script>
 <style lang="scss">
@@ -25,10 +25,10 @@ $max-content-width: 1040px;
     minmax($min-margin, auto) minmax(auto, $max-content-width)
     minmax($min-margin, auto);
   width: 100%;
-  min-height: $section-min-height;
+  min-height: auto;
 
-  &--view-auto {
-    min-height: auto;
+  &--view-fill {
+    min-height: $section-min-height;
   }
 
   > * {

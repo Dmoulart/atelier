@@ -4,10 +4,12 @@
     :class="{
       'content-block--align-left': props.align === 'left',
       'content-block--align-center': props.align === 'center',
+      'content-block--view-fill': props.view === 'fill',
     }"
     :style="{
       background,
     }"
+    :view="props.view"
     v-bind="$attrs"
   >
     <div class="content-block__body">
@@ -22,36 +24,48 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
+  view?: "fill";
   align?: "left" | "right" | "center";
   background?: string;
 }>();
 </script>
 <style lang="scss">
 .content-block {
+  p {
+    line-height: 2.5;
+    // max-width: 780px; // too wide paragraph hurt the head
+  }
+
   &__body {
     display: flex;
     flex-direction: column;
-    height: 100%;
     gap: 24px;
   }
 
   &__media {
-    display: flex;
-    place-items: center;
     order: 1;
     min-width: 40%; // ??
-    height: 100%;
 
     img {
       display: block;
-      height: 100%;
       object-fit: cover;
     }
   }
 
-  p {
-    line-height: 2.5;
-    // max-width: 780px; // too wide paragraph hurt the head
+  &--view-fill {
+    .content-block {
+      &__body {
+        height: 100%;
+      }
+
+      &__media {
+        height: 100%;
+
+        img {
+          height: 100%;
+        }
+      }
+    }
   }
 
   @for $i from 1 to 6 {

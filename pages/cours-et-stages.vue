@@ -1,5 +1,5 @@
 <template>
-  <Content view="auto">
+  <Content view="fill">
     <template #media>
       <nuxt-img
         alt="Image d'un cours se déroulant à l'atelier"
@@ -26,7 +26,7 @@
     </p>
   </Content>
 
-  <Content align="left" view="auto">
+  <Content align="left">
     <template #media>
       <figure class="image is-4-by-5">
         <nuxt-img
@@ -49,7 +49,7 @@
     </p>
   </Content>
 
-  <Content align="center" background="aliceblue" view="auto" class="my-5">
+  <Content align="center" background="aliceblue" class="my-5">
     <p>
       L’atelier vous propose des séances de 2 heures qui se déroulent soit le
       matin de 10h à 12h soit l’après-midi de 14h30 à 16h30, ainsi qu’un cours
@@ -57,7 +57,7 @@
     </p>
   </Content>
 
-  <Content view="auto" class="my-5">
+  <Content class="my-5">
     <h2 class="has-text-centered">Groupes colonies et écoles</h2>
     <p>
       L’Atelier propose d’animer un atelier mosaïque auprès d’enfant en
@@ -75,7 +75,7 @@
     </p>
   </Content>
 
-  <Content view="auto" class="my-5">
+  <Content class="my-5">
     <template #media>
       <PricesTable />
     </template>

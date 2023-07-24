@@ -1,6 +1,6 @@
 <template>
   <Hero />
-  <Content>
+  <Content view="fill">
     <template #media>
       <nuxt-img
         alt="Marie-Laure Moulart Barcelo"
@@ -25,7 +25,7 @@
     </p>
   </Content>
 
-  <Content align="left">
+  <Content align="left" view="fill">
     <template #media>
       <nuxt-img
         alt="Tableau"
