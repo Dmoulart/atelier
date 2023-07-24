@@ -4,4 +4,8 @@ $family-serif: "Comfortaa", serif;
 $family-primary: $family-serif;
 $text: rgb(74, 74, 74);
 $link: #6ea4b6;
+
+html {
+    scroll-behavior: smooth;
+}
 @import "../node_modules/bulma/bulma.sass";

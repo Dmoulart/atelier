@@ -26,7 +26,7 @@
     </p>
   </Content>
 
-  <Content align="left" centered view="auto">
+  <Content align="left" view="auto">
     <template #media>
       <figure class="image is-4-by-5">
         <nuxt-img
@@ -57,7 +57,7 @@
     </p>
   </Content>
 
-  <Content centered view="auto" class="my-5">
+  <Content view="auto" class="my-5">
     <h2 class="has-text-centered">Groupes colonies et écoles</h2>
     <p>
       L’Atelier propose d’animer un atelier mosaïque auprès d’enfant en
@@ -75,7 +75,7 @@
     </p>
   </Content>
 
-  <Content centered view="auto" class="my-5">
+  <Content view="auto" class="my-5">
     <template #media>
       <PricesTable />
     </template>

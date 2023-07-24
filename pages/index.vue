@@ -1,6 +1,6 @@
 <template>
   <Hero />
-  <Content centered>
+  <Content>
     <template #media>
       <nuxt-img
         alt="Marie-Laure Moulart Barcelo"
@@ -25,7 +25,7 @@
     </p>
   </Content>
 
-  <Content align="left" centered>
+  <Content align="left">
     <template #media>
       <nuxt-img
         alt="Tableau"
@@ -51,7 +51,7 @@
     </p>
   </Content>
 
-  <Content align="center" centered>
+  <Content align="center">
     <h2 id="contact">Contact</h2>
     <p>
       Vous avez une question, une suggestion ou souhaitez simplement prendre

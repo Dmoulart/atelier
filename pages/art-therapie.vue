@@ -1,5 +1,5 @@
 <template>
-  <Content centered align="left">
+  <Content align="left">
     <template #media>
       <nuxt-img
         src="./gallery/ArtTherap1.jpg"

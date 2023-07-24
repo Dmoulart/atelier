@@ -10,12 +10,7 @@
     }"
     v-bind="$attrs"
   >
-    <div
-      class="content-block__body"
-      :class="{
-        'my-auto': props.centered,
-      }"
-    >
+    <div class="content-block__body">
       <div v-if="$slots.media" class="content-block__media">
         <slot name="media" />
       </div>
@@ -28,7 +23,6 @@
 <script setup lang="ts">
 const props = defineProps<{
   align?: "left" | "right" | "center";
-  centered?: boolean;
   background?: string;
 }>();
 </script>
