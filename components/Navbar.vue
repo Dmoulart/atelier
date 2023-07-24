@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-transparent navbar--absolute">
+  <nav class="navbar is-transparent navbar--sticky">
     <div class="navbar-brand">
       <div
         class="navbar-burger"
@@ -32,32 +32,9 @@
   </nav>
 </template>
 <script setup lang="ts">
-type MenuItem = {
-  label: string;
-  icon: string;
-  link: string;
-};
+import { MenuItem } from "~/types/menu";
 
-const menu: Readonly<MenuItem[]> = [
-  {label: "Accueil", icon: "fas fa-home", link: "/"},
-  {label: "Commandes", icon: "fa-solid fa-paintbrush", link: "/commandes"},
-  {label: "Galerie", icon: "fa-solid fa-palette", link: "/galerie"},
-  {
-    label: "Cours de mosaïque",
-    icon: "fa-solid fa-person-chalkboard",
-    link: "/cours-et-stages",
-  },
-  {
-    label: "Art thérapie",
-    icon: "fa-solid fa-hand-holding-hand",
-    link: "/art-therapie",
-  },
-  {
-    label: "Contact",
-    icon: "fa-solid fa-envelope",
-    link: "/#contact",
-  },
-];
+defineProps<{menu: MenuItem[]}>();
 
 function closeMenu() {
   // Get all "navbar-burger" elements
@@ -100,8 +77,8 @@ onMounted(() => {
 <style lang="scss">
 .navbar {
   width: 100%;
-  &--absolute.navbar {
-    position: absolute;
+  &--sticky.navbar {
+    position: sticky;
     top: 0;
     right: 0;
   }

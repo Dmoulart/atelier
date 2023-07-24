@@ -1,5 +1,5 @@
 <template>
-  <Section class="hero-section">
+  <Section class="hero-section" view="fill">
     <h1 class="hero-section__title">
       L ' Atelier <br />
       &nbsp;de Saint-Gué

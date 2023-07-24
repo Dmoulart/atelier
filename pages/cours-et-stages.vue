@@ -77,7 +77,7 @@
 
   <Content class="my-5">
     <template #media>
-      <PricesTable />
+      <PricesTable style="height: 100%" />
     </template>
 
     <h2 class="has-text-centered">Tarifs de l'Atelier de Saint Gué</h2>
