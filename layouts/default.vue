@@ -7,14 +7,19 @@
   </main>
 </template>
 <style lang="scss">
-$first-section-margin-top: 8rem;
+// $first-section-margin-top: 8rem;
 .page {
   display: flex;
   flex-direction: column;
 
+  --first-section-mt: 2rem;
+  @include sm {
+    --first-section-mt: 8rem;
+  }
+
   .section:first-of-type {
-    margin-top: $first-section-margin-top;
-    min-height: calc(100vh - $first-section-margin-top);
+    margin-top: var(--first-section-mt);
+    min-height: calc($section-min-height - var(--first-section-mt));
   }
 }
 </style>

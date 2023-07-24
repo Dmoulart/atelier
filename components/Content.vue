@@ -39,20 +39,14 @@ const props = defineProps<{
     display: flex;
     place-items: center;
     order: 1;
-    flex-grow: 1;
     min-width: 40%; // ??
     height: 100%;
 
     img {
       display: block;
       height: 100%;
-      max-height: 100vh;
       object-fit: cover;
     }
-  }
-
-  &__text {
-    flex-grow: 1;
   }
 
   p {

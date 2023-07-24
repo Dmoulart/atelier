@@ -16,14 +16,16 @@ const {fullWidth = false} = defineProps<{
 }>();
 </script>
 <style lang="scss">
+$min-margin: 20px;
+$max-content-width: 1040px;
+
 .section {
   display: grid;
-  grid-template-columns: minmax(20px, auto) minmax(auto, 1040px) minmax(
-      20px,
-      auto
-    );
+  grid-template-columns:
+    minmax($min-margin, auto) minmax(auto, $max-content-width)
+    minmax($min-margin, auto);
   width: 100%;
-  min-height: 100vh;
+  min-height: $section-min-height;
 
   &--view-auto {
     min-height: auto;
@@ -38,5 +40,10 @@ const {fullWidth = false} = defineProps<{
       grid-column: 1/-1;
     }
   }
+}
+
+section.section {
+  //override bulma padding
+  padding: 3rem 0;
 }
 </style>
