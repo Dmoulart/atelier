@@ -1,25 +1,25 @@
 <template>
-  <Section
-    class="hero-section"
-    view="fill"
-    :parallax="{src: `/gallery/Tables/TableMosaiqueZoom1.jpg`}"
-  >
-    <h1 class="hero-section__title">
-      L ' Atelier <br />
-      &nbsp;de Saint-Gué
-    </h1></Section
-  >
+  <Section class="hero-section" view="fill" :parallax="{src: bgImage}">
+    <slot />
+  </Section>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{bgImage: string}>();
+</script>
 <style lang="scss">
 .hero-section {
-  &__title {
+  &__title,
+  h1,
+  h2,
+  h3 {
     font-size: clamp(2rem, 10vw, 6rem);
     font-weight: 500;
+    margin-top: calc(var(--first-section-mt) * 0.5);
     // color: #5c5c5c;
     color: white;
     z-index: 2;
   }
+
   &__slider {
     position: absolute;
     top: 0;

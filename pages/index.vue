@@ -1,5 +1,10 @@
 <template>
-  <Hero />
+  <Hero bg-image="/gallery/Tables/TableMosaiqueZoom1.jpg"
+    ><h1>
+      L ' Atelier <br />
+      &nbsp;de Saint-Gué
+    </h1></Hero
+  >
   <Content view="fill">
     <template #media>
       <nuxt-img

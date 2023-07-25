@@ -21,7 +21,9 @@ const {fullWidth = false, parallax} = defineProps<{
 const img = useImage();
 const backgroundStyle = computed(() => {
   if (parallax) {
-    const imgUrl = img(parallax.src);
+    const imgUrl = img(parallax.src, {
+      format: "webp",
+    });
     return {backgroundImage: `url('${imgUrl}')`};
   } else {
     return "";

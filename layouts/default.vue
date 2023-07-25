@@ -41,13 +41,16 @@ const menu: MenuItem[] = [
     flex-grow: 1;
   }
 
-  --first-section-mt: 0;
+  --first-section-mt: $nav-height;
   @include sm {
-    --first-section-mt: 2rem;
+    --first-section-mt: calc(2rem + #{$nav-height});
   }
 
-  .section:first-of-type::not(.hero-section) {
+  .section:first-of-type {
     margin-top: var(--first-section-mt);
+    &.hero-section {
+      margin-top: 0; // don't put a margin for the hero section
+    }
   }
 }
 </style>

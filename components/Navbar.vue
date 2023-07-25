@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-transparent navbar--sticky">
+  <nav class="navbar is-transparent navbar--sticky topbar">
     <div class="navbar-brand">
       <div
         class="navbar-burger"
@@ -77,10 +77,26 @@ onMounted(() => {
 <style lang="scss">
 .navbar {
   width: 100%;
+  background: transparent !important;
+
   &--sticky.navbar {
-    position: sticky;
+    position: absolute;
     top: 0;
     right: 0;
+  }
+}
+
+.navbar-menu {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  background: transparent;
+}
+
+.topbar {
+  .navbar-item {
+    color: white;
   }
 }
 
@@ -90,13 +106,6 @@ onMounted(() => {
   font-variant-caps: petite-caps;
   font-weight: bold;
   font-size: 1.1rem;
-}
-
-.navbar-menu {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  width: 100%;
 }
 
 @include sm {
