@@ -6,7 +6,7 @@
       </p>
       <p>
         <address>
-            125 Rue de la Joie 29760, 29760 Penmarc'h
+            125 Rue de la Joie, 29760 Penmarc'h
         </address>
       </p>
       

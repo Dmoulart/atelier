@@ -13,11 +13,9 @@
         <nuxt-img
           :src="img.src"
           class="carousel__img"
-          :style="{
-            height: '512px',
-            width: '100%',
-            'object-fit': 'cover',
-          }"
+          loading="lazy"
+          format="webp"
+          height="1024"
         />
       </slide>
 
