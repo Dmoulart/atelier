@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar is-transparent navbar--sticky topbar">
+  <nav
+    class="navbar is-transparent navbar--sticky"
+    :class="{'navbar--transparent': transparent}"
+  >
     <div class="navbar-brand">
       <div
         class="navbar-burger"
@@ -22,7 +25,7 @@
           class="navbar-item"
           @click="closeMenu"
         >
-          <span class="icon mr-2">
+          <span class="icon mr-2" :style="{height: '1rem', width: '1rem'}">
             <i :class="item.icon"></i>
           </span>
           {{ item.label }}
@@ -34,7 +37,7 @@
 <script setup lang="ts">
 import {MenuItem} from "~/types/menu";
 
-defineProps<{menu: MenuItem[]}>();
+defineProps<{menu: MenuItem[]; transparent?: boolean}>();
 
 function closeMenu() {
   // Get all "navbar-burger" elements
@@ -52,6 +55,9 @@ function closeMenu() {
     el.classList.remove("is-active");
     $target.classList.remove("is-active");
   });
+
+  const navbarBrand = document.querySelector(".navbar-brand");
+  navbarBrand?.classList.remove("is-active");
 }
 
 onMounted(() => {
@@ -60,6 +66,8 @@ onMounted(() => {
     document.querySelectorAll(".navbar-burger"),
     0
   );
+
+  const navbarBrand = document.querySelector(".navbar-brand");
 
   // Add a click event on each of them
   $navbarBurgers.forEach((el) => {
@@ -70,6 +78,7 @@ onMounted(() => {
       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
       el.classList.toggle("is-active");
       $target.classList.toggle("is-active");
+      navbarBrand?.classList.toggle("is-active");
     });
   });
 });
@@ -77,12 +86,41 @@ onMounted(() => {
 <style lang="scss">
 .navbar {
   width: 100%;
-  background: transparent !important;
 
   &--sticky.navbar {
     position: absolute;
     top: 0;
     right: 0;
+  }
+
+  &--transparent {
+    background: transparent !important;
+    .navbar-menu {
+      &.is-active {
+        background: white;
+
+        .navbar-item {
+          color: black;
+        }
+      }
+      background: transparent;
+
+      .navbar-item {
+        color: white;
+      }
+    }
+
+    .navbar-brand {
+      &.is-active {
+        background: white;
+      }
+    }
+
+    .navbar-burger {
+      span {
+        background-color: white;
+      }
+    }
   }
 }
 
@@ -91,13 +129,6 @@ onMounted(() => {
   top: 50px;
   left: 0;
   width: 100%;
-  background: transparent;
-}
-
-.topbar {
-  .navbar-item {
-    color: white;
-  }
 }
 
 .navbar-item {

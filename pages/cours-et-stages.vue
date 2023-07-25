@@ -1,4 +1,8 @@
 <template>
+  <Hero bg-image="/gallery/CoupesEtPlateaux/plateauPoisson2.jpg">
+    <h1>Cours et stages de mosaique</h1>
+  </Hero>
+
   <Content view="fill">
     <template #media>
       <nuxt-img
@@ -9,16 +13,18 @@
       />
     </template>
 
-    <h2>Les cours et stages de mosaiques</h2>
+    <h2>Des stages pour tout niveau</h2>
 
     <p>
       L’atelier organise à l’année des cours et des stages pour enfants ados et
       adultes, groupes scolaires, colonies, etc.
     </p>
+
     <p>
       Débutant ou initié, vous pourrez apprendre les techniques de base ou
       progresser sur de nouvelles créations.
     </p>
+
     <p>
       Dans une ambiance calme et conviviale, venez réaliser une mosaïque.
       Enfants, ados et adultes, en groupe : les cours s’adaptent. Laissez votre

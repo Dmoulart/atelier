@@ -1,6 +1,10 @@
 <template>
-  <Content>
+  <Hero bg-image="/gallery/Commandes/Mosaique3.jpg">
     <h1>Créations sur commande</h1>
+  </Hero>
+
+  <Content>
+    <h2>Des oeuvres personnalisées</h2>
     <p>
       L’atelier vous propose des créations personnelles comme du mobilier, de
       l’art de la table, des tableaux, des fresques intérieures et extérieures.

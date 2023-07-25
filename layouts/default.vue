@@ -1,6 +1,6 @@
 <template>
   <main class="page">
-    <Navbar :menu="menu" />
+    <Navbar :menu="menu" transparent />
     <div class="page__content">
       <slot />
     </div>

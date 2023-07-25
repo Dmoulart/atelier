@@ -1,8 +1,11 @@
 <template>
+  <Hero bg-image="/gallery/ArtTherap1.jpg">
+    <h1>Art thérapie</h1>
+  </Hero>
   <Content align="left" view="fill">
     <template #media>
       <nuxt-img
-        src="./gallery/ArtTherap1.jpg"
+        src="./gallery/ArtTherap2.jpg"
         alt="Oeuvre représentant des oiseaux"
         format="webp"
         height="500"
