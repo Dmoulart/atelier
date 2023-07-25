@@ -14,12 +14,13 @@ export default defineNuxtModule({
 
     // check if path exists
     accessSync(path);
+
     nuxt.hooks.hook("build:before", () => {
       try {
         const gallery: string[] = [];
 
         for (const src of walkSync(path)) {
-          const relativeSrc = src.slice(path.length + 1); // remove leading slahs
+          const relativeSrc = src.slice(path.length + 1); // remove leading slash
           if (relativeSrc.endsWith("")) gallery.push(relativeSrc);
         }
 

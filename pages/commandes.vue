@@ -16,10 +16,18 @@ import images from "~/public/gallery.json";
 
 function getSliderData() {
   return images
+    .filter((path) => {
+      return (
+        path.startsWith("Commandes") ||
+        path.startsWith("CoupesEtPlateaux") ||
+        path.startsWith("DessousDePlat") ||
+        path.startsWith("Tableaux") ||
+        path.startsWith("Tables")
+      );
+    })
     .map((path) => ({
       src: `/gallery/${path}`,
-    }))
-    .filter((_, i) => i < 10);
+    }));
 }
 </script>
 

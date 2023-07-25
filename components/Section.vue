@@ -26,6 +26,7 @@ $max-content-width: 1040px;
     minmax($min-margin, auto);
   width: 100%;
   min-height: auto;
+  scroll-margin-top: 1rem;
 
   &--view-fill {
     min-height: $section-min-height;

@@ -51,8 +51,8 @@
     </p>
   </Content>
 
-  <Content align="center">
-    <h2 id="contact">Contact</h2>
+  <Content align="center" id="contact">
+    <h2>Contact</h2>
     <p>
       Vous avez une question, une suggestion ou souhaitez simplement prendre
       contact ? N'hésitez pas à m'envoyer un petit mot 🙃.
