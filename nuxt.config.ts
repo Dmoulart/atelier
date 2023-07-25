@@ -1,4 +1,5 @@
 import {readdirSync} from "fs";
+import {env} from "process";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -23,10 +24,9 @@ export default defineNuxtConfig({
   image: {
     dir: "public/images",
   },
-  // hooks: {
-  //   "build:done": () => {
-  //     const gallery = readdirSync("public/images/gallery");
-  //     console.log("gallery", {gallery});
-  //   },
-  // },
+  runtimeConfig: {
+    public: {
+      BASE_URL: env.BASE_URL || "http://localhost:3000",
+    },
+  },
 });

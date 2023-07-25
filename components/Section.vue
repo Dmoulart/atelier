@@ -20,12 +20,17 @@ const {fullWidth = false, parallax} = defineProps<{
 
 const img = useImage();
 
+const imageDimensions = {
+  height: 700,
+  width: 700,
+};
+
 const backgroundStyle = computed(() => {
   if (parallax) {
     const imgUrl = img(parallax.src, {
       format: "webp",
-      height: 1280, // ??
-      width: 1280, // ??
+      height: imageDimensions.height, // ??
+      width: imageDimensions.width, // ??
     });
     return {backgroundImage: `url('${imgUrl}')`};
   } else {
@@ -33,18 +38,8 @@ const backgroundStyle = computed(() => {
   }
 });
 
-// const imgPreload = computed(() => {
-//   return ({
-//     rel: "preload",
-//     as: "image",
-//     href: `${this.$config.BASE_URL}${img(parallax?.src, {
-//       format: "webp",
-//       height: 1280, // ??
-//       width: 1280, // ??
-//     })}`,
-//   });
-// });
-const BASE_URL = "http://localhost:3000";
+const {BASE_URL} = useRuntimeConfig().public;
+
 useHead({
   link: [
     parallax?.src
@@ -53,8 +48,8 @@ useHead({
           as: "image",
           href: `${BASE_URL}${img(parallax?.src, {
             format: "webp",
-            height: 800, // ??
-            width: 800, // ??
+            height: imageDimensions.height, // ??
+            width: imageDimensions.width, // ??
           })}`,
         }
       : {},

@@ -8,9 +8,10 @@
       <nuxt-img
         :src="img.src"
         class="carousel__img"
-        loading="lazy"
         format="webp"
         :height="!height.endsWith('px') ? '1024' : height"
+        :fetchpriority="i === 0 ? 'medium' : 'low'"
+        loading="lazy"
       />
     </slide>
 
