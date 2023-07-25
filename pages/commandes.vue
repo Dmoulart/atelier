@@ -8,28 +8,12 @@
       devis sur mesure. Pour toute information supplémentaire,
       <NuxtLink to="/#contact">contacter l’Atelier.</NuxtLink>
     </p>
-    <carousel :items-to-show="1">
-      <slide v-for="(img, i) in getData()" :key="i">
-        <nuxt-img
-          :src="img.src"
-          class="carousel__img"
-          loading="lazy"
-          format="webp"
-          height="1024"
-        />
-      </slide>
-
-      <template #addons>
-        <navigation />
-        <pagination />
-      </template>
-    </carousel>
+    <Slider :data="getData()" />
   </Content>
 </template>
 <script setup lang="ts">
 import images from "~/public/gallery.json";
-import "vue3-carousel/dist/carousel.css";
-import {Carousel, Slide, Pagination, Navigation} from "vue3-carousel";
+
 function getData() {
   return images
     .map((path) => ({
@@ -39,20 +23,4 @@ function getData() {
 }
 </script>
 
-<style lang="scss">
-.carousel__img {
-  height: 512px;
-  width: 100%;
-  object-fit: cover;
-}
-// .carousel__item {
-//   min-height: 200px;
-//   min-width: 1024px;
-
-//   font-size: 20px;
-//   border-radius: 8px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-</style>
+<style lang="scss"></style>
