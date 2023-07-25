@@ -97,7 +97,7 @@ onMounted(() => {
     background: transparent !important;
     .navbar-menu {
       &.is-active {
-        background: white;
+        background: $font-white;
 
         .navbar-item {
           color: black;
@@ -106,19 +106,19 @@ onMounted(() => {
       background: transparent;
 
       .navbar-item {
-        color: white;
+        color: $font-white;
       }
     }
 
     .navbar-brand {
       &.is-active {
-        background: white;
+        background: $font-white;
       }
     }
 
     .navbar-burger {
       span {
-        background-color: white;
+        background-color: $font-white;
       }
     }
   }

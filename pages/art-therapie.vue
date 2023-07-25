@@ -1,5 +1,5 @@
 <template>
-  <Hero bg-image="/gallery/ArtTherap1.jpg">
+  <Hero bg-image="/gallery/Tables/TableMosaiqueZoom1.jpg">
     <h1>Art thérapie</h1>
   </Hero>
   <Content align="left" view="fill">

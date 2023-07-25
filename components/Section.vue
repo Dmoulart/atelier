@@ -19,28 +19,60 @@ const {fullWidth = false, parallax} = defineProps<{
 }>();
 
 const img = useImage();
+
 const backgroundStyle = computed(() => {
   if (parallax) {
     const imgUrl = img(parallax.src, {
       format: "webp",
+      height: 1280, // ??
+      width: 1280, // ??
     });
     return {backgroundImage: `url('${imgUrl}')`};
   } else {
     return "";
   }
 });
+
+// const imgPreload = computed(() => {
+//   return ({
+//     rel: "preload",
+//     as: "image",
+//     href: `${this.$config.BASE_URL}${img(parallax?.src, {
+//       format: "webp",
+//       height: 1280, // ??
+//       width: 1280, // ??
+//     })}`,
+//   });
+// });
+const BASE_URL = "http://localhost:3000";
+useHead({
+  link: [
+    parallax?.src
+      ? {
+          rel: "preload",
+          as: "image",
+          href: `${BASE_URL}${img(parallax?.src, {
+            format: "webp",
+            height: 800, // ??
+            width: 800, // ??
+          })}`,
+        }
+      : {},
+  ],
+});
 </script>
 <style lang="scss">
-$min-margin: 20px;
-$max-content-width: 1040px;
-
 .section {
   display: grid;
   grid-template-columns:
-    minmax($min-margin, auto) minmax(auto, $max-content-width)
-    minmax($min-margin, auto);
+    minmax($section-min-inline-margin, auto) minmax(
+      auto,
+      $section-max-content-width
+    )
+    minmax($section-min-inline-margin, auto);
   width: 100%;
   min-height: auto;
+  max-height: $section-max-height;
   scroll-margin-top: 1rem;
 
   &--view-fill {
@@ -61,6 +93,7 @@ $max-content-width: 1040px;
       left: 0;
       width: 100%;
       height: 100%;
+      max-height: $section-max-height;
       background-image: linear-gradient(
         0deg,
         rgba(0, 0, 0, 0),

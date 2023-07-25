@@ -6,7 +6,13 @@ $text: rgb(74, 74, 74);
 $link: #6ea4b6;
 
 $section-min-height: min(100vh, 800px);
+$section-max-height: 1280px;
+$section-min-inline-margin: 20px;
+$section-max-content-width: 1040px;
+
 $nav-height: 52px;
+
+$font-white: rgb(238, 230, 230);
 
 html {
     scroll-behavior: smooth;
