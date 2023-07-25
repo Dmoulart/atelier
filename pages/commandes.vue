@@ -15,6 +15,7 @@
       <slide v-for="(img, i) in getData()" :key="i">
         <nuxt-img
           :src="img.src"
+          class="carousel__img"
           :style="{
             height: '512px',
             width: '100%',
@@ -44,6 +45,11 @@ function getData() {
 </script>
 
 <style lang="scss">
+.carousel__img {
+  height: 512px;
+  width: 100%;
+  object-fit: cover;
+}
 // .carousel__item {
 //   min-height: 200px;
 //   min-width: 1024px;

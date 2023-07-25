@@ -29,6 +29,7 @@ defineProps<{menu: MenuItem[]}>();
     padding-bottom: 3rem !important; //override bulma 
     &__nav{
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         gap: 8px;
     }
