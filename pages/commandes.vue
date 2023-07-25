@@ -8,9 +8,6 @@
       devis sur mesure. Pour toute information supplémentaire,
       <NuxtLink to="/#contact">contacter l’Atelier.</NuxtLink>
     </p>
-  </Content>
-  <Section>
-    <!-- <Carousel :data="getData()" style="width: 100%; height: 520px" /> -->
     <carousel :items-to-show="1">
       <slide v-for="(img, i) in getData()" :key="i">
         <nuxt-img
@@ -29,7 +26,7 @@
         <pagination />
       </template>
     </carousel>
-  </Section>
+  </Content>
 </template>
 <script setup lang="ts">
 import images from "~/public/gallery.json";

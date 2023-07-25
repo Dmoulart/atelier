@@ -26,7 +26,7 @@ defineProps<{menu: MenuItem[]}>();
 
 <style lang="scss">
 .footer{
-    padding-bottom: 3rem !important; //override bulma 
+    padding-bottom: 3rem !important; //override bulma  damned
     &__nav{
         display: flex;
         flex-wrap: wrap;

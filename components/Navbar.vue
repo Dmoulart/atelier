@@ -32,7 +32,7 @@
   </nav>
 </template>
 <script setup lang="ts">
-import { MenuItem } from "~/types/menu";
+import {MenuItem} from "~/types/menu";
 
 defineProps<{menu: MenuItem[]}>();
 
@@ -90,5 +90,21 @@ onMounted(() => {
   font-variant-caps: petite-caps;
   font-weight: bold;
   font-size: 1.1rem;
+}
+
+.navbar-menu {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+}
+
+@include sm {
+  .navbar-menu {
+    position: unset;
+    top: unset;
+    left: unset;
+    width: unset;
+  }
 }
 </style>

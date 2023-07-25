@@ -41,9 +41,9 @@ const menu: MenuItem[] = [
     flex-grow: 1;
   }
 
-  --first-section-mt: 2rem;
+  --first-section-mt: 0;
   @include sm {
-    --first-section-mt: 4rem;
+    --first-section-mt: 2rem;
   }
 
   .section:first-of-type {
