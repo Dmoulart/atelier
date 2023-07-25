@@ -46,7 +46,7 @@ const menu: MenuItem[] = [
     --first-section-mt: 2rem;
   }
 
-  .section:first-of-type {
+  .section:first-of-type::not(.hero-section) {
     margin-top: var(--first-section-mt);
   }
 }
