@@ -65,7 +65,7 @@
       possibilité de développer de nouvelles compétences plastiques en explorant
       les formes et les couleurs ainsi que les possibilités d’assemblage.
     </p>
-
+    <Slider :data="getSliderData()" class="my-5" />
     <p>
       L’activité mosaïque leur permettra de développer à la fois leur créativité
       et leur concentration dans la réalisation de leur production (qu’elle soit
@@ -95,4 +95,18 @@
     </p>
   </Content>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import gallery from "~/public/gallery.json";
+
+function getSliderData() {
+  const images: Array<{src: string}> = [];
+
+  for (const image of gallery) {
+    if (image.startsWith("Ecole")) {
+      images.push({src: `gallery/${image}`});
+    }
+  }
+
+  return images;
+}
+</script>

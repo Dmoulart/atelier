@@ -8,13 +8,13 @@
       devis sur mesure. Pour toute information supplémentaire,
       <NuxtLink to="/#contact">contacter l’Atelier.</NuxtLink>
     </p>
-    <Slider :data="getData()" />
+    <Slider :data="getSliderData()" />
   </Content>
 </template>
 <script setup lang="ts">
 import images from "~/public/gallery.json";
 
-function getData() {
+function getSliderData() {
   return images
     .map((path) => ({
       src: `/gallery/${path}`,
