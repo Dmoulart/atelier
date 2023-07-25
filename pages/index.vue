@@ -13,8 +13,9 @@
     <p>
       Marie-Laure Moulart-Barcelo - artiste-mosaïste et art-thérapeute - vous
       accueille à l’Atelier pour vous initier à sa pratique artistique à travers
-      des cours et stages de mosaïque ponctuels ou réguliers et ouverts à toutes
-      et tous.
+      des
+      <NuxtLink to="/cours-et-stages">cours et stages de mosaïque</NuxtLink>
+      ponctuels ou réguliers et ouverts à toutes et tous.
     </p>
 
     <h2>L'atelier..</h2>
@@ -40,7 +41,8 @@
     <p>
       Visiter l’Atelier est aussi l’occasion de découvrir les
       <NuxtLink to="galerie"> créations originales de Marie-Laure</NuxtLink> ou
-      de lui passer une commande personnalisée.
+      de lui passer une
+      <NuxtLink to="commandes">commande personnalisée</NuxtLink>.
     </p>
     <h2>L'art thérapie</h2>
     <p>
