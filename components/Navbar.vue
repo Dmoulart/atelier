@@ -94,7 +94,7 @@ onMounted(() => {
   }
 
   &--transparent {
-    background: transparent !important;
+    // background: transparent !important;
     .navbar-menu {
       &.is-active {
         background: $font-white;
@@ -102,11 +102,6 @@ onMounted(() => {
         .navbar-item {
           color: black;
         }
-      }
-      background: transparent;
-
-      .navbar-item {
-        color: $font-white;
       }
     }
 

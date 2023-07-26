@@ -3,7 +3,7 @@
 $family-serif: "Comfortaa", serif;
 $family-primary: $family-serif;
 $text: rgb(74, 74, 74);
-$link: #588c9d;
+$link: #77bcd3;
 
 $section-min-height: min(100vh, 800px);
 $section-max-height: 1280px;
@@ -13,6 +13,8 @@ $section-max-content-width: 1040px;
 $nav-height: 52px;
 
 $font-white: rgb(238, 230, 230);
+$navbar-background-color: transparent;
+$navbar-item-color: $font-white;
 
 html {
     scroll-behavior: smooth;
