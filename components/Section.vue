@@ -12,7 +12,6 @@
       class="section__bg-img"
       :class="{'section__bg-img--transition': parallax.transition}"
     />
-    <!-- <div v-if="parallax" class="section__placeholder" /> -->
   </section>
 </template>
 <script setup lang="ts">
@@ -27,7 +26,7 @@ const {fullWidth = false, parallax} = defineProps<{
 const dims = {
   small: {height: 400, width: 400},
   medium: {height: 800, width: 800},
-  big: {height: 1024, width: 1024},
+  big: {height: 1024, width: 1280},
 };
 
 const getImagePlaceholder = () =>
@@ -69,6 +68,17 @@ useHead({
       : {},
   ],
 });
+useSeoMeta({
+  ogImage: parallax?.src
+    ? {
+        url: `${BASE_URL}${getImageURL(dims.big)}`,
+        secureUrl: `${BASE_URL}${getImageURL(dims.big)}`,
+        alt: "Œuvre de l'Atelier de Saint-Guénolé",
+        height: dims.big.height,
+        width: dims.big.width,
+      }
+    : "",
+});
 </script>
 <style lang="scss">
 $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
@@ -101,16 +111,6 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
       animation-timing-function: ease-in-out;
     }
   }
-
-  // &__placeholder {
-  //   @extend %bg-parallax;
-
-  //   // @extend .fade-out;
-  //   animation-timing-function: ease-in;
-
-  //   background-image: v-bind(imagePlaceholder);
-  //   opacity: 0.5;
-  // }
 
   > * {
     grid-column: 2;
@@ -171,24 +171,4 @@ section.section {
     transform: scale(1.1); // remove white borders
   }
 }
-
-// .fade-in {
-//   animation: fade-in 0.25s;
-//   animation-fill-mode: forwards;
-// }
-
-// .fade-out {
-//   animation: fade-in 0.25s;
-//   animation-direction: reverse;
-//   animation-fill-mode: forwards;
-// }
-
-// @keyframes fade-in {
-//   0% {
-//     opacity: 0;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
-// }
 </style>

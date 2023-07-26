@@ -25,7 +25,7 @@
           class="navbar-item"
           @click="closeMenu"
         >
-          <span class="icon mr-2" :style="{height: '1rem', width: '1rem'}">
+          <span class="icon mr-1" :style="{fontSize: '14px'}">
             <i :class="item.icon"></i>
           </span>
           {{ item.label }}

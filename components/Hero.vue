@@ -9,24 +9,6 @@
 </template>
 <script setup lang="ts">
 defineProps<{bgImage: string}>();
-
-// const transition = ref(true);
-
-// function load(src: string) {
-//   return new Promise((resolve, reject) => {
-//     const image = new Image();
-//     image.addEventListener("load", resolve);
-//     image.addEventListener("error", reject);
-//     image.src = src;
-//   });
-// }
-
-// onBeforeMount(() => {
-//   load(props.bgImage).then(() => {
-//     transition.value = false;
-//     console.log("looad");
-//   });
-// });
 </script>
 <style lang="scss">
 .hero-section {

@@ -10,10 +10,9 @@
 <script setup lang="ts">
 import {MenuItem} from "~/types/menu";
 
+const title = "L'Atelier de St-Gué";
+const defaultDescription = `L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch.`;
 useHead({
-  titleTemplate: (title) => {
-    return title ? `${title} - L'Atelier de St-Gué` : "L'Atelier de St-Gué";
-  },
   link() {
     return [
       {
@@ -36,10 +35,10 @@ useHead({
     ];
   },
 });
-
-const defaultDescription = `L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch.`;
-
 useSeoMeta({
+  title,
+  twitterTitle: title,
+  ogTitle: title,
   description: defaultDescription,
   author: "Marie-Laure Moulart",
   applicationName: "L'Atelier de St-Guénolé",

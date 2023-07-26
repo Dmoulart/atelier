@@ -7,11 +7,15 @@
   </Section>
 </template>
 <script setup lang="ts">
-useHead({
-  title: "Galerie",
-});
+const title = "Galerie - Atelier de St-Gué";
 const description = `Venez découvrir les diverses créations de Marie-Laure Moulart à l'Atelier de St-Guénolé.`;
+
 useSeoMeta({
+  title,
   description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogTitle: title,
+  twitterTitle: title,
 });
 </script>

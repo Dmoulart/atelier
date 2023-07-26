@@ -28,13 +28,16 @@
   </Content>
 </template>
 <script setup lang="ts">
-useHead({
-  title: "Art thérapie",
-});
-
+const title = "Art Thérapie - Atelier de St-Gué";
 const description = `Démarche créatrice accompagnée, qui utilise la création
       artistique dans un but thérapeutique, l'Art Thérapie se pratique aussi à l'Atelier de St-Guénolé.`;
+
 useSeoMeta({
+  title,
   description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogTitle: title,
+  twitterTitle: title,
 });
 </script>
