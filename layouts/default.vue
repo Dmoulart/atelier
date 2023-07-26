@@ -14,6 +14,27 @@ useHead({
   titleTemplate: (title) => {
     return title ? `${title} - L'Atelier de St-Gué` : "L'Atelier de St-Gué";
   },
+  link() {
+    return [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: `/favicon-16x16.png`,
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: `/favicon-32x32.png`,
+      },
+      {
+        rel: "manifest",
+        href: `/site.webmanifest`,
+      },
+      {},
+    ];
+  },
 });
 
 const defaultDescription = `L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch.`;
