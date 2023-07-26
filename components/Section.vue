@@ -11,6 +11,8 @@
   </section>
 </template>
 <script setup lang="ts">
+import placeholders from "~/public/gallery-placeholders.json";
+
 const {fullWidth = false, parallax} = defineProps<{
   fullWidth?: boolean;
   view?: "fill";
@@ -22,6 +24,11 @@ const dims = {
   medium: {height: 800, width: 800},
   big: {height: 1024, width: 1024},
 };
+console.log(parallax?.src);
+const getImagePlaceholder = () =>
+  parallax?.src ? placeholders[parallax.src as keyof typeof placeholders] : "";
+
+const imagePlaceholder = `url(${getImagePlaceholder()})`;
 
 const imageSmall = `url(${getImageURL(dims.small)}`;
 const imageMedium = `url(${getImageURL(dims.medium)})`;
@@ -77,15 +84,34 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
   }
 
   &--parallax {
+    // @extend .unblur;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 
-    background-image: v-bind(imageSmall), $bg-img-overlay;
+    background-image: v-bind(imagePlaceholder), v-bind(imageSmall),
+      $bg-img-overlay;
     background-blend-mode: overlay;
 
-    z-index: 1;
+    z-index: 0;
+
+    // &::before {
+    //   // placeholder
+    //   @extend .fade-out;
+    //   content: "";
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   background-attachment: fixed;
+    //   background-position: center;
+    //   background-repeat: no-repeat;
+    //   background-size: cover;
+    //   background-image: v-bind(imagePlaceholder);
+    //   opacity: 0;
+    // }
   }
 
   > * {
@@ -100,12 +126,16 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
 
   @include sm {
     &--parallax {
-      background-image: v-bind(imageMedium), $bg-img-overlay;
+      background-image: v-bind(imagePlaceholder), v-bind(imageMedium),
+        $bg-img-overlay;
     }
   }
+
   @include md {
     &--parallax {
-      background-image: v-bind(imageBig), $bg-img-overlay;
+      background-image: v-bind(imagePlaceholder), v-bind(imageBig),
+        $bg-img-overlay;
+      // background-image: v-bind(imageBig), $bg-img-overlay;
     }
   }
 }
@@ -113,5 +143,32 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
 section.section {
   //override bulma padding
   padding: 3rem 0;
+}
+
+.unblur {
+  animation: unblur 1s;
+  animation-fill-mode: forwards;
+}
+
+.fade-out {
+  animation: fadeout 1s;
+}
+
+@keyframes unblur {
+  0% {
+    filter: blur(30px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>

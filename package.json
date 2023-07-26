@@ -13,9 +13,11 @@
     "@nuxt/image": "^1.0.0-rc.1",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^18.16.19",
+    "blurhash": "^2.0.5",
     "nuxt": "^3.6.2",
     "sass": "^1.63.6",
-    "sass-loader": "^13.3.2"
+    "sass-loader": "^13.3.2",
+    "sharp": "^0.32.4"
   },
   "dependencies": {
     "bulma": "^0.9.4",
