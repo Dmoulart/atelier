@@ -20,7 +20,6 @@ const defaultDescription = `L’Atelier de St-Gué est un lieu de création, d�
 
 useSeoMeta({
   description: defaultDescription,
-  creator: "Marie-Laure Moulart",
   author: "Marie-Laure Moulart",
   applicationName: "L'Atelier de St-Guénolé",
 });

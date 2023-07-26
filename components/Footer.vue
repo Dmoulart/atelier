@@ -6,14 +6,10 @@
       </p>
       <address>125 Rue de la Joie, 29760 Penmarc'h</address>
 
-      <nav class="footer__nav">
-        <NuxtLink
-          v-for="(item, i) in menu"
-          :to="item.link"
-          :key="i"
-          class="navbar-item"
-          >{{ item.label }}</NuxtLink
-        >
+      <nav class="footer__nav mt-5">
+        <NuxtLink v-for="(item, i) in menu" :to="item.link" :key="i">{{
+          item.label
+        }}</NuxtLink>
       </nav>
     </div>
   </footer>

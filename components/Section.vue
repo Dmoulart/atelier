@@ -71,7 +71,7 @@ useHead({
 });
 </script>
 <style lang="scss">
-$bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
+$bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
 
 .section {
   display: grid;
