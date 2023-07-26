@@ -117,6 +117,11 @@ onMounted(() => {
     }
 
     .navbar-burger {
+      &.is-active {
+        span {
+          background-color: black;
+        }
+      }
       span {
         background-color: $font-white;
       }

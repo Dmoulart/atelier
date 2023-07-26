@@ -12,6 +12,10 @@
         src="/mlmb.jpg"
         format="webp"
         loading="lazy"
+        fetchpriority="low"
+        width="400"
+        height="600"
+        sizes="sm:400px, md:500px"
       />
     </template>
     <h2>Venez rencontrer...</h2>
@@ -38,8 +42,10 @@
         src="/brush-strokes.png"
         loading="lazy"
         format="webp"
-        width="500"
+        fetchpriority="low"
+        width="400"
         height="600"
+        sizes="sm:400px, md:500px"
       />
     </template>
     <h2>La galerie</h2>

@@ -8,6 +8,7 @@ defineProps<{bgImage: string}>();
 </script>
 <style lang="scss">
 .hero-section {
+  max-height: $section-max-height;
   h1,
   h2,
   h3 {

@@ -6,10 +6,13 @@
 <script setup lang="ts">
 useHead({
   title: "L'Atelier de St Guénolé",
+  htmlAttrs: {
+    lang: "fr",
+  },
   link: [
     {
       rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700",
+      href: "https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700",
     },
     {
       rel: "stylesheet",

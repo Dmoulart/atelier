@@ -6,7 +6,6 @@
       'section--view-fill': view === 'fill',
       'section--parallax': parallax?.src,
     }"
-    :style="parallax?.src ? backgroundStyle : ''"
   >
     <slot />
   </section>
@@ -18,27 +17,24 @@ const {fullWidth = false, parallax} = defineProps<{
   parallax?: {src: string};
 }>();
 
-const img = useImage();
-
-const backgroundStyle = computed(() => {
-  if (parallax) {
-    return {backgroundImage: `url('${getImageURL()}')`};
-  } else {
-    return "";
-  }
-});
-
-const imageDimensions = {
-  height: 600,
-  width: 600,
+const dims = {
+  small: {height: 400, width: 400},
+  medium: {height: 800, width: 800},
+  big: {height: 1024, width: 1024},
 };
 
-function getImageURL() {
+const imageSmall = `url(${getImageURL(dims.small)}`;
+const imageMedium = `url(${getImageURL(dims.medium)})`;
+const imageBig = `url(${getImageURL(dims.big)})`;
+
+function getImageURL(dimensions: {height: number; width: number}) {
+  const img = useImage();
+
   return parallax?.src
     ? img(parallax.src, {
         format: "webp",
-        height: imageDimensions.height, // ??
-        width: imageDimensions.width, // ??
+        height: dimensions.height, // ??
+        width: dimensions.width, // ??
       })
     : "";
 }
@@ -51,13 +47,19 @@ useHead({
       ? {
           rel: "preload",
           as: "image",
-          href: `${BASE_URL}${getImageURL()}`,
+          imagesrcset: `
+            ${BASE_URL}${getImageURL(dims.small)} 400vw,
+            ${BASE_URL}${getImageURL(dims.medium)} 800vw,
+            ${BASE_URL}${getImageURL(dims.big)} 1600vw`,
+          imagesizes: "100vw",
         }
       : {},
   ],
 });
 </script>
 <style lang="scss">
+$bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
+
 .section {
   display: grid;
   grid-template-columns:
@@ -68,7 +70,6 @@ useHead({
     minmax($section-min-inline-margin, auto);
   width: 100%;
   min-height: auto;
-  max-height: $section-max-height;
   scroll-margin-top: 1rem;
 
   &--view-fill {
@@ -80,24 +81,11 @@ useHead({
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: 1;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      max-height: $section-max-height;
-      background-image: linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 1)
-      );
-      opacity: 0.45;
-      z-index: 0;
-    }
+    background-image: v-bind(imageSmall), $bg-img-overlay;
+    background-blend-mode: overlay;
+
+    z-index: 1;
   }
 
   > * {
@@ -107,6 +95,17 @@ useHead({
   &--full-width {
     > * {
       grid-column: 1/-1;
+    }
+  }
+
+  @include sm {
+    &--parallax {
+      background-image: v-bind(imageMedium), $bg-img-overlay;
+    }
+  }
+  @include md {
+    &--parallax {
+      background-image: v-bind(imageBig), $bg-img-overlay;
     }
   }
 }
