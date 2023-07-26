@@ -13,7 +13,7 @@
       />
     </template>
 
-    <h2>Des stages pour tout niveau</h2>
+    <h2>Des stages pour tous niveaux</h2>
 
     <p>
       L’atelier organise à l’année des cours et des stages pour enfants ados et
