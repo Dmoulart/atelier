@@ -103,6 +103,13 @@
 </template>
 <script setup lang="ts">
 import gallery from "~/public/gallery.json";
+useHead({
+  title: "Cours et stages",
+});
+const description = `L’atelier organise à l’année des cours et des stages pour enfants ados et adultes, groupes scolaires, colonies, etc.  Dans une ambiance calme et conviviale, venez réaliser une mosaïque. Laissez votre créativité s'exprimer`;
+useSeoMeta({
+  description,
+});
 
 function getSliderData() {
   const images: Array<{src: string}> = [];

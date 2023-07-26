@@ -18,6 +18,18 @@
 <script setup lang="ts">
 import images from "~/public/gallery.json";
 
+useHead({
+  title: "Commandes",
+});
+
+const description = `L’atelier vous propose des créations personnelles comme du mobilier, de
+      l’art de la table, des tableaux, des fresques intérieures et extérieures.
+      Toutes vos envies ou projets personnels peuvent être réalisés avec un
+      devis sur mesure.`;
+useSeoMeta({
+  description,
+});
+
 function getSliderData() {
   return images
     .filter((path) => {

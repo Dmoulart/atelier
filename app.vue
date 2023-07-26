@@ -5,7 +5,6 @@
 </template>
 <script setup lang="ts">
 useHead({
-  title: "L'Atelier de St Guénolé",
   htmlAttrs: {
     lang: "fr",
   },

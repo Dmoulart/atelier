@@ -77,4 +77,12 @@
     />
   </Content>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const description = `L’Atelier de St-Gué est un lieu de création, d’échange et de partage
+      autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé,
+      Penmarch.`;
+
+useSeoMeta({
+  description,
+});
+</script>

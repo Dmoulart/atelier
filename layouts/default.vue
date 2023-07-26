@@ -10,6 +10,21 @@
 <script setup lang="ts">
 import {MenuItem} from "~/types/menu";
 
+useHead({
+  titleTemplate: (title) => {
+    return title ? `${title} - L'Atelier de St-Gué` : "L'Atelier de St-Gué";
+  },
+});
+
+const defaultDescription = `L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch.`;
+
+useSeoMeta({
+  description: defaultDescription,
+  creator: "Marie-Laure Moulart",
+  author: "Marie-Laure Moulart",
+  applicationName: "L'Atelier de St-Guénolé",
+});
+
 const menu: MenuItem[] = [
   {label: "Accueil", icon: "fas fa-home", link: "/"},
   {label: "Commandes", icon: "fa-solid fa-paintbrush", link: "/commandes"},

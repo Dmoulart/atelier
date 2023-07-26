@@ -6,4 +6,12 @@
     <Gallery />
   </Section>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useHead({
+  title: "Galerie",
+});
+const description = `Venez découvrir les diverses créations de Marie-Laure Moulart à l'Atelier de St-Guénolé.`;
+useSeoMeta({
+  description,
+});
+</script>
