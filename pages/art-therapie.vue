@@ -5,7 +5,7 @@
   <Content align="left" view="fill">
     <template #media>
       <nuxt-img
-        src="./gallery/ArtTherap2.jpg"
+        src="./gallery/ArtTherap1.jpg"
         alt="Oeuvre représentant des oiseaux"
         format="webp"
         height="500"

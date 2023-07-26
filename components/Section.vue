@@ -20,23 +20,28 @@ const {fullWidth = false, parallax} = defineProps<{
 
 const img = useImage();
 
-const imageDimensions = {
-  height: 700,
-  width: 700,
-};
-
 const backgroundStyle = computed(() => {
   if (parallax) {
-    const imgUrl = img(parallax.src, {
-      format: "webp",
-      height: imageDimensions.height, // ??
-      width: imageDimensions.width, // ??
-    });
-    return {backgroundImage: `url('${imgUrl}')`};
+    return {backgroundImage: `url('${getImageURL()}')`};
   } else {
     return "";
   }
 });
+
+const imageDimensions = {
+  height: 600,
+  width: 600,
+};
+
+function getImageURL() {
+  return parallax?.src
+    ? img(parallax.src, {
+        format: "webp",
+        height: imageDimensions.height, // ??
+        width: imageDimensions.width, // ??
+      })
+    : "";
+}
 
 const {BASE_URL} = useRuntimeConfig().public;
 
@@ -46,11 +51,7 @@ useHead({
       ? {
           rel: "preload",
           as: "image",
-          href: `${BASE_URL}${img(parallax?.src, {
-            format: "webp",
-            height: imageDimensions.height, // ??
-            width: imageDimensions.width, // ??
-          })}`,
+          href: `${BASE_URL}${getImageURL()}`,
         }
       : {},
   ],
