@@ -1,5 +1,5 @@
 <template>
-  <Hero bg-image="/gallery/Commandes/Mosaique3.jpg">
+  <Hero bg-image="/gallery/Commandes/poissonSculture.jpg">
     <h1>Créations sur commande</h1>
   </Hero>
 

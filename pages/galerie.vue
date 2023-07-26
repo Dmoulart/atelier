@@ -1,5 +1,5 @@
 <template>
-  <Hero bg-image="/gallery/Tableaux/Arbredevie.jpg">
+  <Hero bg-image="/gallery/Commandes/Mosaique3.jpg">
     <h1>Galerie</h1>
   </Hero>
   <Section class="mt-5">
