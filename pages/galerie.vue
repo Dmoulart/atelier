@@ -2,7 +2,7 @@
   <Hero bg-image="/gallery/Commandes/Mosaique3.jpg">
     <h1>Galerie</h1>
   </Hero>
-  <Section style="background-color: black">
+  <Section>
     <Gallery :images="getImages()" />
   </Section>
 </template>

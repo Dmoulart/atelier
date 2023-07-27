@@ -1,10 +1,10 @@
 <template>
   <Slider
-    v-if="current !== undefined"
+    v-if="currentSlide !== undefined"
     :data="images"
     fullscreen
-    @close="current = undefined"
-    :current-slide="current"
+    @close="currentSlide = undefined"
+    :current-slide="currentSlide"
   />
 
   <div class="gallery">
@@ -21,17 +21,23 @@
   </div>
 </template>
 <script setup lang="ts">
-import Slider from "./Slider.vue";
-
 defineProps<{images: Array<{src: string}>}>();
 
 //@todo: Generate dynamic grid ?
 
-const current = ref<number | undefined>();
+const currentSlide = ref<number | undefined>();
 
 function setSlide(slide: number) {
-  current.value = slide;
+  currentSlide.value = slide;
 }
+
+watch(currentSlide, () => {
+  if (window) {
+    // lock scroll
+    document.documentElement.style.overflow =
+      currentSlide.value !== undefined ? "hidden" : "auto";
+  }
+});
 </script>
 
 <style lang="scss">

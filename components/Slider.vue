@@ -79,11 +79,19 @@ defineEmits(["close"]);
     position: fixed;
     top: 0;
     right: 0;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 600;
     z-index: 10;
     cursor: pointer;
     padding: 1rem;
+    transition: 300ms;
+    scale: 1;
+
+    &:hover {
+      color: white;
+      transition: 300ms;
+      scale: 1.1;
+    }
   }
 
   &--overlay::before {
@@ -120,9 +128,18 @@ defineEmits(["close"]);
     opacity: 0.5;
     background-color: rgb(0, 0, 0);
     z-index: 0;
+    scale: 1;
+    transition: 300ms;
+
     svg {
       fill: white;
       z-index: 1;
+    }
+
+    &:hover {
+      scale: 1.2;
+      opacity: 0.8;
+      transition: 300ms;
     }
   }
 
