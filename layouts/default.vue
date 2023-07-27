@@ -66,10 +66,16 @@ const menu: MenuItem[] = [
 ];
 </script>
 <style lang="scss">
+body {
+  overflow-x: hidden;
+  width: 100vw;
+}
+
 .page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  max-width: 100%;
 
   &__content {
     flex-grow: 1;

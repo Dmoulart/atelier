@@ -18,5 +18,6 @@ $navbar-item-color: $font-white;
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 @import "../node_modules/bulma/bulma.sass";

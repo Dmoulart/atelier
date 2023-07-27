@@ -4,7 +4,7 @@
   </Hero>
 
   <Content>
-    <h2>Des oeuvres personnalisées</h2>
+    <h2>Des œuvres personnalisées</h2>
     <p>
       L’atelier vous propose des créations personnelles comme du mobilier, de
       l’art de la table, des tableaux, des fresques intérieures et extérieures.
