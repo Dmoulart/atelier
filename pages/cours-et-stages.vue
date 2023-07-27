@@ -1,5 +1,5 @@
 <template>
-  <Hero bg-image="/gallery/CoupesEtPlateaux/plateauPoisson2.jpg">
+  <Hero bg-image="/gallery/Ecole/VagueStJean.jpg">
     <h1>Cours et stages de mosaique</h1>
   </Hero>
 
