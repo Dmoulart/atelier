@@ -41,11 +41,6 @@ import images from "~/public/gallery.json";
 
 <style lang="scss">
 .gallery {
-  // display: grid;
-  // grid-template-columns: repeat(8, 1fr);
-  // grid-template-rows: repeat(8, 5vw);
-  // grid-gap: 15px;
-
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-auto-rows: 260px;
@@ -58,6 +53,4 @@ import images from "~/public/gallery.json";
     object-fit: cover;
   }
 }
-// .gallery__img {
-//}
 </style>
