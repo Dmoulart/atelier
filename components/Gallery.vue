@@ -4,6 +4,7 @@
     :data="getImages()"
     fullscreen
     @close="current = undefined"
+    :current-slide="current"
   />
 
   <div class="gallery">
@@ -15,14 +16,21 @@
       format="webp"
       loading="lazy"
       sizes="sm:80vw md:50vw"
-      @click="current = i"
+      @click="setSlide(i)"
     />
   </div>
 </template>
 <script setup lang="ts">
 import gallery from "~/public/gallery.json";
+import Slider from "./Slider.vue";
+
+//@todo: Generate dynamic grid ?
 
 const current = ref<number | undefined>();
+
+function setSlide(slide: number) {
+  current.value = slide;
+}
 
 function getImages() {
   const images: Array<{src: string}> = [];
@@ -33,8 +41,6 @@ function getImages() {
 
   return images;
 }
-
-//@todo: Generate dynamic grid
 </script>
 
 <style lang="scss">

@@ -2,7 +2,7 @@
   <Hero bg-image="/gallery/Commandes/Mosaique3.jpg">
     <h1>Galerie</h1>
   </Hero>
-  <Section class="mt-5">
+  <Section style="background-color: black">
     <Gallery />
   </Section>
 </template>

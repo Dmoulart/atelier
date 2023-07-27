@@ -4,6 +4,7 @@
     :items-to-show="1"
     v-bind="$attrs"
     :class="{'carousel--overlay': overlay, 'carousel--fullscreen': fullscreen}"
+    :model-value="currentSlide"
   >
     <slide
       v-for="(img, i) in data"
@@ -38,6 +39,7 @@ withDefaults(
     pagination?: boolean;
     overlay?: boolean;
     fullscreen?: boolean;
+    currentSlide?: number;
   }>(),
   {
     navigation: true,
