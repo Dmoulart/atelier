@@ -31,7 +31,6 @@ useHead({
         rel: "manifest",
         href: `/site.webmanifest`,
       },
-      {},
     ];
   },
 });
@@ -42,6 +41,7 @@ useSeoMeta({
   description: defaultDescription,
   author: "Marie-Laure Moulart",
   applicationName: "L'Atelier de St-Guénolé",
+  themeColor: "#ffffff",
 });
 
 const menu: MenuItem[] = [
