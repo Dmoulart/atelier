@@ -31,12 +31,10 @@ withDefaults(
     navigation?: boolean;
     pagination?: boolean;
     overlay?: boolean;
-    height?: string;
   }>(),
   {
     navigation: true,
     pagination: true,
-    height: "512px",
     overlay: false,
   }
 );
@@ -64,7 +62,7 @@ withDefaults(
   }
 
   &__img {
-    height: v-bind(height);
+    height: 70vh;
     width: 100%;
     object-fit: contain;
   }
@@ -81,6 +79,10 @@ withDefaults(
       fill: white;
       z-index: 1;
     }
+  }
+
+  &__pagination {
+    flex-wrap: wrap;
   }
 }
 </style>
