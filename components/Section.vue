@@ -108,7 +108,7 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
   &__bg-img {
     @extend %bg-parallax;
 
-    background-image: v-bind(imagePlaceholder), v-bind(imageSmall),
+    background-image: v-bind(imagePlaceholder), v-bind(imageMedium),
       $bg-img-overlay;
     background-blend-mode: overlay;
 
@@ -148,9 +148,9 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 100vw;
   height: 100%;
-  max-height: 100vh;
+  // max-width: 100vw;
+  // max-height: 100vh;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
