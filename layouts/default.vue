@@ -34,14 +34,19 @@ useHead({
     ];
   },
 });
+
+const {BASE_URL} = useRuntimeConfig().public;
+
 useSeoMeta({
   title,
   twitterTitle: title,
+  twitterCard: "summary_large_image",
   ogTitle: title,
   description: defaultDescription,
   author: "Marie-Laure Moulart",
   applicationName: "L'Atelier de St-Guénolé",
   themeColor: "#ffffff",
+  ogUrl: BASE_URL,
 });
 
 const menu: MenuItem[] = [

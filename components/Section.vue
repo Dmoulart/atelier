@@ -17,6 +17,8 @@
 <script setup lang="ts">
 import placeholders from "~/public/gallery-placeholders.json";
 
+//@todo get all this parallax crap inside hero
+
 const {fullWidth = false, parallax} = defineProps<{
   fullWidth?: boolean;
   view?: "fill";
@@ -53,6 +55,22 @@ function getImageURL(dimensions: {height: number; width: number}) {
 const {BASE_URL} = useRuntimeConfig().public;
 
 useHead({
+  meta: parallax?.src
+    ? [
+        {name: "og:image", content: `${BASE_URL}${getImageURL(dims.big)}`},
+
+        {name: "og:image:height", content: dims.big.height},
+        {name: "og:image:width", content: dims.big.width},
+        {
+          name: "og:image:alt",
+          content: "Une magnifique oeuvre de l'atelier de Saint-Guénolé",
+        },
+        {
+          name: "og:type",
+          content: "website",
+        },
+      ]
+    : [],
   link: [
     parallax?.src
       ? {
@@ -67,17 +85,17 @@ useHead({
       : {},
   ],
 });
-useSeoMeta({
-  ogImage: parallax?.src
-    ? {
-        url: `${BASE_URL}${getImageURL(dims.big)}`,
-        secureUrl: `${BASE_URL}${getImageURL(dims.big)}`,
-        alt: "Œuvre de l'Atelier de Saint-Guénolé",
-        height: dims.big.height,
-        width: dims.big.width,
-      }
-    : "",
-});
+// useSeoMeta({
+//   ogImage: parallax?.src
+//     ? {
+//         url: `${BASE_URL}${getImageURL(dims.big)}`,
+//         secureUrl: `${BASE_URL}${getImageURL(dims.big)}`,
+//         alt: "Œuvre de l'Atelier de Saint-Guénolé",
+//         height: dims.big.height,
+//         width: dims.big.width,
+//       }
+//     : "",
+// });
 </script>
 <style lang="scss">
 $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
