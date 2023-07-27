@@ -36,7 +36,7 @@ const getImagePlaceholder = () =>
 
 const imagePlaceholder = `url(${getImagePlaceholder()})`;
 
-const imageSmall = `url(${getImageURL(dims.small)}`;
+const imageSmall = `url(${getImageURL(dims.small)})`;
 const imageMedium = `url(${getImageURL(dims.medium)})`;
 const imageBig = `url(${getImageURL(dims.big)})`;
 
@@ -108,7 +108,7 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
   &__bg-img {
     @extend %bg-parallax;
 
-    background-image: v-bind(imagePlaceholder), v-bind(imageMedium),
+    background-image: v-bind(imagePlaceholder), v-bind(imageSmall),
       $bg-img-overlay;
     background-blend-mode: overlay;
 
