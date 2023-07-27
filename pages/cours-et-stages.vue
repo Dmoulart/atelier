@@ -10,6 +10,9 @@
         src="gallery/Cours_atelier.jpg"
         format="webp"
         loading="lazy"
+        width="400"
+        height="600"
+        sizes="sm:100vw md:50vw lg:50vw"
       />
     </template>
 
@@ -40,6 +43,9 @@
           src="gallery/Latelier.jpg"
           format="webp"
           loading="lazy"
+          width="400"
+          height="600"
+          sizes="sm:100vw md:50vw lg:50vw"
         />
       </figure>
     </template>
@@ -71,7 +77,7 @@
       possibilité de développer de nouvelles compétences plastiques en explorant
       les formes et les couleurs ainsi que les possibilités d’assemblage.
     </p>
-    <Slider :data="getSliderData()" class="my-5" />
+    <Slider :data="getSliderData()" class="my-5 school-slider" />
     <p>
       L’activité mosaïque leur permettra de développer à la fois leur créativité
       et leur concentration dans la réalisation de leur production (qu’elle soit
@@ -127,3 +133,8 @@ function getSliderData() {
   return images;
 }
 </script>
+<!-- <style lang="scss">
+.school-slider {
+  height: 512px;
+}
+</style> -->

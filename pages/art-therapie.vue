@@ -8,7 +8,9 @@
         src="./gallery/ArtTherap1.jpg"
         alt="Oeuvre représentant des oiseaux"
         format="webp"
-        height="500"
+        width="400"
+        height="600"
+        sizes="sm:100vw md:50vw lg:50vw"
       />
     </template>
     <h2>L'art Thérapie</h2>

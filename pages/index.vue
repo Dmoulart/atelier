@@ -15,7 +15,7 @@
         fetchpriority="low"
         width="400"
         height="600"
-        sizes="sm:400px, md:500px"
+        sizes="sm:100vw md:50vw lg:50vw"
       />
     </template>
     <h2>Venez rencontrer...</h2>
@@ -45,7 +45,7 @@
         fetchpriority="low"
         width="400"
         height="600"
-        sizes="sm:400px, md:500px"
+        sizes="sm:100vw md:50vw lg:50vw"
       />
     </template>
     <h2>La galerie</h2>
