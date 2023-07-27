@@ -4,12 +4,11 @@
     v-bind="$attrs"
     :class="{'carousel--overlay': overlay}"
   >
-    <slide v-for="(img, i) in data" :key="i">
+    <slide v-for="(img, i) in data" :key="i" class="carousel__slide">
       <nuxt-img
         :src="img.src"
         class="carousel__img"
         format="webp"
-        :height="!height.endsWith('px') ? '1024' : height"
         :fetchpriority="i === 0 ? 'medium' : 'low'"
         loading="lazy"
         sizes="sm:100vw md:100vw lg:100vw"
@@ -59,10 +58,15 @@ withDefaults(
     opacity: 0.45;
     z-index: 1;
   }
+
+  &__slide {
+    background-color: black;
+  }
+
   &__img {
     height: v-bind(height);
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   &__prev,
