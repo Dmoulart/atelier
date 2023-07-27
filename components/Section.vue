@@ -71,31 +71,20 @@ useHead({
         },
       ]
     : [],
-  link: [
-    parallax?.src
-      ? {
-          rel: "preload",
-          as: "image",
-          imagesrcset: `
-            ${BASE_URL}${getImageURL(dims.small)} 400w,
-            ${BASE_URL}${getImageURL(dims.medium)} 800w,
-            ${BASE_URL}${getImageURL(dims.big)} 1600w`,
-          imagesizes: "100vw",
-        }
-      : {},
-  ],
+  // link: [
+  //   parallax?.src
+  //     ? {
+  //         rel: "preload",
+  //         as: "image",
+  //         imagesrcset: `
+  //           ${BASE_URL}${getImageURL(dims.small)} 400w,
+  //           ${BASE_URL}${getImageURL(dims.medium)} 800w,
+  //           ${BASE_URL}${getImageURL(dims.big)} 1600w`,
+  //         imagesizes: "100vw",
+  //       }
+  //     : {},
+  // ],
 });
-// useSeoMeta({
-//   ogImage: parallax?.src
-//     ? {
-//         url: `${BASE_URL}${getImageURL(dims.big)}`,
-//         secureUrl: `${BASE_URL}${getImageURL(dims.big)}`,
-//         alt: "Œuvre de l'Atelier de Saint-Guénolé",
-//         height: dims.big.height,
-//         width: dims.big.width,
-//       }
-//     : "",
-// });
 </script>
 <style lang="scss">
 $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
