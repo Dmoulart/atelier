@@ -74,7 +74,7 @@
       contact ? N'hésitez pas à m'envoyer un petit mot 🙃.
     </p>
     <ContactForm
-      mailto="dorian.moulart@gmail.com"
+      mailto="latelier29@gmail.com"
       :subject="`L'atelier de St-Gué`"
       class="mt-5"
     />
