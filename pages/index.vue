@@ -29,7 +29,8 @@
 
     <h2>L'atelier..</h2>
     <p>
-      L’Atelier de St-Gué est un lieu de création, d’échange et de partage
+      L’Atelier de St-Gué est un
+      <strong>lieu de création, d’échange et de partage</strong>
       autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé,
       Penmarch.
     </p>

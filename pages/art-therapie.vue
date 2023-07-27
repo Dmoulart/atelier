@@ -17,15 +17,19 @@
     <h3>Qu'est-ce que l'art thérapie ?</h3>
     <p>
       Lorsque la parole est bloquée ou insuffisante, lorsque l’esprit conscient
-      empêche l’inconscient de se manifester, l’Art-thérapie offre d’autres
-      moyens d’expression que le langage verbal.
+      empêche l’inconscient de se manifester,
+      <strong
+        >l’Art-thérapie offre d’autres moyens d’expression que le langage
+        verbal</strong
+      >.
     </p>
 
     <p>
-      C’est une démarche créatrice accompagnée, qui utilise la création
-      artistique dans un but thérapeutique. L’art va permettre de stimuler les
-      capacités sensorielles, cognitives et motrices. Il va pénétrer les
-      problématiques inconscientes et conduire à une transformation positive.
+      C’est une <strong>démarche créatrice accompagnée</strong>, qui utilise la
+      création artistique dans un but thérapeutique. L’art va permettre de
+      stimuler les capacités sensorielles, cognitives et motrices. Il va
+      pénétrer les problématiques inconscientes et conduire à une transformation
+      positive.
     </p>
   </Content>
 </template>
