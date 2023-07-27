@@ -6,36 +6,37 @@
       :id="`gallery-img-${String(i)}`"
       :src="`/gallery/${src}`"
       format="webp"
-      @load="(img) => setStyle(img, `gallery-img-${String(i)}`)"
       loading="lazy"
-      width="400"
-      height="400"
+      sizes="sm:80vw md:50vw"
     />
+    <!-- @load="(img) => setStyle(img, `gallery-img-${String(i)}`)" -->
   </div>
 </template>
 <script setup lang="ts">
 import images from "~/public/gallery.json";
 
-function getSpanEstimate() {
-  return (Math.random() * 2 + 1).toFixed();
-  // if (size > 300) {
-  //   return 3;
-  // }
+//@todo: Generate dynamic grid
 
-  // if (size > 250) {
-  //   return 2;
-  // }
+// function getSpanEstimate() {
+//   return (Math.random() * 2 + 1).toFixed();
+//   // if (size > 300) {
+//   //   return 3;
+//   // }
 
-  // return 1;
-}
+//   // if (size > 250) {
+//   //   return 2;
+//   // }
 
-function setStyle(event: Event, id: string) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.style.gridColumnEnd = `span ${getSpanEstimate()}`;
-    el.style.gridRowEnd = `span ${getSpanEstimate()}`;
-  }
-}
+//   // return 1;
+// }
+
+// function setStyle(event: Event, id: string) {
+//   const el = document.getElementById(id);
+//   if (el) {
+//     el.style.gridColumnEnd = `span ${getSpanEstimate()}`;
+//     el.style.gridRowEnd = `span ${getSpanEstimate()}`;
+//   }
+// }
 </script>
 
 <style lang="scss">
@@ -47,7 +48,7 @@ function setStyle(event: Event, id: string) {
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  grid-template-rows: repeat(auto-fit, 260px);
+  grid-auto-rows: 260px;
   grid-auto-flow: dense;
   grid-gap: 0.3rem;
 
