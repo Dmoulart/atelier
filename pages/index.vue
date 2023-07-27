@@ -39,7 +39,7 @@
     <template #media>
       <nuxt-img
         alt="Tableau"
-        src="/brush-strokes.png"
+        src="/gallery/Tableaux/Mosaique10.jpg"
         loading="lazy"
         format="webp"
         fetchpriority="low"
