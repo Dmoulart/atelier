@@ -71,19 +71,19 @@ useHead({
         },
       ]
     : [],
-  // link: [
-  //   parallax?.src
-  //     ? {
-  //         rel: "preload",
-  //         as: "image",
-  //         imagesrcset: `
-  //           ${BASE_URL}${getImageURL(dims.small)} 400w,
-  //           ${BASE_URL}${getImageURL(dims.medium)} 800w,
-  //           ${BASE_URL}${getImageURL(dims.big)} 1600w`,
-  //         imagesizes: "100vw",
-  //       }
-  //     : {},
-  // ],
+  link: [
+    parallax?.src
+      ? {
+          rel: "preload",
+          as: "image",
+          imagesrcset: `
+            ${BASE_URL}${getImageURL(dims.small)} 400w,
+            ${BASE_URL}${getImageURL(dims.medium)} 800w,
+            ${BASE_URL}${getImageURL(dims.big)} 1600w`,
+          imagesizes: "100vw",
+        }
+      : {},
+  ],
 });
 </script>
 <style lang="scss">
@@ -148,7 +148,9 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 100vw;
   height: 100%;
+  max-height: 100vh;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
