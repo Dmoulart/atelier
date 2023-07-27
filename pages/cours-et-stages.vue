@@ -43,8 +43,8 @@
           src="gallery/Latelier.jpg"
           format="webp"
           loading="lazy"
-          width="400"
-          height="600"
+          width="416"
+          height="312"
           sizes="sm:100vw md:50vw lg:50vw"
         />
       </figure>
