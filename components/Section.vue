@@ -58,11 +58,10 @@ useHead({
       ? {
           rel: "preload",
           as: "image",
-          href: `${BASE_URL}${getImageURL(dims.small)}`,
           imagesrcset: `
-            ${BASE_URL}${getImageURL(dims.small)} 400vw,
-            ${BASE_URL}${getImageURL(dims.medium)} 800vw,
-            ${BASE_URL}${getImageURL(dims.big)} 1600vw`,
+            ${BASE_URL}${getImageURL(dims.small)} 400w,
+            ${BASE_URL}${getImageURL(dims.medium)} 800w,
+            ${BASE_URL}${getImageURL(dims.big)} 1600w`,
           imagesizes: "100vw",
         }
       : {},
