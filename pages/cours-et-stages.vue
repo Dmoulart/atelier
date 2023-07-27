@@ -91,7 +91,7 @@
       >dans la réalisation de leur production (qu’elle soit individuelle ou
       collective). Pour plus d’infos sur la mise en œuvre d’atelier mosaïque
       n’hésitez pas à <NuxtLink to="/#contact">me contacter</NuxtLink>.
-      L’Atelier se déplace aussi à l’extérieur
+      L’Atelier se déplace aussi à l’extérieur.
     </p>
   </Content>
 
@@ -106,7 +106,7 @@
     <p>
       Une séance dure 2 heures ; deux séances minimum. Tarifs dégressifs à
       partir de la 3ème et 7ème séance. Modes de règlement acceptés : chèques et
-      espèces
+      espèces.
     </p>
     <p>
       Les tarifs comprennent le prêt de l’outillage, tous les matériaux (émaux,
