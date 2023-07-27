@@ -133,8 +133,3 @@ function getSliderData() {
   return images;
 }
 </script>
-<!-- <style lang="scss">
-.school-slider {
-  height: 512px;
-}
-</style> -->
