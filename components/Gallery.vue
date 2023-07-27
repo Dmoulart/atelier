@@ -1,7 +1,7 @@
 <template>
   <Slider
     v-if="current !== undefined"
-    :data="getImages()"
+    :data="images"
     fullscreen
     @close="current = undefined"
     :current-slide="current"
@@ -10,7 +10,7 @@
   <div class="gallery">
     <nuxt-img
       class="gallery__img"
-      v-for="({src}, i) in getImages()"
+      v-for="({src}, i) in images"
       :id="`gallery-img-${String(i)}`"
       :src="src"
       format="webp"
@@ -21,8 +21,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import gallery from "~/public/gallery.json";
 import Slider from "./Slider.vue";
+
+defineProps<{images: Array<{src: string}>}>();
 
 //@todo: Generate dynamic grid ?
 
@@ -30,16 +31,6 @@ const current = ref<number | undefined>();
 
 function setSlide(slide: number) {
   current.value = slide;
-}
-
-function getImages() {
-  const images: Array<{src: string}> = [];
-
-  for (const image of gallery) {
-    images.push({src: `gallery/${image}`});
-  }
-
-  return images;
 }
 </script>
 
