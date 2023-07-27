@@ -33,6 +33,7 @@ const props = defineProps<{
 .content-block {
   p {
     line-height: 2.5;
+    text-align: justify;
     // max-width: 780px; // too wide paragraph hurt the head
   }
 
@@ -93,6 +94,10 @@ const props = defineProps<{
   }
 
   @include sm {
+    p {
+      text-align: left;
+    }
+
     &__body {
       flex-direction: row;
       gap: 48px;
