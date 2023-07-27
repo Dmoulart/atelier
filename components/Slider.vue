@@ -1,10 +1,16 @@
 <template>
+  <div class="carousel__close" v-if="fullscreen" @click="$emit('close')">X</div>
   <carousel
     :items-to-show="1"
     v-bind="$attrs"
-    :class="{'carousel--overlay': overlay}"
+    :class="{'carousel--overlay': overlay, 'carousel--fullscreen': fullscreen}"
   >
-    <slide v-for="(img, i) in data" :key="i" class="carousel__slide">
+    <slide
+      v-for="(img, i) in data"
+      :key="i"
+      class="carousel__slide"
+      @click="$emit('close')"
+    >
       <nuxt-img
         :src="img.src"
         class="carousel__img"
@@ -31,6 +37,7 @@ withDefaults(
     navigation?: boolean;
     pagination?: boolean;
     overlay?: boolean;
+    fullscreen?: boolean;
   }>(),
   {
     navigation: true,
@@ -38,9 +45,45 @@ withDefaults(
     overlay: false,
   }
 );
+defineEmits(["close"]);
 </script>
 <style lang="scss">
 .carousel {
+  &--fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+
+    .carousel__img {
+      height: 100vh;
+    }
+
+    &::before {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: black;
+      opacity: 0.5;
+    }
+  }
+
+  &__close {
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 24px;
+    font-weight: 600;
+    z-index: 10;
+    cursor: pointer;
+    padding: 1rem;
+  }
+
   &--overlay::before {
     content: "";
     position: absolute;

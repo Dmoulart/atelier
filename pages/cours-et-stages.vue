@@ -83,7 +83,7 @@
       nouvelles compétences plastiques en explorant les formes et les couleurs
       ainsi que les possibilités d’assemblage.
     </p>
-    <Slider :data="getSliderData()" class="my-5 school-slider" />
+    <Slider :data="getSliderData()" class="my-5" />
     <p>
       L’activité mosaïque leur permettra de
       <strong

@@ -1,42 +1,40 @@
 <template>
+  <Slider
+    v-if="current !== undefined"
+    :data="getImages()"
+    fullscreen
+    @close="current = undefined"
+  />
+
   <div class="gallery">
     <nuxt-img
       class="gallery__img"
-      v-for="(src, i) in images"
+      v-for="({src}, i) in getImages()"
       :id="`gallery-img-${String(i)}`"
-      :src="`/gallery/${src}`"
+      :src="src"
       format="webp"
       loading="lazy"
       sizes="sm:80vw md:50vw"
+      @click="current = i"
     />
-    <!-- @load="(img) => setStyle(img, `gallery-img-${String(i)}`)" -->
   </div>
 </template>
 <script setup lang="ts">
-import images from "~/public/gallery.json";
+import gallery from "~/public/gallery.json";
+
+const current = ref<number | undefined>();
+
+function getImages() {
+  const images: Array<{src: string}> = [];
+
+  for (const image of gallery) {
+    images.push({src: `gallery/${image}`});
+  }
+
+  return images;
+}
 
 //@todo: Generate dynamic grid
-
-// function getSpanEstimate() {
-//   return (Math.random() * 2 + 1).toFixed();
-//   // if (size > 300) {
-//   //   return 3;
-//   // }
-
-//   // if (size > 250) {
-//   //   return 2;
-//   // }
-
-//   // return 1;
-// }
-
-// function setStyle(event: Event, id: string) {
-//   const el = document.getElementById(id);
-//   if (el) {
-//     el.style.gridColumnEnd = `span ${getSpanEstimate()}`;
-//     el.style.gridRowEnd = `span ${getSpanEstimate()}`;
-//   }
-// }
 </script>
 
 <style lang="scss">
@@ -51,6 +49,7 @@ import images from "~/public/gallery.json";
     width: 100%;
     height: 100%;
     object-fit: cover;
+    cursor: pointer;
   }
 }
 </style>
