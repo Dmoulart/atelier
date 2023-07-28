@@ -12,6 +12,10 @@ defineProps<{bgImage: string}>();
 </script>
 <style lang="scss">
 .hero-section {
+  // center on mobile only
+  place-items: center;
+  text-align: center;
+
   max-height: $section-max-height;
   h1,
   h2,
@@ -29,6 +33,11 @@ defineProps<{bgImage: string}>();
     grid-column: 1/-1;
     width: 100%;
     z-index: 0;
+  }
+
+  @include sm {
+    place-items: initial;
+    text-align: initial;
   }
 }
 </style>
