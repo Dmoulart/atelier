@@ -151,10 +151,16 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
   height: 100vh;
   // max-width: 100vw;
   // max-height: 100vh;
-  background-attachment: fixed;
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@include sm {
+  %bg-parallax {
+    background-attachment: fixed;
+  }
 }
 
 section.section {
