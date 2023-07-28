@@ -10,7 +10,7 @@
 import gallery from "~/assets/gallery.json";
 
 const title = "Galerie - Atelier de St-Gué";
-const description = `Venez découvrir les diverses créations de Marie-Laure Moulart à l'Atelier de St-Guénolé.`;
+const description = `Venez découvrir les diverses créations de Marie-Laure Barcelo Moulart à l'Atelier de St-Guénolé.`;
 
 useSeoMeta({
   title,

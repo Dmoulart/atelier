@@ -8,7 +8,7 @@
   <Content view="fill">
     <template #media>
       <nuxt-img
-        alt="Marie-Laure Moulart Barcelo"
+        alt="Marie-Laure Barcelo Moulart"
         src="/mlmb.jpg"
         format="webp"
         loading="lazy"
@@ -20,7 +20,7 @@
     </template>
     <h2>Venez rencontrer...</h2>
     <p>
-      Marie-Laure Moulart-Barcelo - artiste-mosaïste et art-thérapeute - vous
+      Marie-Laure Barcelo Moulart - artiste-mosaïste et art-thérapeute - vous
       accueille à l’Atelier pour vous initier à sa pratique artistique à travers
       des
       <NuxtLink to="/cours-et-stages">cours et stages de mosaïque</NuxtLink>

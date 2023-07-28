@@ -43,7 +43,7 @@ useSeoMeta({
   twitterCard: "summary_large_image",
   ogTitle: title,
   description: defaultDescription,
-  author: "Marie-Laure Moulart",
+  author: "Marie-Laure Barcelo Moulart",
   applicationName: "L'Atelier de St-Guénolé",
   themeColor: "#ffffff",
   ogUrl: BASE_URL,
