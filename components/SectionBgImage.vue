@@ -56,11 +56,23 @@ useHead({
     {
       rel: "preload",
       as: "image",
-      imagesrcset: `
-            ${BASE_URL}${getImageURL(dims.small)} 400w,
-            ${BASE_URL}${getImageURL(dims.medium)} 800w,
-            ${BASE_URL}${getImageURL(dims.big)} 1600w`,
-      imagesizes: "100vw",
+      href: `${BASE_URL}${getImageURL(dims.small)}`,
+      media: "(min-width: 300px)", // link the nuxt-image config sizes without making the nuxt config visible ?
+      fetchpriority: "high",
+    },
+    {
+      rel: "preload",
+      as: "image",
+      href: `${BASE_URL}${getImageURL(dims.medium)}`,
+      media: "(min-width: 576px)", // link the nuxt-image config sizes without making the nuxt config visible ?
+      fetchpriority: "high",
+    },
+    {
+      rel: "preload",
+      as: "image",
+      href: `${BASE_URL}${getImageURL(dims.big)}`,
+      media: "(min-width: 992px)", // link the nuxt-image config sizes without making the nuxt config visible ?
+      fetchpriority: "high",
     },
   ],
 });
