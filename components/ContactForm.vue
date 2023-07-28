@@ -43,6 +43,6 @@
 const props = defineProps<{mailto: string; subject: string}>();
 
 function getFormAction() {
-  return `https://mailto:${props.mailto}?subject:${props.subject}`;
+  return `mailto:${props.mailto}?subject:${props.subject}`;
 }
 </script>
