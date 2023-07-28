@@ -1,5 +1,10 @@
 <template>
-  <form :action="getFormAction()" method="get" enctype="text/plain">
+  <form
+    target="_top"
+    :action="getFormAction()"
+    method="get"
+    enctype="text/plain"
+  >
     <div class="field">
       <label class="label" for="email">Email</label>
       <div class="control has-icons-left has-icons-right">
