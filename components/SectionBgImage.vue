@@ -5,7 +5,7 @@
   />
 </template>
 <script setup lang="ts">
-import placeholders from "~/public/gallery-placeholders.json";
+import placeholders from "~/assets/gallery-placeholders.json";
 
 const {src, transition} = defineProps<{src: string; transition?: boolean}>();
 

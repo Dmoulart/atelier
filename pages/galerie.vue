@@ -7,7 +7,7 @@
   </Section>
 </template>
 <script setup lang="ts">
-import gallery from "~/public/gallery.json";
+import gallery from "~/assets/gallery.json";
 
 const title = "Galerie - Atelier de St-Gué";
 const description = `Venez découvrir les diverses créations de Marie-Laure Moulart à l'Atelier de St-Guénolé.`;

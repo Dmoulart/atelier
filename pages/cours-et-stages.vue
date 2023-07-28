@@ -118,7 +118,7 @@
   </Content>
 </template>
 <script setup lang="ts">
-import gallery from "~/public/gallery.json";
+import gallery from "~/assets/gallery.json";
 
 const title = "Cours et Stages - Atelier de St-Gué";
 const description = `L’atelier organise à l’année des cours et des stages pour enfants ados et adultes, groupes scolaires, colonies, etc.  Dans une ambiance calme et conviviale, venez réaliser une mosaïque. Laissez votre créativité s'exprimer`;

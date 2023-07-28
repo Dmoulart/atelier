@@ -16,7 +16,7 @@
   </Content>
 </template>
 <script setup lang="ts">
-import images from "~/public/gallery.json";
+import images from "~/assets/gallery.json";
 
 const title = "Commandes - Atelier de St-Gué";
 const description = `L’atelier vous propose des créations personnelles comme du mobilier, de

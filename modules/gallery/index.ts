@@ -32,9 +32,9 @@ export default defineNuxtModule({
           placeholders[`/gallery/${relativeSrc}`] = dataUri;
         }
 
-        writeFileSync(`public/gallery.json`, JSON.stringify(gallery));
+        writeFileSync(`assets/gallery.json`, JSON.stringify(gallery));
         writeFileSync(
-          `public/gallery-placeholders.json`,
+          `assets/gallery-placeholders.json`,
           JSON.stringify(placeholders)
         );
       } catch (e) {
