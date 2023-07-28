@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/image",
     ["./modules/gallery", {path: "public/images/gallery"}],
+    "@nuxtjs/google-fonts",
   ],
 
   devtools: {enabled: true},
@@ -19,6 +20,12 @@ export default defineNuxtConfig({
           `,
         },
       },
+    },
+  },
+  googleFonts: {
+    preload: true,
+    families: {
+      Comfortaa: [400, 500, 600, 700],
     },
   },
   image: {
