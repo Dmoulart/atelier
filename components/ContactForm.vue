@@ -1,10 +1,5 @@
 <template>
-  <form
-    target="_top"
-    :action="getFormAction()"
-    method="get"
-    enctype="text/plain"
-  >
+  <form method="POST" enctype="text/plain" @submit.prevent>
     <div class="field">
       <label class="label" for="email">Email</label>
       <div class="control has-icons-left has-icons-right">
@@ -25,12 +20,12 @@
     </div>
 
     <div class="field">
-      <label class="label" for="subject">Message</label>
+      <label class="label" for="message">Message</label>
       <div class="control">
         <textarea
-          id="subject"
+          id="message"
           class="textarea"
-          name="subject"
+          name="message"
           placeholder="Votre message"
           required
         ></textarea>
@@ -45,9 +40,12 @@
   </form>
 </template>
 <script setup lang="ts">
-const props = defineProps<{mailto: string; subject: string}>();
-
-function getFormAction() {
-  return `mailto:${props.mailto}?subject:${props.subject}`;
-}
+useHead({
+  script: [
+    {
+      id: "ratufa_loader",
+      src: "https://www.ratufa.io/c/ld.js?f=mye86exj&n=n1.ratufa.io",
+    },
+  ],
+});
 </script>
