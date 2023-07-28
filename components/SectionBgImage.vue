@@ -57,14 +57,14 @@ useHead({
       rel: "preload",
       as: "image",
       href: `${BASE_URL}${getImageURL(dims.small)}`,
-      media: "(min-width: 300px)", // link the nuxt-image config sizes without making the nuxt config visible ?
+      media: "(min-width: 300px) and (max-width: 575px)", // link the nuxt-image config sizes without making the nuxt config visible ?
       fetchpriority: "high",
     },
     {
       rel: "preload",
       as: "image",
       href: `${BASE_URL}${getImageURL(dims.medium)}`,
-      media: "(min-width: 576px)", // link the nuxt-image config sizes without making the nuxt config visible ?
+      media: "(min-width: 576px) and (max-width: 991px)", // link the nuxt-image config sizes without making the nuxt config visible ?
       fetchpriority: "high",
     },
     {
