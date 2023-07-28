@@ -73,8 +73,9 @@
       Vous avez une question, une suggestion ou souhaitez simplement prendre
       contact ? N'hésitez pas à m'envoyer un petit mot 🙃.
     </p>
+    <!--latelier29@gmail.com-->
     <ContactForm
-      mailto="latelier29@gmail.com"
+      mailto="dorian.moulart@gmail.com"
       :subject="`L'atelier de St-Gué`"
       class="mt-5"
     />
