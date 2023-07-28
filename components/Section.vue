@@ -149,8 +149,6 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
   left: 0;
   width: 100vw;
   height: 100vh;
-  // max-width: 100vw;
-  // max-height: 100vh;
 
   background-position: center;
   background-repeat: no-repeat;
@@ -159,6 +157,8 @@ $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
 
 @include sm {
   %bg-parallax {
+    // Background attachment fixed work very bad on mobile, so we should only keep it a tablet and desktop
+    // @todo?:https://css-tricks.com/the-fixed-background-attachment-hack/
     background-attachment: fixed;
   }
 }
