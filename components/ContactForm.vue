@@ -45,6 +45,7 @@ useHead({
     {
       id: "ratufa_loader",
       src: "https://www.ratufa.io/c/ld.js?f=mye86exj&n=n1.ratufa.io",
+      defer: true,
     },
   ],
 });
