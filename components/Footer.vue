@@ -4,7 +4,7 @@
       <p>
         <strong>Atelier de Saint-Guénolé</strong>
       </p>
-      <address>125 Rue de la Joie, 29760 Penmarc'h</address>
+      <address>135 Rue de la Joie, 29760 Penmarc'h</address>
 
       <nav class="footer__nav mt-5">
         <NuxtLink v-for="(item, i) in menu" :to="item.link" :key="i">{{
