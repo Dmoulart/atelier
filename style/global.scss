@@ -1,23 +1,29 @@
 @charset "utf-8";
-
-$family-serif: "Comfortaa", serif;
-$family-primary: $family-serif;
-$text: rgb(74, 74, 74);
-$link: #77bcd3;
-
-$section-min-height: min(100vh, 800px);
-$section-max-height: 1280px;
-$section-min-inline-margin: 20px;
-$section-max-content-width: 1040px;
-
-$nav-height: 52px;
-
-$font-white: rgb(238, 230, 230);
-$navbar-background-color: transparent;
-$navbar-item-color: $font-white;
+@import "~/style/vars";
 
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
+
 @import "../node_modules/bulma/bulma.sass";
+
+.content-block {
+    @for $i from 1 to 6 {
+        &--align-center {
+            h#{$i},
+            p {
+                @extend .has-text-centered !optional;
+            }
+        }
+
+        // automatic title bulma styling inside content
+        h#{$i} {
+            @extend .is-#{$i} !optional;
+            @extend .title !optional;
+            + p {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}

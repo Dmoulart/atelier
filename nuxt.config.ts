@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     ["./modules/gallery", {path: "public/images/gallery"}],
   ],
-
+  css: ["~/style/global.scss"],
   devtools: {enabled: true},
   vite: {
     css: {
@@ -15,7 +15,7 @@ export default defineNuxtConfig({
         scss: {
           additionalData: `
           @import "@/style/responsive.scss";
-          @import "@/style/global.scss";
+          @import "@/style/vars.scss";
           `,
         },
       },
