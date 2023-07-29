@@ -1,14 +1,14 @@
 @charset "utf-8";
 
-//@todo display swap !
+//@todo work on fallback font so its more like comfortaa
 @font-face {
-    font-family: Helvetica;
+    font-family: "Comfortaa-Fallback";
     font-size: 18px;
-    line-height: 1.3;
-    letter-spacing: -0.05px;
+    line-height: 1.3; // all this specific crap is not working, should be a dynamic css class see https://css-tricks.com/books/greatest-css-tricks/perfect-font-fallbacks/
+    letter-spacing: 2px;
     word-spacing: 1px;
     font-weight: 200;
-    src: local("Helvetica");
+    src: local("Verdana");
 }
 
 @import "~/style/vars";
@@ -16,7 +16,22 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+
+    // Use special settings when font is not loaded to avoid CLS
+    // line-height: 1.3;
+    // letter-spacing: 0px;
+    // font-weight: 200;
+    // word-spacing: 0.15px;
+    // font-size: 18px;
 }
+
+// body.font-loaded {
+//     font-size: 16px;
+//     line-height: 1.5;
+//     word-spacing: initial;
+//     letter-spacing: initial;
+//     font-weight: initial;
+// }
 
 @import "../node_modules/bulma/bulma.sass";
 

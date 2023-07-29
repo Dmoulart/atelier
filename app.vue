@@ -4,6 +4,7 @@
   </NuxtLayout>
 </template>
 <script setup lang="ts">
+// import FontFaceObserver from "fontfaceobserver";
 useHead({
   htmlAttrs: {
     lang: "fr",
@@ -19,5 +20,15 @@ useHead({
     },
   ],
 });
+// @todo : work on fallback font
+// onBeforeMount(() => {
+//   const font = new FontFaceObserver("Comfortaa", {
+//     weight: 400,
+//   });
+
+//   font.load().then(function () {
+//     document.body.classList.add("font-loaded");
+//   });
+// });
 </script>
 <style lang="scss"></style>
