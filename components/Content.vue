@@ -30,6 +30,7 @@ const props = defineProps<{
 }>();
 </script>
 <style lang="scss">
+// some styling of this content component is done in global.scss (to re-use some bulma classes).
 .content-block {
   p {
     line-height: 2.5;
@@ -65,24 +66,6 @@ const props = defineProps<{
         img {
           height: 100%;
         }
-      }
-    }
-  }
-
-  @for $i from 1 to 6 {
-    &--align-center {
-      h#{$i},
-      p {
-        @extend .has-text-centered;
-      }
-    }
-
-    // automatic title bulma styling inside content
-    h#{$i} {
-      @extend .is-#{$i} !optional;
-      @extend .title !optional;
-      + p {
-        margin-bottom: 2rem;
       }
     }
   }

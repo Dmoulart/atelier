@@ -94,7 +94,6 @@ onMounted(() => {
   }
 
   &--transparent {
-    // background: transparent !important;
     .navbar-menu {
       &.is-active {
         background: $font-white;
@@ -122,29 +121,29 @@ onMounted(() => {
       }
     }
   }
-}
 
-.navbar-menu {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  width: 100%;
-}
-
-.navbar-item {
-  display: flex;
-  align-items: baseline;
-  font-variant-caps: petite-caps;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-@include sm {
   .navbar-menu {
-    position: unset;
-    top: unset;
-    left: unset;
-    width: unset;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+  }
+
+  @include sm {
+    .navbar-menu {
+      position: unset;
+      top: unset;
+      left: unset;
+      width: unset;
+    }
+  }
+
+  .navbar-item {
+    display: flex;
+    align-items: baseline;
+    font-variant-caps: petite-caps;
+    font-weight: bold;
+    font-size: 1.1rem;
   }
 }
 </style>

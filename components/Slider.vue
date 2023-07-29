@@ -19,6 +19,7 @@
         :fetchpriority="i === 0 ? 'medium' : 'low'"
         loading="lazy"
         sizes="sm:100vw md:100vw lg:100vw"
+        alt="Photo de l'Atelier de St-Gué"
       />
     </slide>
 

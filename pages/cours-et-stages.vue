@@ -99,7 +99,13 @@
 
   <Content class="my-5">
     <template #media>
-      <PricesTable style="height: 100%" />
+      <nuxt-img
+        alt="Tarifs des cours de l'atelier de Saint-Guénolé"
+        src="tarifs.png"
+        format="webp"
+        loading="lazy"
+        sizes="sm:100vw md:50vw lg:50vw"
+      />
     </template>
 
     <h2 class="has-text-centered">Tarifs de l'Atelier de Saint Gué</h2>
@@ -114,6 +120,12 @@
       supports en bois, des planches petit format ainsi que du filet sont à
       votre disposition. Si vous souhaitez travaillez une autre dimension ou
       d’autres matériaux, vous en aurez la charge.
+    </p>
+
+    <p class="has-text-centered is-size-4 mt-3" style="width: 100%">
+      <a class="" href="atelier-de-st-gue-tarifs-cours-et-stages.pdf"
+        >Télécharger la brochure.</a
+      >
     </p>
   </Content>
 </template>
