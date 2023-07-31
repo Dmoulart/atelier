@@ -23,6 +23,11 @@ export default defineNuxtModule({
         const gallery: string[] = [];
         const placeholders: Record<string, string> = {};
 
+        // create creations-et-commandes gallery
+        // @todo : in this spirit make an image selection for each specific carousel at build time
+        const creationsAndOrderGallery: string[] = [];
+        const CREATIONS_AND_GALLERY_PREFIX = "CreationsEtCommandes";
+
         for (const src of walkSync(path)) {
           const relativeSrc = src.slice(path.length + 1); // remove leading slash
           gallery.push(relativeSrc);
@@ -30,12 +35,33 @@ export default defineNuxtModule({
           const blurhash = await encodeImageToBlurhash(src);
           const dataUri = blurHashToDataURL(blurhash) ?? "";
           placeholders[`/gallery/${relativeSrc}`] = dataUri;
+
+          if (relativeSrc.startsWith(CREATIONS_AND_GALLERY_PREFIX)) {
+            creationsAndOrderGallery.push(relativeSrc);
+          }
         }
 
         writeFileSync(`assets/gallery.json`, JSON.stringify(gallery));
         writeFileSync(
           `assets/gallery-placeholders.json`,
           JSON.stringify(placeholders)
+        );
+
+        // order creations et commandes
+        // every file name should consist of a number and file extension
+        creationsAndOrderGallery.sort((a, b) => {
+          const numA = a
+            .split(".")[0]
+            .substring((CREATIONS_AND_GALLERY_PREFIX + "/").length);
+          const numB = b
+            .split(".")[0]
+            .substring((CREATIONS_AND_GALLERY_PREFIX + "/").length);
+
+          return Number(numA) - Number(numB);
+        });
+        writeFileSync(
+          `assets/gallery-creations-et-commandes.json`,
+          JSON.stringify(creationsAndOrderGallery)
         );
       } catch (e) {
         console.error(

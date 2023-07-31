@@ -16,7 +16,7 @@
   </Content>
 </template>
 <script setup lang="ts">
-import gallery from "~/assets/gallery.json";
+import gallery from "~/assets/gallery-creations-et-commandes.json";
 
 const title = "Créations et commandes - Atelier de St-Gué";
 const description = `L’atelier vous propose des créations personnelles comme du mobilier, de
@@ -37,8 +37,7 @@ function getImages() {
   const images: Array<{src: string}> = [];
 
   for (const image of gallery) {
-    if (image.startsWith("CreationsEtCommandes"))
-      images.push({src: `gallery/${image}`});
+    images.push({src: `gallery/${image}`});
   }
 
   return images;
