@@ -40,7 +40,7 @@
     <template #media>
       <nuxt-img
         alt="Tableau"
-        src="/gallery/Tableaux/Mosaique10.jpg"
+        src="/gallery/CreationsEtCommandes/8.jpg"
         loading="lazy"
         format="webp"
         fetchpriority="low"

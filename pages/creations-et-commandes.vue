@@ -37,14 +37,7 @@ function getImages() {
   const images: Array<{src: string}> = [];
 
   for (const image of gallery) {
-    if (
-      image.startsWith("Commandes") ||
-      image.startsWith("CoupesEtPlateaux") ||
-      image.startsWith("DessousDePlat") ||
-      image.startsWith("Exterieur") ||
-      image.startsWith("Tableaux") ||
-      image.startsWith("Tables")
-    )
+    if (image.startsWith("CreationsEtCommandes"))
       images.push({src: `gallery/${image}`});
   }
 
