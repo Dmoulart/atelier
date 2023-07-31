@@ -1,6 +1,6 @@
 <template>
   <Hero bg-image="/gallery/Commandes/poissonSculture.jpg">
-    <h1>Créations sur commande</h1>
+    <h1>Créations et commandes</h1>
   </Hero>
 
   <Content>
@@ -12,13 +12,13 @@
       devis sur mesure. Pour toute information supplémentaire,
       <NuxtLink to="/#contact">contacter l’Atelier.</NuxtLink>
     </p>
-    <Slider :data="getSliderData()" />
+    <Gallery :images="getImages()" />
   </Content>
 </template>
 <script setup lang="ts">
-import images from "~/assets/gallery.json";
+import gallery from "~/assets/gallery.json";
 
-const title = "Commandes - Atelier de St-Gué";
+const title = "Créations et commandes - Atelier de St-Gué";
 const description = `L’atelier vous propose des créations personnelles comme du mobilier, de
       l’art de la table, des tableaux, des fresques intérieures et extérieures.
       Toutes vos envies ou projets personnels peuvent être réalisés avec un
@@ -33,20 +33,22 @@ useSeoMeta({
   twitterTitle: title,
 });
 
-function getSliderData() {
-  return images
-    .filter((path) => {
-      return (
-        path.startsWith("Commandes") ||
-        path.startsWith("CoupesEtPlateaux") ||
-        path.startsWith("DessousDePlat") ||
-        path.startsWith("Tableaux") ||
-        path.startsWith("Tables")
-      );
-    })
-    .map((path) => ({
-      src: `/gallery/${path}`,
-    }));
+function getImages() {
+  const images: Array<{src: string}> = [];
+
+  for (const image of gallery) {
+    if (
+      image.startsWith("Commandes") ||
+      image.startsWith("CoupesEtPlateaux") ||
+      image.startsWith("DessousDePlat") ||
+      image.startsWith("Exterieur") ||
+      image.startsWith("Tableaux") ||
+      image.startsWith("Tables")
+    )
+      images.push({src: `gallery/${image}`});
+  }
+
+  return images;
 }
 </script>
 

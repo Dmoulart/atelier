@@ -54,7 +54,7 @@
       Visiter l’Atelier est aussi l’occasion de découvrir les
       <NuxtLink to="galerie"> créations originales de Marie-Laure</NuxtLink> ou
       de lui passer une
-      <NuxtLink to="commandes">commande personnalisée</NuxtLink>.
+      <NuxtLink to="creations-et-commandes">commande personnalisée</NuxtLink>.
     </p>
     <h2>L'art thérapie</h2>
     <p>

@@ -51,10 +51,13 @@ useSeoMeta({
 
 const menu: MenuItem[] = [
   {label: "Accueil", icon: "fas fa-home", link: "/"},
-  {label: "Commandes", icon: "fa-solid fa-paintbrush", link: "/commandes"},
-  {label: "Galerie", icon: "fa-solid fa-palette", link: "/galerie"},
   {
-    label: "Cours de mosaïque",
+    label: "Créations et commandes",
+    icon: "fa-solid fa-paintbrush",
+    link: "/creations-et-commandes",
+  },
+  {
+    label: "Cours et stages",
     icon: "fa-solid fa-person-chalkboard",
     link: "/cours-et-stages",
   },
