@@ -16,7 +16,10 @@
       <div v-if="$slots.media" class="content-block__media">
         <slot name="media" />
       </div>
-      <div class="content-block__text">
+      <div
+        class="content-block__text"
+        :class="{'content-block__text--spread': !$slots.media}"
+      >
         <slot />
       </div>
     </div>
@@ -42,6 +45,12 @@ const props = defineProps<{
     display: flex;
     flex-direction: column;
     gap: 24px;
+  }
+
+  &__text {
+    &--spread {
+      width: 100%;
+    }
   }
 
   &__media {
