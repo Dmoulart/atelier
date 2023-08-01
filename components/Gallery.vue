@@ -16,7 +16,7 @@
         :src="src"
         format="webp"
         loading="lazy"
-        sizes="sm:80vw md:50vw"
+        sizes="sm:80vw md:50vw lg:40vw"
         @click="setSlide(i)"
       />
       <figcaption class="gallery__caption" v-if="caption">
