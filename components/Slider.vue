@@ -7,20 +7,21 @@
     :model-value="currentSlide"
   >
     <slide
-      v-for="(img, i) in data"
+      v-for="({src, caption}, i) in data"
       :key="i"
       class="carousel__slide"
       @click="$emit('close')"
     >
       <nuxt-img
-        :src="img.src"
+        :src="src"
         class="carousel__img"
         format="webp"
         :fetchpriority="i === 0 ? 'medium' : 'low'"
         loading="lazy"
         sizes="sm:100vw md:100vw lg:100vw"
-        alt="Photo de l'Atelier de St-Gué"
+        :alt="caption ?? `Photo de l'Atelier de St-Gué`"
       />
+      <div class="carousel__caption" v-if="caption">{{ caption }}</div>
     </slide>
 
     <template #addons>
@@ -35,12 +36,12 @@ import {Carousel, Slide, Pagination, Navigation} from "vue3-carousel";
 
 withDefaults(
   defineProps<{
-    data: Array<{src: string}>;
+    data: Array<{src: string; caption?: string}>;
+    currentSlide?: number;
     navigation?: boolean;
     pagination?: boolean;
     overlay?: boolean;
     fullscreen?: boolean;
-    currentSlide?: number;
   }>(),
   {
     navigation: true,
@@ -48,7 +49,10 @@ withDefaults(
     overlay: false,
   }
 );
+
 defineEmits(["close"]);
+
+function getCaption(src: string) {}
 </script>
 <style lang="scss">
 .carousel {
@@ -119,6 +123,18 @@ defineEmits(["close"]);
     height: 70vh;
     width: 100%;
     object-fit: contain;
+  }
+
+  &__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    text-align: center;
   }
 
   &__prev,

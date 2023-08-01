@@ -51,10 +51,10 @@
     </template>
     <h2>La galerie</h2>
     <p>
-      Visiter l’Atelier est aussi l’occasion de découvrir les
-      <NuxtLink to="galerie"> créations originales de Marie-Laure</NuxtLink> ou
-      de lui passer une
-      <NuxtLink to="creations-et-commandes">commande personnalisée</NuxtLink>.
+      Visiter l’Atelier est aussi l’occasion de
+      <NuxtLink to="creations-et-commandes"
+        >découvrir les créations originales de Marie-Laure </NuxtLink
+      >ou de lui passer une commande personnalisée.
     </p>
     <h2>L'art thérapie</h2>
     <p>

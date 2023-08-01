@@ -10,7 +10,8 @@
   <div class="gallery">
     <nuxt-img
       class="gallery__img"
-      v-for="({src}, i) in images"
+      v-for="({src, caption}, i) in images"
+      :alt="caption ?? `Photo de l'Atelier de St-Gué`"
       :id="`gallery-img-${String(i)}`"
       :src="src"
       format="webp"
@@ -21,7 +22,9 @@
   </div>
 </template>
 <script setup lang="ts">
-defineProps<{images: Array<{src: string}>}>();
+defineProps<{
+  images: Array<{src: string; caption?: string}>;
+}>();
 
 //@todo: Generate dynamic grid ?
 
