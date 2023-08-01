@@ -63,7 +63,9 @@
       <strong>temps pour faire le bilan</strong>
       sur le vécu et le ressenti de la séance.
     </p>
+
     <br />
+
     <h3 class="has-text-centered">Mes garanties professionnelles</h3>
     <p>
       <strong>Climat d’écoute, de bienveillance et confidentialité</strong>.

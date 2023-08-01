@@ -66,14 +66,28 @@
   </Content>
 
   <Divider />
-
-  <Content align="center" id="contact">
+  <!-- <Content align="center" id="contact"> </Content> -->
+  <Content class="contact" align="center" id="contact">
     <h2>Contact</h2>
     <p>
       Vous avez une question, une suggestion ou souhaitez simplement prendre
-      contact ? N'hésitez pas à m'envoyer un petit mot 🙃.
+      contact ? N'hésitez pas à m'envoyer un petit mot. 🙃
     </p>
+
     <ContactForm class="mt-5" />
+
+    <h3>Retrouver l'Atelier</h3>
+
+    <address class="contact__address">
+      <Picto class="py-2" icon="fa-solid fa-location-dot" :size="20">
+        <a href="https://goo.gl/maps/YQBsrJZ2gzBfUy3A6">
+          135 Rue de la Joie, 29760 Penmarc'h
+        </a>
+      </Picto>
+      <Picto class="py-2" icon="fa-solid fa-phone" :size="20">
+        <a href="tel:+33626675883">06 26 67 58 83</a>
+      </Picto>
+    </address>
   </Content>
 </template>
 <script setup lang="ts">
@@ -85,3 +99,14 @@ useSeoMeta({
   twitterDescription: description,
 });
 </script>
+<style lang="scss">
+.contact {
+  &__address {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 1.2rem;
+  }
+}
+</style>
