@@ -66,7 +66,6 @@
   </Content>
 
   <Divider />
-  <!-- <Content align="center" id="contact"> </Content> -->
   <Content class="contact" align="center" id="contact">
     <h2>Contact</h2>
     <p>
@@ -74,7 +73,7 @@
       contact ? N'hésitez pas à m'envoyer un petit mot. 🙃
     </p>
 
-    <ContactForm class="mt-5" />
+    <ContactForm class="my-5" />
 
     <h3>Retrouver l'Atelier</h3>
 
@@ -103,10 +102,22 @@ useSeoMeta({
 .contact {
   &__address {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    flex-flow: column nowrap;
     gap: 2rem;
     font-size: 1.2rem;
+
+    .picto {
+      margin-inline: auto;
+    }
+
+    @include sm {
+      flex-flow: row nowrap;
+      justify-content: center;
+
+      .picto {
+        margin-inline: initial;
+      }
+    }
   }
 }
 </style>
