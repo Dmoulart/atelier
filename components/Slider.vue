@@ -16,10 +16,10 @@
         <nuxt-img
           :src="src"
           class="carousel__img"
-          format="webp"
           :fetchpriority="i === 0 ? 'medium' : 'low'"
           loading="lazy"
-          sizes="sm:100vw md:100vw lg:100vw"
+          sizes="sm:80vw md:50vw lg:40vw"
+          format="webp"
           :alt="caption ?? `Photo de l'Atelier de St-Gué`"
         />
         <figcaption v-if="caption" class="carousel__caption">
