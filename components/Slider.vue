@@ -12,16 +12,20 @@
       class="carousel__slide"
       @click="$emit('close')"
     >
-      <nuxt-img
-        :src="src"
-        class="carousel__img"
-        format="webp"
-        :fetchpriority="i === 0 ? 'medium' : 'low'"
-        loading="lazy"
-        sizes="sm:100vw md:100vw lg:100vw"
-        :alt="caption ?? `Photo de l'Atelier de St-Gué`"
-      />
-      <div class="carousel__caption" v-if="caption">{{ caption }}</div>
+      <figure class="carousel__figure">
+        <nuxt-img
+          :src="src"
+          class="carousel__img"
+          format="webp"
+          :fetchpriority="i === 0 ? 'medium' : 'low'"
+          loading="lazy"
+          sizes="sm:100vw md:100vw lg:100vw"
+          :alt="caption ?? `Photo de l'Atelier de St-Gué`"
+        />
+        <figcaption v-if="caption" class="carousel__caption">
+          {{ caption }}
+        </figcaption>
+      </figure>
     </slide>
 
     <template #addons>
@@ -51,8 +55,6 @@ withDefaults(
 );
 
 defineEmits(["close"]);
-
-function getCaption(src: string) {}
 </script>
 <style lang="scss">
 .carousel {
@@ -119,8 +121,13 @@ function getCaption(src: string) {}
     background-color: black;
   }
 
+  &__figure {
+    margin: 0;
+  }
+
   &__img {
-    height: 70vh;
+    display: block;
+    height: 50vh;
     width: 100%;
     object-fit: contain;
   }
@@ -135,6 +142,7 @@ function getCaption(src: string) {}
     background-color: rgba(0, 0, 0, 0.4);
     color: white;
     text-align: center;
+    font-style: italic;
   }
 
   &__prev,
@@ -162,6 +170,12 @@ function getCaption(src: string) {}
 
   &__pagination {
     flex-wrap: wrap;
+  }
+
+  @include sm {
+    &__img {
+      height: 70vh;
+    }
   }
 }
 </style>
