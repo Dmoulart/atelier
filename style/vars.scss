@@ -13,3 +13,21 @@ $nav-height: 52px;
 $font-white: rgb(238, 230, 230);
 $navbar-background-color: transparent;
 $navbar-item-color: $font-white;
+
+%caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 1.25rem;
+    padding-inline: 1rem;
+    margin-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    text-align: center;
+    font-style: italic;
+
+    @include sm {
+        font-size: 1.15rem;
+    }
+}

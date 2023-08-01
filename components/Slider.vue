@@ -133,16 +133,7 @@ defineEmits(["close"]);
   }
 
   &__caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    text-align: center;
-    font-style: italic;
+    @extend %caption;
   }
 
   &__prev,
