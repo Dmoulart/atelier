@@ -18,6 +18,14 @@
         sizes="sm:100vw md:50vw lg:50vw"
       />
     </template>
+    <h2>L'atelier..</h2>
+    <p>
+      L’Atelier de St-Gué est un
+      <strong>lieu de création, d’échange et de partage</strong>
+      autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé,
+      Penmarch.
+    </p>
+
     <h2>Venez rencontrer...</h2>
     <p>
       Marie-Laure Barcelo Moulart - artiste-mosaïste et art-thérapeute - vous
@@ -25,14 +33,6 @@
       des
       <NuxtLink to="/cours-et-stages">cours et stages de mosaïque</NuxtLink>
       ponctuels ou réguliers et ouverts à toutes et tous.
-    </p>
-
-    <h2>L'atelier..</h2>
-    <p>
-      L’Atelier de St-Gué est un
-      <strong>lieu de création, d’échange et de partage</strong>
-      autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé,
-      Penmarch.
     </p>
   </Content>
 
@@ -49,19 +49,19 @@
         sizes="sm:100vw md:50vw lg:50vw"
       />
     </template>
-    <h2>La galerie</h2>
-    <p>
-      Visiter l’Atelier est aussi l’occasion de
-      <NuxtLink to="creations-et-commandes"
-        >découvrir les créations originales de Marie-Laure </NuxtLink
-      >ou de lui passer une commande personnalisée.
-    </p>
     <h2>L'art thérapie</h2>
     <p>
       Vous pouvez bénéficier à l’Atelier de
       <NuxtLink to="art-therapie">séances d’art thérapie</NuxtLink> : un
       accompagnement thérapeutique individualisé qui exploite votre potentiel
       artistique pour retrouver sérénité et joie de vivre.
+    </p>
+    <h2>La galerie</h2>
+    <p>
+      Visiter l’Atelier est aussi l’occasion de
+      <NuxtLink to="creations-et-commandes"
+        >découvrir les créations originales de Marie-Laure </NuxtLink
+      >ou de lui passer une commande personnalisée.
     </p>
   </Content>
 
