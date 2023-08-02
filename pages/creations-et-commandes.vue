@@ -12,7 +12,8 @@
       devis sur mesure. Pour toute information supplémentaire,
       <NuxtLink to="/#contact">contacter l’Atelier.</NuxtLink>
     </p>
-    <Gallery :images="getImages()" />
+    <Slider :data="getImages()" class="my-5" />
+    <!-- <Gallery/> -->
   </Content>
 </template>
 <script setup lang="ts">
