@@ -80,9 +80,12 @@ useHead({
 <style lang="scss">
 $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
 
+.section > .section-bg-img {
+  grid-column: 1/-1;
+}
+
 .section-bg-img {
   @extend %bg-parallax;
-
   background-image: v-bind(imagePlaceholder), v-bind(imageSmall),
     $bg-img-overlay;
   background-blend-mode: overlay;

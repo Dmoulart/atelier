@@ -12,11 +12,12 @@ defineProps<{bgImage: string}>();
 </script>
 <style lang="scss">
 .hero-section {
+  position: relative;
   // center on mobile only
   place-items: center;
   text-align: center;
-
-  max-height: $section-max-height;
+  height: 100vh;
+  // max-height: $section-max-height;
   h1,
   h2,
   h3 {

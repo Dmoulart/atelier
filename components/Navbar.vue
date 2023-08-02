@@ -118,6 +118,7 @@ onMounted(() => {
       }
       span {
         background-color: $font-white;
+        height: 2px;
       }
     }
   }
