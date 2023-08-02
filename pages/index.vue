@@ -73,9 +73,9 @@
       contact ? N'hésitez pas à m'envoyer un petit mot. 🙃
     </p>
 
-    <ContactForm class="my-5" />
+    <ContactForm class="mt-5" />
 
-    <h3>Retrouver l'Atelier</h3>
+    <h3 class="mt-5">Retrouver l'Atelier</h3>
 
     <address class="contact__address">
       <Picto class="py-2" icon="fa-solid fa-location-dot" :size="20">
