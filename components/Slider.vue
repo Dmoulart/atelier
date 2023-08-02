@@ -18,7 +18,7 @@
           class="carousel__img"
           :fetchpriority="i === 0 ? 'medium' : 'low'"
           loading="lazy"
-          sizes="sm:80vw md:50vw lg:45vw"
+          sizes="sm:80vw md:50vw lg:46vw"
           format="webp"
           :alt="caption ?? `Photo de l'Atelier de St-Gué`"
         />

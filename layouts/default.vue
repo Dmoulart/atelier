@@ -51,11 +51,7 @@ useSeoMeta({
 
 const menu: MenuItem[] = [
   {label: "Accueil", icon: "fas fa-home", link: "/"},
-  {
-    label: "Créations et commandes",
-    icon: "fa-solid fa-paintbrush",
-    link: "/creations-et-commandes",
-  },
+
   {
     label: "Cours et stages",
     icon: "fa-solid fa-person-chalkboard",
@@ -65,6 +61,11 @@ const menu: MenuItem[] = [
     label: "Art thérapie",
     icon: "fa-solid fa-hand-holding-hand",
     link: "/art-therapie",
+  },
+  {
+    label: "Créations et commandes",
+    icon: "fa-solid fa-paintbrush",
+    link: "/creations-et-commandes",
   },
   {
     label: "Contact",
