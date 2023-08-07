@@ -34,11 +34,9 @@ function getImageURL(dimensions: {height: number; width: number}) {
   });
 }
 
-const {BASE_URL} = useRuntimeConfig().public;
-
 useHead({
   meta: [
-    {name: "og:image", content: `${BASE_URL}${getImageURL(dims.big)}`},
+    {name: "og:image", content: getImageURL(dims.big)},
 
     {name: "og:image:height", content: dims.big.height},
     {name: "og:image:width", content: dims.big.width},
@@ -56,21 +54,21 @@ useHead({
     {
       rel: "preload",
       as: "image",
-      href: `${BASE_URL}${getImageURL(dims.small)}`,
+      href: getImageURL(dims.small),
       media: "(min-width: 300px) and (max-width: 575px)", // link the nuxt-image config sizes without making the nuxt config visible ?
       fetchpriority: "high",
     },
     {
       rel: "preload",
       as: "image",
-      href: `${BASE_URL}${getImageURL(dims.medium)}`,
+      href: getImageURL(dims.medium),
       media: "(min-width: 576px) and (max-width: 991px)", // link the nuxt-image config sizes without making the nuxt config visible ?
       fetchpriority: "high",
     },
     {
       rel: "preload",
       as: "image",
-      href: `${BASE_URL}${getImageURL(dims.big)}`,
+      href: getImageURL(dims.big),
       media: "(min-width: 992px)", // link the nuxt-image config sizes without making the nuxt config visible ?
       fetchpriority: "high",
     },
