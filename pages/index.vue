@@ -73,7 +73,7 @@
       contact ? N'hésitez pas à m'envoyer un petit mot. 🙃
     </p>
 
-    <ContactForm class="mt-5" />
+    <!-- <ContactForm class="mt-5" /> -->
 
     <h3 class="mt-5">Retrouver l'Atelier</h3>
 

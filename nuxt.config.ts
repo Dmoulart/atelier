@@ -1,16 +1,17 @@
-import {readdirSync} from "fs";
-import {env} from "process";
+import { readdirSync } from "fs";
+import { env } from "process";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
     "@nuxt/image",
-    ["./modules/gallery", {path: "public/images/gallery"}],
+    ["./modules/gallery", { path: "public/images/gallery" }],
     "@nuxtjs/google-fonts",
     "@nuxtjs/fontaine",
   ],
+  compatibilityDate: "2025-06-08",
   css: ["~/style/global.scss"],
-  devtools: {enabled: true},
+  devtools: { enabled: true },
   vite: {
     css: {
       preprocessorOptions: {
@@ -51,6 +52,6 @@ export default defineNuxtConfig({
     payloadExtraction: false,
   },
   routeRules: {
-    "/**": {prerender: true},
+    "/**": { prerender: true },
   },
 });
