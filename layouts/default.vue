@@ -8,7 +8,7 @@
   </main>
 </template>
 <script setup lang="ts">
-import {MenuItem} from "~/types/menu";
+import type { MenuItem } from "~/types/menu";
 
 const title = "L'Atelier de St-Gué";
 const defaultDescription = `L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch.`;
@@ -35,7 +35,7 @@ useHead({
   },
 });
 
-const {BASE_URL} = useRuntimeConfig().public;
+const { BASE_URL } = useRuntimeConfig().public;
 
 useSeoMeta({
   title,
@@ -50,7 +50,7 @@ useSeoMeta({
 });
 
 const menu: MenuItem[] = [
-  {label: "Accueil", icon: "fas fa-home", link: "/"},
+  { label: "Accueil", icon: "fas fa-home", link: "/" },
 
   {
     label: "Cours et stages",

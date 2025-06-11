@@ -22,9 +22,9 @@
   </footer>
 </template>
 <script setup lang="ts">
-import {MenuItem} from "~/types/menu";
+import type { MenuItem } from "~/types/menu";
 
-defineProps<{menu: MenuItem[]}>();
+defineProps<{ menu: MenuItem[] }>();
 </script>
 
 <style lang="scss">

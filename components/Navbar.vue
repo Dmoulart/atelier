@@ -1,7 +1,7 @@
 <template>
   <nav
     class="navbar is-transparent navbar--sticky"
-    :class="{'navbar--transparent': transparent}"
+    :class="{ 'navbar--transparent': transparent }"
   >
     <div class="navbar-brand">
       <div
@@ -25,7 +25,7 @@
           class="navbar-item"
           @click="closeMenu"
         >
-          <span class="icon mr-1" :style="{fontSize: '14px'}">
+          <span class="icon mr-1" :style="{ fontSize: '14px' }">
             <i :class="item.icon"></i>
           </span>
           {{ item.label }}
@@ -35,9 +35,9 @@
   </nav>
 </template>
 <script setup lang="ts">
-import {MenuItem} from "~/types/menu";
+import type { MenuItem } from "~/types/menu";
 
-defineProps<{menu: MenuItem[]; transparent?: boolean}>();
+defineProps<{ menu: MenuItem[]; transparent?: boolean }>();
 
 function closeMenu() {
   // Get all "navbar-burger" elements
