@@ -33,7 +33,7 @@ html {
 //     font-weight: initial;
 // }
 
-@import "../node_modules/bulma/bulma.sass";
+@import "../../node_modules/bulma/bulma.sass";
 
 .content-block {
     @for $i from 1 to 6 {

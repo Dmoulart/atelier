@@ -7,7 +7,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
     ["./modules/gallery", { path: "public/images/gallery" }],
     "@nuxtjs/google-fonts",
-    "@nuxtjs/fontaine",
   ],
   compatibilityDate: "2025-06-08",
   css: ["~/style/global.scss"],
@@ -33,7 +32,7 @@ export default defineNuxtConfig({
   },
   image: {
     provider: "ipx",
-    dir: "public/images",
+    dir: "../public/images",
     screens: {
       xs: 320,
       sm: 576,

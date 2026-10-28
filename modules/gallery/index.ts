@@ -41,9 +41,9 @@ export default defineNuxtModule({
           }
         }
 
-        writeFileSync(`assets/gallery.json`, JSON.stringify(gallery));
+        writeFileSync(`app/assets/gallery.json`, JSON.stringify(gallery));
         writeFileSync(
-          `assets/gallery-placeholders.json`,
+          `app/assets/gallery-placeholders.json`,
           JSON.stringify(placeholders)
         );
 
@@ -60,7 +60,7 @@ export default defineNuxtModule({
           return Number(numA) - Number(numB);
         });
         writeFileSync(
-          `assets/gallery-creations-et-commandes.json`,
+          `app/assets/gallery-creations-et-commandes.json`,
           JSON.stringify(creationsAndOrderGallery)
         );
       } catch (e) {
