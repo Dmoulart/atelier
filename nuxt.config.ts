@@ -1,13 +1,13 @@
-import { readdirSync } from "fs";
 import { env } from "process";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
     "@nuxt/image",
     ["./modules/gallery", { path: "public/images/gallery" }],
     "@nuxtjs/google-fonts",
+    "@transient/nuxt",
   ],
+  transient: { route: "/edit" },
   compatibilityDate: "2025-06-08",
   css: ["~/style/global.scss"],
   devtools: { enabled: true },
