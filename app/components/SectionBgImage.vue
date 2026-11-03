@@ -35,21 +35,6 @@ function getImageURL(dimensions: {height: number; width: number}) {
 }
 
 useHead({
-  meta: [
-    {name: "og:image", content: getImageURL(dims.big)},
-
-    {name: "og:image:height", content: dims.big.height},
-    {name: "og:image:width", content: dims.big.width},
-    {
-      name: "og:image:alt",
-      content: "Une magnifique oeuvre de l'atelier de Saint-Guénolé",
-    },
-    {
-      name: "og:type",
-      content: "website",
-    },
-  ],
-
   link: [
     {
       rel: "preload",
