@@ -1,4 +1,8 @@
 <template>
+  <Seo
+    title="Art Thérapie - Atelier de St-Gué"
+    description="Démarche créatrice accompagnée, qui utilise la création artistique dans un but thérapeutique, l'Art Thérapie se pratique aussi à l'Atelier de St-Guénolé."
+  />
   <Hero bg-image="/gallery/CreationsEtCommandes/11.jpg">
     <h1>Art thérapie</h1>
   </Hero>
@@ -91,17 +95,3 @@
     </TextImgBlock>
   </Content>
 </template>
-<script setup lang="ts">
-const title = "Art Thérapie - Atelier de St-Gué";
-const description = `Démarche créatrice accompagnée, qui utilise la création
-      artistique dans un but thérapeutique, l'Art Thérapie se pratique aussi à l'Atelier de St-Guénolé.`;
-
-useSeoMeta({
-  title,
-  description,
-  ogDescription: description,
-  twitterDescription: description,
-  ogTitle: title,
-  twitterTitle: title,
-});
-</script>
