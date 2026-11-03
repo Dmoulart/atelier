@@ -1,5 +1,5 @@
 <template>
-  <form method="POST" enctype="text/plain" @submit.prevent>
+  <form class="mt-5" method="POST" enctype="text/plain" @submit.prevent>
     <div class="field">
       <label class="label" for="email">Email</label>
       <div class="control has-icons-left has-icons-right">

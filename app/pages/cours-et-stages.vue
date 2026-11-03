@@ -5,14 +5,9 @@
 
   <Content view="fill">
     <template #media>
-      <nuxt-img
-        alt="Image d'un cours se déroulant à l'atelier"
+      <Photo
         src="gallery/Cours_atelier.jpg"
-        format="webp"
-        loading="lazy"
-        width="400"
-        height="600"
-        sizes="sm:100vw md:50vw lg:50vw"
+        alt="Image d'un cours se déroulant à l'atelier"
       />
     </template>
 
@@ -37,17 +32,11 @@
   <Divider />
   <Content align="left">
     <template #media>
-      <figure class="image is-4-by-5">
-        <nuxt-img
-          alt="Image d'un cours se déroulant à l'atelier"
-          src="gallery/Latelier.jpg"
-          format="webp"
-          loading="lazy"
-          width="416"
-          height="312"
-          sizes="sm:100vw md:50vw lg:50vw"
-        />
-      </figure>
+      <Photo
+        src="gallery/Latelier.jpg"
+        alt="Image d'un cours se déroulant à l'atelier"
+        shape="landscape"
+      />
     </template>
     <p>
       L’enseignement à l’Atelier mènera les stagiaires débutants, guidés par
@@ -83,7 +72,7 @@
       nouvelles compétences plastiques en explorant les formes et les couleurs
       ainsi que les possibilités d’assemblage.
     </p>
-    <Slider :data="getSliderData()" class="my-5" />
+    <PhotoSlider album="ecole" />
     <p>
       L’activité mosaïque leur permettra de
       <strong
@@ -99,12 +88,10 @@
 
   <Content class="my-5">
     <template #media>
-      <nuxt-img
-        alt="Tarifs des cours de l'atelier de Saint-Guénolé"
+      <Photo
         src="tarifs.png"
-        format="webp"
-        loading="lazy"
-        sizes="sm:100vw md:50vw lg:50vw"
+        alt="Tarifs des cours de l'atelier de Saint-Guénolé"
+        shape="original"
       />
     </template>
 
@@ -122,16 +109,14 @@
       d’autres matériaux, vous en aurez la charge.
     </p>
 
-    <p class="has-text-centered is-size-4 mt-3" style="width: 100%">
-      <a class="" href="atelier-de-st-gue-tarifs-cours-et-stages.pdf"
+    <p class="has-text-centered is-size-4 mt-3">
+      <a href="atelier-de-st-gue-tarifs-cours-et-stages.pdf"
         >Télécharger la brochure.</a
       >
     </p>
   </Content>
 </template>
 <script setup lang="ts">
-import gallery from "~/assets/gallery.json";
-
 const title = "Cours et Stages - Atelier de St-Gué";
 const description = `L’atelier organise à l’année des cours et des stages pour enfants ados et adultes, groupes scolaires, colonies, etc.  Dans une ambiance calme et conviviale, venez réaliser une mosaïque. Laissez votre créativité s'exprimer`;
 useSeoMeta({
@@ -142,16 +127,4 @@ useSeoMeta({
   ogTitle: title,
   twitterTitle: title,
 });
-
-function getSliderData() {
-  const images: Array<{src: string}> = [];
-
-  for (const image of gallery) {
-    if (image.startsWith("Ecole")) {
-      images.push({src: `gallery/${image}`});
-    }
-  }
-
-  return images;
-}
 </script>

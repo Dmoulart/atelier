@@ -1,5 +1,5 @@
 <template>
-  <div class="text-img-block">
+  <div class="text-img-block my-4">
     <nuxt-img
       :src="src"
       :alt="alt"

@@ -16,14 +16,7 @@
   <Divider />
   <Content align="left" view="fill">
     <template #media>
-      <nuxt-img
-        src="./gallery/ArtTherap1.jpg"
-        alt="Oeuvre représentant des oiseaux"
-        format="webp"
-        width="400"
-        height="600"
-        sizes="sm:100vw md:50vw lg:50vw"
-      />
+      <Photo src="./gallery/ArtTherap1.jpg" alt="Oeuvre représentant des oiseaux" />
     </template>
     <h2>L'art Thérapie</h2>
     <h3>Qu'est-ce que l'art thérapie ?</h3>
@@ -81,23 +74,19 @@
       Dans le cadre de nos séances, vous pourrez utiliser les mediums suivants :
     </p>
 
-    <TextImgBlock class="my-4" src="/mediums/acrylic.jpg" alt="Acrylique">
+    <TextImgBlock src="/mediums/acrylic.jpg" alt="Acrylique">
       Acrylique
     </TextImgBlock>
 
-    <TextImgBlock class="my-4" src="/mediums/ink.jpg" alt="Dessin et encre">
+    <TextImgBlock src="/mediums/ink.jpg" alt="Dessin et encre">
       Dessin et encre
     </TextImgBlock>
 
-    <TextImgBlock
-      class="my-4"
-      src="/mediums/mosaic.jpg"
-      alt="Collage et mosaïque"
-    >
+    <TextImgBlock src="/mediums/mosaic.jpg" alt="Collage et mosaïque">
       Collage et mosaïque
     </TextImgBlock>
 
-    <TextImgBlock class="my-4" src="/mediums/clay.jpg" alt="Argile">
+    <TextImgBlock src="/mediums/clay.jpg" alt="Argile">
       Argile
     </TextImgBlock>
   </Content>

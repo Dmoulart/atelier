@@ -7,16 +7,7 @@
   </Hero>
   <Content view="fill">
     <template #media>
-      <nuxt-img
-        alt="Marie-Laure Barcelo Moulart"
-        src="/mlmb.jpg"
-        format="webp"
-        loading="lazy"
-        fetchpriority="low"
-        width="400"
-        height="600"
-        sizes="sm:100vw md:50vw lg:50vw"
-      />
+      <Photo src="/mlmb.jpg" alt="Marie-Laure Barcelo Moulart" />
     </template>
     <h2>L'atelier..</h2>
     <p>
@@ -38,16 +29,7 @@
 
   <Content align="left" view="fill">
     <template #media>
-      <nuxt-img
-        alt="Tableau"
-        src="/gallery/CreationsEtCommandes/8.jpg"
-        loading="lazy"
-        format="webp"
-        fetchpriority="low"
-        width="400"
-        height="600"
-        sizes="sm:100vw md:50vw lg:50vw"
-      />
+      <Photo src="/gallery/CreationsEtCommandes/8.jpg" alt="Tableau" />
     </template>
     <h2>L'art thérapie</h2>
     <p>
@@ -66,18 +48,18 @@
   </Content>
 
   <Divider />
-  <Content class="contact" align="center" id="contact">
+  <Content align="center" id="contact">
     <h2>Contact</h2>
     <p>
       Vous avez une question, une suggestion ou souhaitez simplement prendre
       contact ? N'hésitez pas à m'envoyer un petit mot. 🙃
     </p>
 
-    <!-- <ContactForm class="mt-5" /> -->
+    <ContactForm />
 
     <h3 class="mt-5">Retrouver l'Atelier</h3>
 
-    <address class="contact__address">
+    <ContactDetails>
       <Picto class="py-2" icon="fa-solid fa-location-dot" :size="20">
         <a href="https://goo.gl/maps/YQBsrJZ2gzBfUy3A6">
           135 Rue de la Joie, 29760 Penmarc'h
@@ -86,7 +68,7 @@
       <Picto class="py-2" icon="fa-solid fa-phone" :size="20">
         <a href="tel:+33626675883">06 26 67 58 83</a>
       </Picto>
-    </address>
+    </ContactDetails>
   </Content>
 </template>
 <script setup lang="ts">
@@ -98,26 +80,3 @@ useSeoMeta({
   twitterDescription: description,
 });
 </script>
-<style lang="scss">
-.contact {
-  &__address {
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 2rem;
-    font-size: 1.2rem;
-
-    .picto {
-      margin-inline: auto;
-    }
-
-    @include sm {
-      flex-flow: row nowrap;
-      justify-content: center;
-
-      .picto {
-        margin-inline: initial;
-      }
-    }
-  }
-}
-</style>
