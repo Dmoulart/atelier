@@ -45,6 +45,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       BASE_URL: env.BASE_URL || "http://localhost:3000",
+      BACK_URL: env.BACK_URL,
     },
   },
   experimental: {
