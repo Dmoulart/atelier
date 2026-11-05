@@ -41,6 +41,14 @@
           }
         }
       }
+    },
+    {
+      "includes": ["app/pages/*.vue", "!app/pages/edit.vue"],
+      "html": {
+        "formatter": {
+          "enabled": false
+        }
+      }
     }
   ],
   "javascript": {
