@@ -13,12 +13,12 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.15",
     "@nuxt/image": "^1.10.0",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/fontfaceobserver": "^2.1.0",
     "@types/node": "^22.0.0",
-    "biome": "^0.3.3",
     "blurhash": "^2.0.5",
     "fontfaceobserver": "^2.3.0",
     "nuxt": "^4.6.3",
