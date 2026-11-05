@@ -1,7 +1,6 @@
 <template>
   <Seo
-    description="L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch."
-  />
+    description="L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch." />
   <Hero bg-image="/gallery/ArtTherap1.jpg">
     <h1>
       L ' Atelier <br />
@@ -44,9 +43,9 @@
     <h2>La galerie</h2>
     <p>
       Visiter l’Atelier est aussi l’occasion de
-      <NuxtLink to="creations-et-commandes"
-        >découvrir les créations originales de Marie-Laure </NuxtLink
-      >ou de lui passer une commande personnalisée.
+      <NuxtLink to="creations-et-commandes">découvrir les créations originales de Marie-Laure </NuxtLink>ou de lui
+      passer
+      une commande personnalisée.
     </p>
   </Content>
 

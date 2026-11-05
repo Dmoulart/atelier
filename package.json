@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "lint": "biome lint --write .",
+    "format": "biome format --write .",
+    "fix": "biome check --write .",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
@@ -15,6 +18,7 @@
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/fontfaceobserver": "^2.1.0",
     "@types/node": "^22.0.0",
+    "biome": "^0.3.3",
     "blurhash": "^2.0.5",
     "fontfaceobserver": "^2.3.0",
     "nuxt": "^4.6.3",

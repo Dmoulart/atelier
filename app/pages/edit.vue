@@ -57,17 +57,10 @@ async function publish(component: TransientComponentSchema) {
   if (!result.success) {
     console.error(result.message);
   }
-  console.log({ result });
 }
 </script>
 
 <template>
   <p v-if="!component">Unknown page "{{ page }}"</p>
-  <ComponentEditor
-    v-else
-    @publish="publish"
-    v-model="component"
-    :dictionnary="schemas"
-    :components="components"
-  />
+  <ComponentEditor v-else @publish="publish" v-model="component" :dictionnary="schemas" :components="components" />
 </template>
