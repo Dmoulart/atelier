@@ -1,32 +1,26 @@
 <template>
-  <Section
-    class="hero-section"
-    view="fill"
-    :parallax="{src: bgImage, transition: false}"
-  >
+  <Section class="hero-section" view="fill" :parallax="{src: bgImage, transition: false}">
     <slot />
   </Section>
 </template>
 <script setup lang="ts">
-const {bgImage} = defineProps<{bgImage: string}>();
+const { bgImage } = defineProps<{ bgImage: string }>()
 
 // the hero is the page cover: it is also its sharing image.
 // social networks need an absolute url, and not all of them read webp
-const {BASE_URL} = useRuntimeConfig().public;
-const img = useImage();
-const ogImage = computed(() =>
-  img(bgImage, {format: "jpeg", width: 1280, height: 1024})
-);
+const { BASE_URL } = useRuntimeConfig().public
+const img = useImage()
+const ogImage = computed(() => img(bgImage, { format: 'jpeg', width: 1280, height: 1024 }))
 // only referenced in <meta>, the crawler wouldn't generate it otherwise
-prerenderRoutes(ogImage.value);
+prerenderRoutes(ogImage.value)
 
 useSeoMeta({
   ogImage: () => new URL(ogImage.value, BASE_URL).href,
   ogImageWidth: 1280,
   ogImageHeight: 1024,
   ogImageAlt: "Une magnifique oeuvre de l'atelier de Saint-Guénolé",
-  ogType: "website",
-});
+  ogType: 'website',
+})
 </script>
 <style lang="scss">
 .hero-section {

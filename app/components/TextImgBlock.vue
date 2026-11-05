@@ -13,7 +13,7 @@
   </div>
 </template>
 <script setup lang="ts">
-defineProps<{src: string; alt: string}>();
+defineProps<{ src: string; alt: string }>()
 </script>
 <style lang="scss">
 .text-img-block {

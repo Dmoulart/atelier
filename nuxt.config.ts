@@ -1,15 +1,15 @@
-import { env } from "process";
+import { env } from 'node:process'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    "@nuxt/image",
-    ["./modules/gallery", { path: "public/images/gallery" }],
-    "@nuxtjs/google-fonts",
-    "@transient/nuxt",
+    '@nuxt/image',
+    ['./modules/gallery', { path: 'public/images/gallery' }],
+    '@nuxtjs/google-fonts',
+    '@transient/nuxt',
   ],
-  transient: { route: "/edit" },
-  compatibilityDate: "2025-06-08",
-  css: ["~/style/global.scss"],
+  transient: { route: '/edit' },
+  compatibilityDate: '2025-06-08',
+  css: ['~/style/global.scss'],
   devtools: { enabled: true },
   vite: {
     css: {
@@ -31,8 +31,8 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    provider: "ipx",
-    dir: "../public/images",
+    provider: 'ipx',
+    dir: '../public/images',
     screens: {
       xs: 320,
       sm: 576,
@@ -44,7 +44,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      BASE_URL: env.BASE_URL || "http://localhost:3000",
+      BASE_URL: env.BASE_URL || 'http://localhost:3000',
       BACK_URL: env.BACK_URL,
     },
   },
@@ -52,6 +52,6 @@ export default defineNuxtConfig({
     payloadExtraction: false,
   },
   routeRules: {
-    "/**": { prerender: true },
+    '/**': { prerender: true },
   },
-});
+})

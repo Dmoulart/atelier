@@ -7,7 +7,7 @@
   </div>
 </template>
 <script setup lang="ts">
-defineProps<{icon: string; size?: number}>();
+defineProps<{ icon: string; size?: number }>()
 </script>
 <style lang="scss">
 .picto {

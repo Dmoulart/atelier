@@ -8,19 +8,15 @@
   >
     <slot />
 
-    <section-bg-image
-      v-if="parallax"
-      :transition="parallax.transition"
-      :src="parallax.src"
-    />
+    <section-bg-image v-if="parallax" :transition="parallax.transition" :src="parallax.src" />
   </section>
 </template>
 <script setup lang="ts">
-const {fullWidth = false, parallax} = defineProps<{
-  fullWidth?: boolean;
-  view?: "fill";
-  parallax?: {src: string; transition?: boolean};
-}>();
+const { fullWidth = false, parallax } = defineProps<{
+  fullWidth?: boolean
+  view?: 'fill'
+  parallax?: { src: string; transition?: boolean }
+}>()
 </script>
 <style lang="scss">
 .section {

@@ -1,84 +1,75 @@
-import {defineNuxtModule} from "@nuxt/kit";
-import path from "path";
-import fs, {accessSync, writeFileSync} from "fs";
-import {encode} from "blurhash";
-import sharp from "sharp";
-import {blurHashToDataURL} from "./blurhash-data-uri";
+import fs, { accessSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import { defineNuxtModule } from '@nuxt/kit'
+import { encode } from 'blurhash'
+import sharp from 'sharp'
+import { blurHashToDataURL } from './blurhash-data-uri'
 
 /**
  * This module create a JSON file containing an array with all the path of the gallery images.
  */
 export default defineNuxtModule({
   schema: {
-    path: "public/images/gallery",
+    path: 'public/images/gallery',
   },
   setup(options, nuxt) {
-    const {path} = options;
+    const { path } = options
 
     // check if path exists
-    accessSync(path);
+    accessSync(path)
 
-    nuxt.hooks.hook("build:before", async () => {
+    nuxt.hooks.hook('build:before', async () => {
       try {
-        const gallery: string[] = [];
-        const placeholders: Record<string, string> = {};
+        const gallery: string[] = []
+        const placeholders: Record<string, string> = {}
 
         // create creations-et-commandes gallery
         // @todo : in this spirit make an image selection for each specific carousel at build time
-        const creationsAndOrderGallery: string[] = [];
-        const CREATIONS_AND_GALLERY_PREFIX = "CreationsEtCommandes";
+        const creationsAndOrderGallery: string[] = []
+        const CREATIONS_AND_GALLERY_PREFIX = 'CreationsEtCommandes'
 
         for (const src of walkSync(path)) {
-          const relativeSrc = src.slice(path.length + 1); // remove leading slash
-          gallery.push(relativeSrc);
+          const relativeSrc = src.slice(path.length + 1) // remove leading slash
+          gallery.push(relativeSrc)
 
-          const blurhash = await encodeImageToBlurhash(src);
-          const dataUri = blurHashToDataURL(blurhash) ?? "";
-          placeholders[`/gallery/${relativeSrc}`] = dataUri;
+          const blurhash = await encodeImageToBlurhash(src)
+          const dataUri = blurHashToDataURL(blurhash) ?? ''
+          placeholders[`/gallery/${relativeSrc}`] = dataUri
 
           if (relativeSrc.startsWith(CREATIONS_AND_GALLERY_PREFIX)) {
-            creationsAndOrderGallery.push(relativeSrc);
+            creationsAndOrderGallery.push(relativeSrc)
           }
         }
 
-        writeFileSync(`app/assets/gallery.json`, JSON.stringify(gallery));
-        writeFileSync(
-          `app/assets/gallery-placeholders.json`,
-          JSON.stringify(placeholders)
-        );
+        writeFileSync(`app/assets/gallery.json`, JSON.stringify(gallery))
+        writeFileSync(`app/assets/gallery-placeholders.json`, JSON.stringify(placeholders))
 
         // order creations et commandes
         // every file name should consist of a number and file extension
         creationsAndOrderGallery.sort((a, b) => {
-          const numA = a
-            .split(".")[0]
-            .substring((CREATIONS_AND_GALLERY_PREFIX + "/").length);
-          const numB = b
-            .split(".")[0]
-            .substring((CREATIONS_AND_GALLERY_PREFIX + "/").length);
+          const numA = a.split('.')[0].substring(`${CREATIONS_AND_GALLERY_PREFIX}/`.length)
+          const numB = b.split('.')[0].substring(`${CREATIONS_AND_GALLERY_PREFIX}/`.length)
 
-          return Number(numA) - Number(numB);
-        });
+          return Number(numA) - Number(numB)
+        })
         writeFileSync(
           `app/assets/gallery-creations-et-commandes.json`,
-          JSON.stringify(creationsAndOrderGallery)
-        );
+          JSON.stringify(creationsAndOrderGallery),
+        )
       } catch (e) {
-        console.error(
-          `Gallery module - Error while registering gallery images : ${e}`
-        );
+        console.error(`Gallery module - Error while registering gallery images : ${e}`)
       }
-    });
+    })
   },
-});
+})
 
-function* walkSync(dir: string): Generator<string, any, undefined> {
-  const files = fs.readdirSync(dir, {withFileTypes: true});
+function* walkSync(dir: string): Generator<string, void, undefined> {
+  const files = fs.readdirSync(dir, { withFileTypes: true })
   for (const file of files) {
     if (file.isDirectory()) {
-      yield* walkSync(path.join(dir, file.name));
+      yield* walkSync(path.join(dir, file.name))
     } else {
-      yield path.join(dir, file.name);
+      yield path.join(dir, file.name)
     }
   }
 }
@@ -87,12 +78,12 @@ const encodeImageToBlurhash = async (path: string): Promise<string> =>
     sharp(path)
       .raw()
       .ensureAlpha()
-      .resize(32, 32, {fit: "inside"})
-      .toBuffer((err, buffer, {width, height}) => {
-        if (err) return reject(err);
-        resolve(encode(new Uint8ClampedArray(buffer), width, height, 4, 4));
-      });
-  });
+      .resize(32, 32, { fit: 'inside' })
+      .toBuffer((err, buffer, { width, height }) => {
+        if (err) return reject(err)
+        resolve(encode(new Uint8ClampedArray(buffer), width, height, 4, 4))
+      })
+  })
 
 // const loadImage = async (src: string) =>
 //   new Promise((resolve, reject) => {

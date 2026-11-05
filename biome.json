@@ -6,12 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": [
-      "**",
-      "!!**/dist",
-      "!**/auto-imports.d.ts",
-      "!**/components.d.ts"
-    ]
+    "includes": ["**", "!!**/dist", "!**/auto-imports.d.ts", "!**/components.d.ts"]
   },
   "formatter": {
     "enabled": true,
@@ -31,9 +26,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "**/*.vue"
-      ],
+      "includes": ["**/*.vue"],
       "linter": {
         "rules": {
           "correctness": {

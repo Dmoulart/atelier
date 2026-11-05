@@ -16,10 +16,7 @@
       <div v-if="$slots.media" class="content-block__media">
         <slot name="media" />
       </div>
-      <div
-        class="content-block__text"
-        :class="{'content-block__text--spread': !$slots.media}"
-      >
+      <div class="content-block__text" :class="{'content-block__text--spread': !$slots.media}">
         <slot />
       </div>
     </div>
@@ -27,10 +24,10 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  view?: "fill";
-  align?: "left" | "right" | "center";
-  background?: string;
-}>();
+  view?: 'fill'
+  align?: 'left' | 'right' | 'center'
+  background?: string
+}>()
 </script>
 <style lang="scss">
 // some styling of this content component is done in global.scss (to re-use some bulma classes).

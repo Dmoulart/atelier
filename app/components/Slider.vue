@@ -1,13 +1,21 @@
 <template>
-  <div class="carousel__close" v-if="fullscreen" @click="$emit('close')">X</div>
-  <carousel
+  <button
+    v-if="fullscreen"
+    type="button"
+    class="carousel__close"
+    aria-label="Fermer"
+    @click="$emit('close')"
+  >
+    X
+  </button>
+  <Carousel
     :items-to-show="1"
     v-bind="$attrs"
     :class="{'carousel--overlay': overlay, 'carousel--fullscreen': fullscreen}"
     :model-value="currentSlide"
   >
-    <slide
-      v-for="({src, caption}, i) in data"
+    <Slide
+      v-for="({ src, caption }, i) in data"
       :key="i"
       class="carousel__slide"
       @click="$emit('close')"
@@ -26,35 +34,35 @@
           {{ caption }}
         </figcaption>
       </figure>
-    </slide>
+    </Slide>
 
     <template #addons>
-      <navigation v-if="navigation" />
-      <pagination v-if="pagination" />
+      <Navigation v-if="navigation" />
+      <Pagination v-if="pagination" />
     </template>
-  </carousel>
+  </Carousel>
 </template>
 <script setup lang="ts">
-import "vue3-carousel/dist/carousel.css";
-import {Carousel, Slide, Pagination, Navigation} from "vue3-carousel";
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
 
 withDefaults(
   defineProps<{
-    data: Array<{src: string; caption?: string}>;
-    currentSlide?: number;
-    navigation?: boolean;
-    pagination?: boolean;
-    overlay?: boolean;
-    fullscreen?: boolean;
+    data: Array<{ src: string; caption?: string }>
+    currentSlide?: number
+    navigation?: boolean
+    pagination?: boolean
+    overlay?: boolean
+    fullscreen?: boolean
   }>(),
   {
     navigation: true,
     pagination: true,
     overlay: false,
-  }
-);
+  },
+)
 
-defineEmits(["close"]);
+defineEmits(['close'])
 </script>
 <style lang="scss">
 .carousel {
@@ -91,6 +99,9 @@ defineEmits(["close"]);
     z-index: 10;
     cursor: pointer;
     padding: 1rem;
+    background: none;
+    border: 0;
+    color: inherit;
     transition: 300ms;
     scale: 1;
 

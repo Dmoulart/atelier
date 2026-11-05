@@ -1,64 +1,61 @@
 <template>
-  <div
-    class="section-bg-img"
-    :class="{'section__bg-img--transition': transition}"
-  />
+  <div class="section-bg-img" :class="{'section__bg-img--transition': transition}" />
 </template>
 <script setup lang="ts">
-import placeholders from "~/assets/gallery-placeholders.json";
+// biome-ignore-all lint/correctness/noUnusedVariables: used by v-bind() in <style>
+import placeholders from '~/assets/gallery-placeholders.json'
 
-const {src, transition} = defineProps<{src: string; transition?: boolean}>();
+const { src, transition } = defineProps<{ src: string; transition?: boolean }>()
 
 const dims = {
-  small: {height: 400, width: 400},
-  medium: {height: 800, width: 800},
-  big: {height: 1024, width: 1280},
-};
+  small: { height: 400, width: 400 },
+  medium: { height: 800, width: 800 },
+  big: { height: 1024, width: 1280 },
+}
 
-const getImagePlaceholder = () =>
-  placeholders[src as keyof typeof placeholders];
+const getImagePlaceholder = () => placeholders[src as keyof typeof placeholders]
 
-const imagePlaceholder = `url(${getImagePlaceholder()})`;
+const imagePlaceholder = `url(${getImagePlaceholder()})`
 
-const imageSmall = `url(${getImageURL(dims.small)})`;
-const imageMedium = `url(${getImageURL(dims.medium)})`;
-const imageBig = `url(${getImageURL(dims.big)})`;
+const imageSmall = `url(${getImageURL(dims.small)})`
+const imageMedium = `url(${getImageURL(dims.medium)})`
+const imageBig = `url(${getImageURL(dims.big)})`
 
-function getImageURL(dimensions: {height: number; width: number}) {
-  const img = useImage();
+function getImageURL(dimensions: { height: number; width: number }) {
+  const img = useImage()
 
   return img(src, {
-    format: "webp",
+    format: 'webp',
     height: dimensions.height, // ??
     width: dimensions.width, // ??
-  });
+  })
 }
 
 useHead({
   link: [
     {
-      rel: "preload",
-      as: "image",
+      rel: 'preload',
+      as: 'image',
       href: getImageURL(dims.small),
-      media: "(min-width: 300px) and (max-width: 575px)", // link the nuxt-image config sizes without making the nuxt config visible ?
-      fetchpriority: "high",
+      media: '(min-width: 300px) and (max-width: 575px)', // link the nuxt-image config sizes without making the nuxt config visible ?
+      fetchpriority: 'high',
     },
     {
-      rel: "preload",
-      as: "image",
+      rel: 'preload',
+      as: 'image',
       href: getImageURL(dims.medium),
-      media: "(min-width: 576px) and (max-width: 991px)", // link the nuxt-image config sizes without making the nuxt config visible ?
-      fetchpriority: "high",
+      media: '(min-width: 576px) and (max-width: 991px)', // link the nuxt-image config sizes without making the nuxt config visible ?
+      fetchpriority: 'high',
     },
     {
-      rel: "preload",
-      as: "image",
+      rel: 'preload',
+      as: 'image',
       href: getImageURL(dims.big),
-      media: "(min-width: 992px)", // link the nuxt-image config sizes without making the nuxt config visible ?
-      fetchpriority: "high",
+      media: '(min-width: 992px)', // link the nuxt-image config sizes without making the nuxt config visible ?
+      fetchpriority: 'high',
     },
   ],
-});
+})
 </script>
 <style lang="scss">
 $bg-img-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));

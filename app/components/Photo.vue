@@ -22,9 +22,9 @@
   />
 </template>
 <script setup lang="ts">
-const { shape = "portrait" } = defineProps<{
-  src: string;
-  alt: string;
-  shape?: "portrait" | "landscape" | "original";
-}>();
+const { shape = 'portrait' } = defineProps<{
+  src: string
+  alt: string
+  shape?: 'portrait' | 'landscape' | 'original'
+}>()
 </script>

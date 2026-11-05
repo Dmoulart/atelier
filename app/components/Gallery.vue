@@ -8,7 +8,7 @@
   />
 
   <div class="gallery">
-    <figure class="gallery__frame" v-for="({src, caption}, i) in images">
+    <figure class="gallery__frame" v-for="({ src, caption }, i) in images">
       <nuxt-img
         class="gallery__img"
         :alt="caption ?? `Photo de l'Atelier de St-Gué`"
@@ -27,24 +27,23 @@
 </template>
 <script setup lang="ts">
 defineProps<{
-  images: Array<{src: string; caption?: string}>;
-}>();
+  images: Array<{ src: string; caption?: string }>
+}>()
 
 //@todo: Generate dynamic grid ?
 
-const currentSlide = ref<number | undefined>();
+const currentSlide = ref<number | undefined>()
 
 function setSlide(slide: number) {
-  currentSlide.value = slide;
+  currentSlide.value = slide
 }
 
 watch(currentSlide, () => {
   if (window) {
     // lock scroll
-    document.documentElement.style.overflow =
-      currentSlide.value !== undefined ? "hidden" : "auto";
+    document.documentElement.style.overflow = currentSlide.value !== undefined ? 'hidden' : 'auto'
   }
-});
+})
 </script>
 
 <style lang="scss">

@@ -8,80 +8,80 @@
   </main>
 </template>
 <script setup lang="ts">
-import type { MenuItem } from "~/types/menu";
+import type { MenuItem } from '~/types/menu'
 
-const title = "L'Atelier de St-Gué";
-const defaultDescription = `L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch.`;
+const title = "L'Atelier de St-Gué"
+const defaultDescription = `L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch.`
 
-const { BASE_URL } = useRuntimeConfig().public;
-const route = useRoute();
+const { BASE_URL } = useRuntimeConfig().public
+const route = useRoute()
 // the host serves every page with a trailing slash (/art-therapie/)
-const url = computed(() =>
-  new URL(route.path.endsWith("/") ? route.path : `${route.path}/`, BASE_URL).href
-);
+const url = computed(
+  () => new URL(route.path.endsWith('/') ? route.path : `${route.path}/`, BASE_URL).href,
+)
 
 useHead({
   link() {
     return [
-      { rel: "canonical", href: url.value },
+      { rel: 'canonical', href: url.value },
       {
-        rel: "icon",
-        type: "image/png",
-        sizes: "16x16",
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
         href: `/favicon-16x16.png`,
       },
       {
-        rel: "icon",
-        type: "image/png",
-        sizes: "16x16",
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
         href: `/favicon-32x32.png`,
       },
       {
-        rel: "manifest",
+        rel: 'manifest',
         href: `/site.webmanifest`,
       },
-    ];
+    ]
   },
-});
+})
 
 useSeoMeta({
   title,
   twitterTitle: title,
-  twitterCard: "summary_large_image",
+  twitterCard: 'summary_large_image',
   ogTitle: title,
   description: defaultDescription,
-  author: "Marie-Laure Barcelo Moulart",
+  author: 'Marie-Laure Barcelo Moulart',
   applicationName: "L'Atelier de St-Guénolé",
-  themeColor: "#ffffff",
+  themeColor: '#ffffff',
   ogUrl: url,
   ogSiteName: "L'Atelier de St-Guénolé",
-  ogLocale: "fr_FR",
-});
+  ogLocale: 'fr_FR',
+})
 
 const menu: MenuItem[] = [
-  { label: "Accueil", icon: "fas fa-home", link: "/" },
+  { label: 'Accueil', icon: 'fas fa-home', link: '/' },
 
   {
-    label: "Cours et stages",
-    icon: "fa-solid fa-person-chalkboard",
-    link: "/cours-et-stages",
+    label: 'Cours et stages',
+    icon: 'fa-solid fa-person-chalkboard',
+    link: '/cours-et-stages',
   },
   {
-    label: "Art thérapie",
-    icon: "fa-solid fa-hand-holding-hand",
-    link: "/art-therapie",
+    label: 'Art thérapie',
+    icon: 'fa-solid fa-hand-holding-hand',
+    link: '/art-therapie',
   },
   {
-    label: "Créations et commandes",
-    icon: "fa-solid fa-paintbrush",
-    link: "/creations-et-commandes",
+    label: 'Créations et commandes',
+    icon: 'fa-solid fa-paintbrush',
+    link: '/creations-et-commandes',
   },
   {
-    label: "Contact",
-    icon: "fa-solid fa-envelope",
-    link: "/#contact",
+    label: 'Contact',
+    icon: 'fa-solid fa-envelope',
+    link: '/#contact',
   },
-];
+]
 </script>
 <style lang="scss">
 body {

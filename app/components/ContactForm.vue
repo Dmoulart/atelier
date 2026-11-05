@@ -9,7 +9,7 @@
           type="email"
           placeholder="Votre adresse email"
           required
-        />
+        >
         <span class="icon is-medium is-left">
           <i class="fas fa-envelope"></i>
         </span>
@@ -34,7 +34,7 @@
 
     <div class="field">
       <div class="control">
-        <button class="button is-link">Envoyer</button>
+        <button type="submit" class="button is-link">Envoyer</button>
       </div>
     </div>
   </form>
@@ -43,10 +43,10 @@
 useHead({
   script: [
     {
-      id: "ratufa_loader",
-      src: "https://www.ratufa.io/c/ld.js?f=mye86exj&n=n1.ratufa.io",
+      id: 'ratufa_loader',
+      src: 'https://www.ratufa.io/c/ld.js?f=mye86exj&n=n1.ratufa.io',
       defer: true,
     },
   ],
-});
+})
 </script>

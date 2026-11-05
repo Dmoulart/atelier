@@ -1,10 +1,8 @@
 <template>
-  <nav
-    class="navbar is-transparent navbar--sticky"
-    :class="{ 'navbar--transparent': transparent }"
-  >
+  <nav class="navbar is-transparent navbar--sticky" :class="{ 'navbar--transparent': transparent }">
     <div class="navbar-brand">
-      <div
+      <button
+        type="button"
         class="navbar-burger"
         data-target="navmenu"
         aria-label="menu"
@@ -13,18 +11,13 @@
         <span aria-hidden="true" />
         <span aria-hidden="true" />
         <span aria-hidden="true" />
-      </div>
+      </button>
     </div>
 
     <div id="navmenu" class="navbar-menu">
       <div class="navbar-start" />
       <div class="navbar-end">
-        <NuxtLink
-          v-for="item in menu"
-          :to="item.link"
-          class="navbar-item"
-          @click="closeMenu"
-        >
+        <NuxtLink v-for="item in menu" :to="item.link" class="navbar-item" @click="closeMenu">
           <span class="icon mr-1" :style="{ fontSize: '14px' }">
             <i :class="item.icon"></i>
           </span>
@@ -35,53 +28,47 @@
   </nav>
 </template>
 <script setup lang="ts">
-import type { MenuItem } from "~/types/menu";
+import type { MenuItem } from '~/types/menu'
 
-defineProps<{ menu: MenuItem[]; transparent?: boolean }>();
+defineProps<{ menu: MenuItem[]; transparent?: boolean }>()
 
 function closeMenu() {
   // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(
-    document.querySelectorAll(".navbar-burger"),
-    0
-  );
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
 
   // Add a click event on each of them
   $navbarBurgers.forEach((el) => {
     // Get the target from the "data-target" attribute
-    const target = el.dataset.target;
-    const $target = document.getElementById(target)!;
+    const target = el.dataset.target
+    const $target = document.getElementById(target)!
     // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-    el.classList.remove("is-active");
-    $target.classList.remove("is-active");
-  });
+    el.classList.remove('is-active')
+    $target.classList.remove('is-active')
+  })
 
-  const navbarBrand = document.querySelector(".navbar-brand");
-  navbarBrand?.classList.remove("is-active");
+  const navbarBrand = document.querySelector('.navbar-brand')
+  navbarBrand?.classList.remove('is-active')
 }
 
 onMounted(() => {
   // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(
-    document.querySelectorAll(".navbar-burger"),
-    0
-  );
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
 
-  const navbarBrand = document.querySelector(".navbar-brand");
+  const navbarBrand = document.querySelector('.navbar-brand')
 
   // Add a click event on each of them
   $navbarBurgers.forEach((el) => {
-    el.addEventListener("click", () => {
+    el.addEventListener('click', () => {
       // Get the target from the "data-target" attribute
-      const target = el.dataset.target;
-      const $target = document.getElementById(target)!;
+      const target = el.dataset.target
+      const $target = document.getElementById(target)!
       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      el.classList.toggle("is-active");
-      $target.classList.toggle("is-active");
-      navbarBrand?.classList.toggle("is-active");
-    });
-  });
-});
+      el.classList.toggle('is-active')
+      $target.classList.toggle('is-active')
+      navbarBrand?.classList.toggle('is-active')
+    })
+  })
+})
 </script>
 <style lang="scss">
 .navbar {

@@ -11,7 +11,7 @@ export default defineComponent({
       description: () => props.description,
       ogDescription: () => props.description,
       twitterDescription: () => props.description,
-    });
-    return () => null;
+    })
+    return () => null
   },
-});
+})
