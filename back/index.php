@@ -70,10 +70,15 @@ if (!$result) {
 }
 
 $status = curl_getinfo($req, CURLINFO_HTTP_CODE);
-
 header('Content-Type: application/json');
 
 http_response_code($status);
 
-echo json_encode(["success" => true, "message" => "Page succesfully updated"]);
+if ($status >= 200 && $status < 300) {
+    echo json_encode(["success" => true, "message" => "Page succesfully updated"]);
+    return;
+}
+
+echo json_encode(["success" => false, "message" => "Github error"]);
+
 return;
