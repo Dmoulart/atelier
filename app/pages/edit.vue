@@ -41,7 +41,7 @@ onBeforeUnmount(() => document.removeEventListener('click', followLink, true))
 const toast = ref<{ success: boolean; message: string } | null>(null)
 let toastTimer: ReturnType<typeof setTimeout> | undefined
 onBeforeUnmount(() => clearTimeout(toastTimer))
-
+const editor = useTemplateRef('editor')
 function showToast(success: boolean, message: string) {
   clearTimeout(toastTimer)
   toast.value = { success, message }
@@ -51,12 +51,10 @@ function showToast(success: boolean, message: string) {
 
 async function publish(component: TransientComponentSchema) {
   const config = useRuntimeConfig()
-
   const url = `${config.public.BACK_URL}/${component.tag}`
 
   try {
     const sfc = irToSfc(component, schemas)
-    // the back answers with an http error on failure, which makes $fetch throw
     const result = await $fetch<{ message: string; success: boolean }>(url, {
       body: sfc,
       method: 'PUT',
@@ -67,6 +65,7 @@ async function publish(component: TransientComponentSchema) {
       true,
       'Publication réussie. Les modifications seront en ligne dans quelques minutes !',
     )
+    editor.value?.markAsSaved()
   } catch (e) {
     console.error(e)
     showToast(
@@ -81,6 +80,7 @@ async function publish(component: TransientComponentSchema) {
   <p v-if="!component">Unknown page "{{ page }}"</p>
   <ComponentEditor
     v-else
+    ref="editor"
     @publish="publish"
     v-model="component"
     :dictionnary="schemas"
