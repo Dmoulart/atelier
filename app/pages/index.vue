@@ -10,7 +10,7 @@
   </Hero>
   <Content view="fill">
     <template #media>
-      <Photo src="/mlmb.jpg" alt="Marie-Laure Barcelo Moulart" />
+      <Photo src="/gallery/mlmb.jpg" alt="Marie-Laure Barcelo Moulart" />
     </template>
     <h2>L'atelier..</h2>
     <p>L’Atelier de St-Gué est un

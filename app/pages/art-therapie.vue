@@ -14,7 +14,7 @@
   <Divider />
   <Content align="left" view="fill">
     <template #media>
-      <Photo src="./gallery/ArtTherap1.jpg" alt="Oeuvre représentant des oiseaux" />
+      <Photo src="/gallery/ArtTherap1.jpg" alt="Oeuvre représentant des oiseaux" />
     </template>
     <h2>L'art Thérapie</h2>
     <h3>Qu'est-ce que l'art thérapie ?</h3>
@@ -51,12 +51,12 @@
     <h3 class="has-text-centered">Mediums</h3>
     <p>Dans le cadre de nos séances, vous pourrez utiliser les mediums suivants :</p>
 
-    <TextImgBlock src="/mediums/acrylic.jpg" alt="Acrylique">Acrylique</TextImgBlock>
+    <TextImgBlock src="/assets/mediums/acrylic.jpg" alt="Acrylique">Acrylique</TextImgBlock>
 
-    <TextImgBlock src="/mediums/ink.jpg" alt="Dessin et encre">Dessin et encre</TextImgBlock>
+    <TextImgBlock src="/assets/mediums/ink.jpg" alt="Dessin et encre">Dessin et encre</TextImgBlock>
 
-    <TextImgBlock src="/mediums/mosaic.jpg" alt="Collage et mosaïque">Collage et mosaïque</TextImgBlock>
+    <TextImgBlock src="/assets/mediums/mosaic.jpg" alt="Collage et mosaïque">Collage et mosaïque</TextImgBlock>
 
-    <TextImgBlock src="/mediums/clay.jpg" alt="Argile">Argile</TextImgBlock>
+    <TextImgBlock src="/assets/mediums/clay.jpg" alt="Argile">Argile</TextImgBlock>
   </Content>
 </template>

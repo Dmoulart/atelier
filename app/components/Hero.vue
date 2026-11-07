@@ -11,8 +11,6 @@ const { bgImage } = defineProps<{ bgImage: string }>()
 const { BASE_URL } = useRuntimeConfig().public
 const img = useImage()
 const ogImage = computed(() => img(bgImage, { format: 'jpeg', width: 1280, height: 1024 }))
-// only referenced in <meta>, the crawler wouldn't generate it otherwise
-prerenderRoutes(ogImage.value)
 
 useSeoMeta({
   ogImage: () => new URL(ogImage.value, BASE_URL).href,

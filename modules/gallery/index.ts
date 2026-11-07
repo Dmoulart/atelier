@@ -1,61 +1,62 @@
-import fs, { accessSync, writeFileSync } from 'node:fs'
-import path from 'node:path'
+import { writeFileSync } from 'node:fs'
 import { defineNuxtModule } from '@nuxt/kit'
 import { encode } from 'blurhash'
 import sharp from 'sharp'
 import { blurHashToDataURL } from './blurhash-data-uri'
 
+const FOLDER = 'gallery'
+
 /**
- * This module create a JSON file containing an array with all the path of the gallery images.
+ * Lists the Cloudinary gallery folder at build time and writes the JSON files used by the app:
+ * the list of images, their blur placeholders and the ordered "creations et commandes" album.
  */
 export default defineNuxtModule({
-  schema: {
-    path: 'public/images/gallery',
-  },
-  setup(options, nuxt) {
-    const { path } = options
-
-    // check if path exists
-    accessSync(path)
-
+  setup(_options, nuxt) {
     nuxt.hooks.hook('build:before', async () => {
+      const { CLD_CLOUDNAME: cloud, CLD_API_KEY: key, CLD_API_SECRET: secret } = process.env
+      if (!cloud || !key || !secret) {
+        console.warn('Gallery module - CLD_* env vars missing, keeping existing gallery JSON files')
+        return
+      }
       try {
-        const gallery: string[] = []
+        const auth = `Basic ${Buffer.from(`${key}:${secret}`).toString('base64')}`
+        const resources: { public_id: string; format: string }[] = []
+        let next: string | undefined
+        do {
+          const url = `https://api.cloudinary.com/v1_1/${cloud}/resources/image/upload?prefix=${FOLDER}/&max_results=500${next ? `&next_cursor=${next}` : ''}`
+          const res = await fetch(url, { headers: { Authorization: auth } })
+          if (!res.ok) throw new Error(`Cloudinary API ${res.status}`)
+          const json = await res.json()
+          resources.push(...json.resources)
+          next = json.next_cursor
+        } while (next)
+
+        // file names keep their extension: "CreationsEtCommandes/1.jpg"
+        const files = resources
+          .map((r) => ({ id: r.public_id, name: `${r.public_id.slice(FOLDER.length + 1)}.${r.format}` }))
+          .sort((a, b) => a.name.localeCompare(b.name))
+
         const placeholders: Record<string, string> = {}
-
-        // create creations-et-commandes gallery
-        // @todo : in this spirit make an image selection for each specific carousel at build time
-        const creationsAndOrderGallery: string[] = []
-        const CREATIONS_AND_GALLERY_PREFIX = 'CreationsEtCommandes'
-
-        for (const src of walkSync(path)) {
-          const relativeSrc = src.slice(path.length + 1) // remove leading slash
-          gallery.push(relativeSrc)
-
-          const blurhash = await encodeImageToBlurhash(src)
-          const dataUri = blurHashToDataURL(blurhash) ?? ''
-          placeholders[`/gallery/${relativeSrc}`] = dataUri
-
-          if (relativeSrc.startsWith(CREATIONS_AND_GALLERY_PREFIX)) {
-            creationsAndOrderGallery.push(relativeSrc)
-          }
-        }
-
-        writeFileSync(`app/assets/gallery.json`, JSON.stringify(gallery))
-        writeFileSync(`app/assets/gallery-placeholders.json`, JSON.stringify(placeholders))
-
-        // order creations et commandes
-        // every file name should consist of a number and file extension
-        creationsAndOrderGallery.sort((a, b) => {
-          const numA = a.split('.')[0].substring(`${CREATIONS_AND_GALLERY_PREFIX}/`.length)
-          const numB = b.split('.')[0].substring(`${CREATIONS_AND_GALLERY_PREFIX}/`.length)
-
-          return Number(numA) - Number(numB)
-        })
-        writeFileSync(
-          `app/assets/gallery-creations-et-commandes.json`,
-          JSON.stringify(creationsAndOrderGallery),
+        await Promise.all(
+          files.map(async ({ id, name }) => {
+            const thumb = await fetch(
+              `https://res.cloudinary.com/${cloud}/image/upload/w_32,h_32,c_limit,f_png/${id}`,
+            )
+            const blurhash = await encodeImageToBlurhash(Buffer.from(await thumb.arrayBuffer()))
+            placeholders[`/gallery/${name}`] = blurHashToDataURL(blurhash) ?? ''
+          }),
         )
+
+        // every file name of the album should consist of a number and file extension
+        const PREFIX = 'CreationsEtCommandes/'
+        const creations = files
+          .map((f) => f.name)
+          .filter((n) => n.startsWith(PREFIX))
+          .sort((a, b) => parseInt(a.slice(PREFIX.length), 10) - parseInt(b.slice(PREFIX.length), 10))
+
+        writeFileSync('app/assets/gallery.json', JSON.stringify(files.map((f) => f.name)))
+        writeFileSync('app/assets/gallery-placeholders.json', JSON.stringify(placeholders))
+        writeFileSync('app/assets/gallery-creations-et-commandes.json', JSON.stringify(creations))
       } catch (e) {
         console.error(`Gallery module - Error while registering gallery images : ${e}`)
       }
@@ -63,27 +64,14 @@ export default defineNuxtModule({
   },
 })
 
-function* walkSync(dir: string): Generator<string, void, undefined> {
-  const files = fs.readdirSync(dir, { withFileTypes: true })
-  for (const file of files) {
-    if (file.isDirectory()) {
-      yield* walkSync(path.join(dir, file.name))
-    } else {
-      yield path.join(dir, file.name)
-    }
-  }
+const encodeImageToBlurhash = async (input: Buffer): Promise<string> => {
+  const { data, info } = await sharp(input)
+    .raw()
+    .ensureAlpha()
+    .resize(32, 32, { fit: 'inside' })
+    .toBuffer({ resolveWithObject: true })
+  return encode(new Uint8ClampedArray(data), info.width, info.height, 4, 4)
 }
-const encodeImageToBlurhash = async (path: string): Promise<string> =>
-  new Promise((resolve, reject) => {
-    sharp(path)
-      .raw()
-      .ensureAlpha()
-      .resize(32, 32, { fit: 'inside' })
-      .toBuffer((err, buffer, { width, height }) => {
-        if (err) return reject(err)
-        resolve(encode(new Uint8ClampedArray(buffer), width, height, 4, 4))
-      })
-  })
 
 // const loadImage = async (src: string) =>
 //   new Promise((resolve, reject) => {

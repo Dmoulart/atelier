@@ -3,7 +3,7 @@ import { env } from 'node:process'
 export default defineNuxtConfig({
   modules: [
     '@nuxt/image',
-    ['./modules/gallery', { path: 'public/images/gallery' }],
+    './modules/gallery',
     '@nuxtjs/google-fonts',
     '@transient/nuxt',
   ],
@@ -31,8 +31,11 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    provider: 'ipx',
-    dir: '../public/images',
+    provider: 'cloudinary',
+    cloudinary: {
+      baseURL: `https://res.cloudinary.com/${env.CLD_CLOUDNAME}/image/upload`,
+      modifiers: { fit: 'fill' }, // same crop as ipx's default "cover", cloudinary would distort otherwise
+    },
     screens: {
       xs: 320,
       sm: 576,

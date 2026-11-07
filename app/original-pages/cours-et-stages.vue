@@ -84,7 +84,7 @@
   <Content class="my-5">
     <template #media>
       <Photo
-        src="tarifs.png"
+        src="/assets/tarifs.png"
         alt="Tarifs des cours de l'atelier de Saint-Guénolé"
         shape="original"
       />
