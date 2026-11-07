@@ -63,10 +63,16 @@ async function publish(component: TransientComponentSchema) {
     })
     if (!result.success) throw new Error(result.message)
 
-    showToast(true, 'Publication réussie. Les modifications seront en ligne dans quelques minutes !')
+    showToast(
+      true,
+      'Publication réussie. Les modifications seront en ligne dans quelques minutes !',
+    )
   } catch (e) {
     console.error(e)
-    showToast(false, 'La publication a échoué : les modifications ne sont pas en ligne. Si l\'erreur persiste, concactez Dodo :).')
+    showToast(
+      false,
+      "La publication a échoué : les modifications ne sont pas en ligne. Si l'erreur persiste, contactez Dodo :).",
+    )
   }
 }
 </script>
