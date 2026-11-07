@@ -38,19 +38,35 @@ function followLink(ev: MouseEvent) {
 onMounted(() => document.addEventListener('click', followLink, true))
 onBeforeUnmount(() => document.removeEventListener('click', followLink, true))
 
+const toast = ref<{ success: boolean; message: string } | null>(null)
+let toastTimer: ReturnType<typeof setTimeout> | undefined
+onBeforeUnmount(() => clearTimeout(toastTimer))
+
+function showToast(success: boolean, message: string) {
+  clearTimeout(toastTimer)
+  toast.value = { success, message }
+  // an error stays until it is closed, it must not be missed
+  if (success) toastTimer = setTimeout(() => (toast.value = null), 8000)
+}
+
 async function publish(component: TransientComponentSchema) {
   const config = useRuntimeConfig()
 
   const url = `${config.public.BACK_URL}/${component.tag}`
-  const sfc = irToSfc(component, schemas)
 
-  const result = await $fetch<{ message: string; success: boolean }>(url, {
-    body: sfc,
-    method: 'PUT',
-  })
+  try {
+    const sfc = irToSfc(component, schemas)
+    // the back answers with an http error on failure, which makes $fetch throw
+    const result = await $fetch<{ message: string; success: boolean }>(url, {
+      body: sfc,
+      method: 'PUT',
+    })
+    if (!result.success) throw new Error(result.message)
 
-  if (!result.success) {
-    console.error(result.message)
+    showToast(true, 'Publication réussie. Les modifications seront en ligne dans quelques minutes !')
+  } catch (e) {
+    console.error(e)
+    showToast(false, 'La publication a échoué : les modifications ne sont pas en ligne. Si l\'erreur persiste, concactez Dodo :).')
   }
 }
 </script>
@@ -64,4 +80,23 @@ async function publish(component: TransientComponentSchema) {
     :dictionnary="schemas"
     :components="components"
   />
+  <div
+    v-if="toast"
+    class="notification publish-toast"
+    :class="toast.success ? 'is-success' : 'is-danger'"
+    role="alert"
+  >
+    <button type="button" class="delete" aria-label="Fermer" @click="toast = null" />
+    {{ toast.message }}
+  </div>
 </template>
+
+<style scoped>
+.publish-toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 9999;
+  max-width: min(28rem, calc(100vw - 2rem));
+}
+</style>
