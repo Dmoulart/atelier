@@ -1,105 +1,124 @@
 <?php
 
-$repoUrl = getenv('REPO_BASE_URL');
-$siteUrl = getenv('BASE_URL');
-$token = getenv('GH_TOKEN');
+use Uri\Rfc3986\Uri;
 
-if (!$repoUrl || !$token) {
-    http_response_code(500);
-    echo json_encode(["success" => false, "message" => "Server Error. Wrong setup."]);
-    return;
-}
+set_exception_handler(function (Throwable $e) {
+    error_log($e->getMessage());
+    respond(500, "Server error");
+});
+
+$siteUrl = getEnvOrFail('BASE_URL');
 
 header("Access-Control-Allow-Origin: $siteUrl");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
     header("Access-Control-Allow-Methods: GET, POST, PUT");
     header("Access-Control-Allow-Headers: content-type");
-    echo "ok";
+    respond(200, "ok");
     return;
 }
 
-if (array_last(explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) === 'media') {
-    handleMedia();
-    return;
-}
+$url = getRequestUrl();
 
-if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
-    http_response_code(405);
-    echo json_encode(["erreur" => "Unauthorized method"]);
-    return;
-}
-
-$file = file_get_contents('php://input');
-if (!$file) {
-    http_response_code(422);
-    echo json_encode(["success" => false, "message" => "Expected content"]);
-    return;
-}
-$page = array_last(explode('/', $_SERVER['REQUEST_URI']));
-
-$url = "$repoUrl/contents/app/pages/$page.vue";
-$headers = [
-    "Authorization: Bearer $token",
-    "Accept: application/vnd.github+json",
-    "User-Agent: atelier-editor",
+$routes = [
+    "#^\/api\/media$#" => function () {
+        handleMedia();
+    },
+    "#^\/api\/pages\/.*$#" => function () {
+        handlePage();
+    }
 ];
 
-$get = curl_init("$url?ref=nuxt4");
-curl_setopt_array($get, [CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $headers]);
-$sha = json_decode(curl_exec($get), true)['sha'] ?? null;
+$found = false;
 
-$req = curl_init($url);
+foreach ($routes as $route => $handler) {
+    if (preg_match($route, $url->getPath())) {
+        call_user_func($handler);
+        $found = true;
+        break;
+    }
+}
 
-curl_setopt_array($req, [
-    CURLOPT_CUSTOMREQUEST  => 'PUT',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_HTTPHEADER     => $headers,
-    CURLOPT_POSTFIELDS     => json_encode(array_filter([
-        "message" => "[editor] page $page edition",
-        "branch"  => "nuxt4",
-        "content" => base64_encode($file),
-        "sha"     => $sha,
-    ])),
-]);
-
-$result = curl_exec($req);
-
-if (!$result) {
-    trigger_error(curl_error($req));
-
-    http_response_code(500);
-    echo json_encode(["success" => false, "message" => "Server Error"]);
+if (!$found) {
+    respond(404, "Not found");
     return;
 }
 
-$status = curl_getinfo($req, CURLINFO_HTTP_CODE);
-header('Content-Type: application/json');
 
-http_response_code($status);
+function handlePage(): void
+{
+    $repoUrl = getEnvOrFail('REPO_BASE_URL');
+    $token = getEnvOrFail('GH_TOKEN');
 
-if ($status >= 200 && $status < 300) {
-    echo json_encode(["success" => true, "message" => "Page succesfully updated"]);
+    if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+        respond(405, ["erreur" => "Unauthorized method"]);
+        return;
+    }
+
+    $file = file_get_contents('php://input');
+    if (!$file) {
+        respond(422, ["success" => false, "message" => "Expected content"]);
+        return;
+    }
+
+    $page = array_last(explode('/', $_SERVER['REQUEST_URI']));
+
+    $url = "$repoUrl/contents/app/pages/$page.vue";
+    $headers = [
+        "Authorization: Bearer $token",
+        "Accept: application/vnd.github+json",
+        "User-Agent: atelier-editor",
+    ];
+
+    $get = curl_init("$url?ref=nuxt4");
+    curl_setopt_array($get, [CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $headers]);
+    $sha = json_decode(curl_exec($get), true)['sha'] ?? null;
+
+    $req = curl_init($url);
+
+    curl_setopt_array($req, [
+        CURLOPT_CUSTOMREQUEST  => 'PUT',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER     => $headers,
+        CURLOPT_POSTFIELDS     => json_encode(array_filter([
+            "message" => "[editor] page $page edition",
+            "branch"  => "nuxt4",
+            "content" => base64_encode($file),
+            "sha"     => $sha,
+        ])),
+    ]);
+
+    $result = curl_exec($req);
+
+    if (!$result) {
+        trigger_error(curl_error($req));
+
+        respond(500, ["success" => false, "message" => "Server Error"]);
+        return;
+    }
+
+    $status = curl_getinfo($req, CURLINFO_HTTP_CODE);
+    header('Content-Type: application/json');
+
+    http_response_code($status);
+
+    if ($status >= 200 && $status < 300) {
+        echo json_encode(["success" => true, "message" => "Page succesfully updated"]);
+        return;
+    }
+
+    echo json_encode(["success" => false, "message" => "Github error"]);
+
     return;
 }
-
-echo json_encode(["success" => false, "message" => "Github error"]);
-
-return;
 
 function handleMedia(): void
 {
     header('Content-Type: application/json');
 
-    $cloud = getenv('CLD_CLOUDNAME');
-    $key = getenv('CLD_API_KEY');
-    $secret = getenv('CLD_API_SECRET');
-
-    if (!$cloud || !$key || !$secret) {
-        respond(500, ["message" => "Server Error. Wrong setup."]);
-        return;
-    }
+    $cloud = getEnvOrFail('CLD_CLOUDNAME');
+    $key = getEnvOrFail('CLD_API_KEY');
+    $secret = getEnvOrFail('CLD_API_SECRET');
 
     $api = "https://api.cloudinary.com/v1_1/$cloud";
     $folder = 'gallery';
@@ -117,7 +136,7 @@ function handleMedia(): void
                     return;
                 }
                 array_push($photos, ...array_map(
-                    fn ($photo) => "/{$photo['public_id']}.{$photo['format']}",
+                    fn($photo) => "/{$photo['public_id']}.{$photo['format']}",
                     $json['resources'],
                 ));
                 $cursor = $json['next_cursor'] ?? '';
@@ -146,10 +165,14 @@ function handleMedia(): void
     respond(405, ["message" => "Unauthorized method"]);
 }
 
-function respond(int $status, array $data): void
+function respond(int $status, array|string $data): void
 {
     http_response_code($status);
-    echo json_encode($data);
+    if (is_array($data)) {
+        echo json_encode($data);
+    } else {
+        echo $data;
+    }
 }
 
 /** @param array<string, string|int> $params must be sorted by key */
@@ -165,4 +188,18 @@ function cloudinary(string $url, array $options): array
     $result = curl_exec($req);
 
     return [curl_getinfo($req, CURLINFO_HTTP_CODE), json_decode($result ?: '', true)];
+}
+
+function getEnvOrFail(string $key): string
+{
+    $value = getenv($key);
+    if (!isset($value)) {
+        throw new Exception("Expected defined env value");
+    }
+    return $value;
+}
+
+function getRequestUrl()
+{
+    return Uri::parse($_SERVER['REQUEST_URI']);
 }
