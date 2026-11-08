@@ -15,7 +15,7 @@
     :model-value="currentSlide"
   >
     <Slide
-      v-for="({ src, caption }, i) in data"
+      v-for="({ src, caption }, i) in images"
       :key="i"
       class="carousel__slide"
       @click="$emit('close')"
@@ -48,7 +48,7 @@ import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
 
 withDefaults(
   defineProps<{
-    data: Array<{ src: string; caption?: string }>
+    images: Array<{ src: string; caption?: string }>
     currentSlide?: number
     navigation?: boolean
     pagination?: boolean

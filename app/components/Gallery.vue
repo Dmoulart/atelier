@@ -1,7 +1,7 @@
 <template>
   <Slider
     v-if="currentSlide !== undefined"
-    :data="images"
+    :images="images"
     fullscreen
     @close="currentSlide = undefined"
     :current-slide="currentSlide"

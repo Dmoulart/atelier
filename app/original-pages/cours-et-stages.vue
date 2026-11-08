@@ -69,7 +69,16 @@
       >. De manière ludique, les enfants ont la possibilité de développer de nouvelles compétences
       plastiques en explorant les formes et les couleurs ainsi que les possibilités d’assemblage.
     </p>
-    <PhotoSlider album="ecole" />
+    <Slider
+      class="my-5"
+      :images='[
+        {"src": "/gallery/Ecole/ArbreDeVieStJean.jpg"},
+        {"src": "/gallery/Ecole/ColoGroupe.jpg"},
+        {"src": "/gallery/Ecole/ecole-lechiagat.jpg"},
+        {"src": "/gallery/Ecole/StJean.jpg"},
+        {"src": "/gallery/Ecole/VagueStJean.jpg"}
+      ]'
+    />
     <p>
       L’activité mosaïque leur permettra de
       <strong>développer à la fois leur créativité et leur concentration </strong>dans la

@@ -53,7 +53,16 @@
     <h2 class="has-text-centered">Groupes colonies et écoles</h2>
     <p>L’Atelier propose d’<strong>animer un atelier mosaïque auprès d’enfants en structure scolaire ou de loisirs</strong>. De manière ludique, les enfants ont la possibilité de développer de nouvelles compétences
       plastiques en explorant les formes et les couleurs ainsi que les possibilités d’assemblage.</p>
-    <PhotoSlider album="ecole" />
+    <Slider
+      class="my-5"
+      :images='[
+        {"src": "/gallery/Ecole/ArbreDeVieStJean.jpg"},
+        {"src": "/gallery/Ecole/ColoGroupe.jpg"},
+        {"src": "/gallery/Ecole/ecole-lechiagat.jpg"},
+        {"src": "/gallery/Ecole/StJean.jpg"},
+        {"src": "/gallery/Ecole/VagueStJean.jpg"}
+      ]'
+    />
     <p>L’activité mosaïque leur permettra de
       <strong>développer à la fois leur créativité et leur concentration</strong> dans la
       réalisation de leur production (qu’elle soit individuelle ou collective). Pour plus d’infos

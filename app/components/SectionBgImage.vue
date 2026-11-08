@@ -13,17 +13,19 @@ const dims = {
   big: { height: 1024, width: 1280 },
 }
 
-const getImagePlaceholder = () => placeholders[src as keyof typeof placeholders]
+const img = useImage()
 
-const imagePlaceholder = `url(${getImagePlaceholder()})`
+// a photo imported since the last build has no placeholder yet
+const imagePlaceholder = computed(() => {
+  const placeholder = placeholders[src as keyof typeof placeholders]
+  return placeholder ? `url(${placeholder})` : 'none'
+})
 
-const imageSmall = `url(${getImageURL(dims.small)})`
-const imageMedium = `url(${getImageURL(dims.medium)})`
-const imageBig = `url(${getImageURL(dims.big)})`
+const imageSmall = computed(() => `url(${getImageURL(dims.small)})`)
+const imageMedium = computed(() => `url(${getImageURL(dims.medium)})`)
+const imageBig = computed(() => `url(${getImageURL(dims.big)})`)
 
 function getImageURL(dimensions: { height: number; width: number }) {
-  const img = useImage()
-
   return img(src, {
     format: 'webp',
     height: dimensions.height, // ??
@@ -32,7 +34,7 @@ function getImageURL(dimensions: { height: number; width: number }) {
 }
 
 useHead({
-  link: [
+  link: () => [
     {
       rel: 'preload',
       as: 'image',
