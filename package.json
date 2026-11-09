@@ -19,12 +19,10 @@
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/fontfaceobserver": "^2.1.0",
     "@types/node": "^22.0.0",
-    "blurhash": "^2.0.5",
     "fontfaceobserver": "^2.3.0",
     "nuxt": "^4.6.3",
     "sass": "^1.63.6",
-    "sass-loader": "^13.3.2",
-    "sharp": "^0.32.4"
+    "sass-loader": "^13.3.2"
   },
   "dependencies": {
     "bulma": "^0.9.4",
