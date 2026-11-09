@@ -156,6 +156,7 @@
 
 <script setup lang="ts">
 import { getTypeKind, type TransientProp } from '@transient/nuxt/ir'
+import { listPhotos, signUpload } from '~/api/api'
 
 type Photo = { src: string; caption?: string }
 type Upload = {
@@ -172,7 +173,6 @@ const emit = defineEmits<{ 'update:modelValue': [value: string | Photo[]] }>()
 
 const MAX_SIZE = 10 * 1024 * 1024 // cloudinary free plan
 
-const { BACK_URL } = useRuntimeConfig().public
 const img = useImage()
 const dialog = useTemplateRef('dialog')
 
@@ -224,10 +224,6 @@ const pickedCount = (name: string) =>
     ? picked.value.filter(({ src }) => folderOf(`/${src.replace(/^\.?\//, '')}`) === name).length
     : picked.value.length
 
-function media<T>(method: 'GET' | 'POST', body?: Record<string, string>) {
-  return $fetch<T>(`${BACK_URL}/media`, { method, body })
-}
-
 async function attempt(action: () => Promise<void>, failure: string) {
   error.value = ''
   try {
@@ -241,7 +237,7 @@ async function attempt(action: () => Promise<void>, failure: string) {
 async function load() {
   loading.value = true
   await attempt(async () => {
-    photos.value = (await media<{ photos: string[] }>('GET')).photos
+    photos.value = await listPhotos()
   }, 'Impossible de charger les photos.')
   loading.value = false
 }
@@ -364,10 +360,7 @@ async function upload(files: File[]) {
 
     try {
       item.status = 'sending'
-      const { url, fields } = await media<{ url: string; fields: Record<string, string> }>('POST', {
-        filename: file.name,
-        folder: target,
-      })
+      const { url, fields } = await signUpload(file.name, target)
       const form = new FormData()
       for (const [name, value] of Object.entries(fields)) form.set(name, value)
       form.set('file', file)

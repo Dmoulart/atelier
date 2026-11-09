@@ -6,7 +6,7 @@ export async function api(route: string | URL | Request, init?: RequestInit | un
     if (response.ok) {
       const content = await response.json()
 
-      if (!content.success) {
+      if (content.success === false) {
         throw new Error(content.message)
       }
 
@@ -45,6 +45,30 @@ export async function checkLogged() {
   }
 
   return true
+}
+
+export async function listPhotos() {
+  const { data, err } = await api('/media')
+
+  if (err) {
+    throw err
+  }
+
+  return data.photos as string[]
+}
+
+export async function signUpload(filename: string, folder: string) {
+  const { data, err } = await api('/media', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ filename, folder }),
+  })
+
+  if (err) {
+    throw err
+  }
+
+  return data as { url: string; fields: Record<string, string> }
 }
 
 export async function publishPage(name: string, component: string) {

@@ -92,15 +92,16 @@ function handleLogin(): void
     $token = createToken();
 
     if (password_verify($userPassword, $hash)) {
+        $env = getEnvOrFail("ENV");
         setcookie(
             'token',
             $token,
             [
                 'expires' => time() + 60 * 60,
                 'path' => '/',
-                'secure' => false,
+                'secure' => $env === 'PROD',
                 'httponly' => true,
-                'samesite' => 'Lax'
+                'samesite' => $env === 'PROD' ? 'Strict' : 'Lax'
             ]
         );
 
