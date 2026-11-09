@@ -33,18 +33,22 @@ export default defineNuxtModule({
 
         // file names keep their extension: "CreationsEtCommandes/1.jpg"
         const files = resources
-          .map((r) => ({ id: r.public_id, name: `${r.public_id.slice(FOLDER.length + 1)}.${r.format}` }))
+          .map((r) => ({
+            id: r.public_id,
+            name: `${r.public_id.slice(FOLDER.length + 1)}.${r.format}`,
+          }))
           .sort((a, b) => a.name.localeCompare(b.name))
 
-        const placeholders: Record<string, string> = {}
-        await Promise.all(
-          files.map(async ({ id, name }) => {
-            const thumb = await fetch(
-              `https://res.cloudinary.com/${cloud}/image/upload/w_32,h_32,c_limit,f_png/${id}`,
-            )
-            const blurhash = await encodeImageToBlurhash(Buffer.from(await thumb.arrayBuffer()))
-            placeholders[`/gallery/${name}`] = blurHashToDataURL(blurhash) ?? ''
-          }),
+        const placeholders = Object.fromEntries(
+          await Promise.all(
+            files.map(async ({ id, name }) => {
+              const thumb = await fetch(
+                `https://res.cloudinary.com/${cloud}/image/upload/w_32,h_32,c_limit,f_png/${id}`,
+              )
+              const blurhash = await encodeImageToBlurhash(Buffer.from(await thumb.arrayBuffer()))
+              return [`/gallery/${name}`, blurHashToDataURL(blurhash) ?? '']
+            }),
+          ),
         )
 
         // every file name of the album should consist of a number and file extension
@@ -52,9 +56,10 @@ export default defineNuxtModule({
         const creations = files
           .map((f) => f.name)
           .filter((n) => n.startsWith(PREFIX))
-          .sort((a, b) => parseInt(a.slice(PREFIX.length), 10) - parseInt(b.slice(PREFIX.length), 10))
+          .sort(
+            (a, b) => parseInt(a.slice(PREFIX.length), 10) - parseInt(b.slice(PREFIX.length), 10),
+          )
 
-        writeFileSync('app/assets/gallery.json', JSON.stringify(files.map((f) => f.name)))
         writeFileSync('app/assets/gallery-placeholders.json', JSON.stringify(placeholders))
         writeFileSync('app/assets/gallery-creations-et-commandes.json', JSON.stringify(creations))
       } catch (e) {

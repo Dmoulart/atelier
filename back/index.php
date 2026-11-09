@@ -4,27 +4,54 @@ use Uri\Rfc3986\Uri;
 
 set_exception_handler(function (Throwable $e) {
     error_log($e->getMessage());
-    respond(500, "Server error");
+    echo $e->getMessage();
+    respond(500, ["success" => false, "message" => "Server error"]);
 });
 
 $siteUrl = getEnvOrFail('BASE_URL');
 
 header("Access-Control-Allow-Origin: $siteUrl");
+header('Content-Type: application/json');
+header("Access-Control-Allow-Credentials: true");
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("Access-Control-Allow-Methods: GET, POST, PUT");
     header("Access-Control-Allow-Headers: content-type");
-    respond(200, "ok");
+    respond(200, ["success" => true, "message" => "OK"]);
     return;
 }
 
 $url = getRequestUrl();
 
 $routes = [
+    "#^\/api\/auth/login$#" => function () {
+        handleLogin();
+    },
+    "#^\/api\/auth/logged$#" => function () {
+        if (!checkToken()) {
+            return unauthorized();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            respond(405, ["erreur" => "Unauthorized method"]);
+            return;
+        }
+
+        respond(200, ["success" => true, "message" => "OK"]);
+    },
     "#^\/api\/media$#" => function () {
+        if (!checkToken()) {
+            return unauthorized();
+        }
+
         handleMedia();
     },
     "#^\/api\/pages\/.*$#" => function () {
+        if (!checkToken()) {
+            return unauthorized();
+        }
+
         handlePage();
     }
 ];
@@ -40,8 +67,50 @@ foreach ($routes as $route => $handler) {
 }
 
 if (!$found) {
-    respond(404, "Not found");
+    respond(404, ["success" => false, "message" => "Not found"]);
     return;
+}
+
+function handleLogin(): void
+{
+    $password = getEnvOrFail('API_PASSWORD');
+    $hash = password_hash($password, PASSWORD_BCRYPT);
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        respond(405, ["erreur" => "Unauthorized method"]);
+        return;
+    }
+
+    $body = json_decode(file_get_contents('php://input'), true);
+    if (!$body || !isset($body["password"])) {
+        respond(422, ["success" => false, "message" => "Invalid request."]);
+        return;
+    }
+
+    $userPassword = $body["password"];
+
+    $token = createToken();
+
+    if (password_verify($userPassword, $hash)) {
+        setcookie(
+            'token',
+            $token,
+            [
+                'expires' => time() + 60 * 60,
+                'path' => '/',
+                'secure' => false,
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ]
+        );
+
+        respond(200, ["success" => true, "token" => $token]);
+
+        return;
+    } else {
+        respond(401, ["success" => false, "token" => "Unauthorized"]);
+        return;
+    }
 }
 
 
@@ -98,7 +167,6 @@ function handlePage(): void
     }
 
     $status = curl_getinfo($req, CURLINFO_HTTP_CODE);
-    header('Content-Type: application/json');
 
     http_response_code($status);
 
@@ -108,13 +176,10 @@ function handlePage(): void
     }
 
     echo json_encode(["success" => false, "message" => "Github error"]);
-
-    return;
 }
 
 function handleMedia(): void
 {
-    header('Content-Type: application/json');
 
     $cloud = getEnvOrFail('CLD_CLOUDNAME');
     $key = getEnvOrFail('CLD_API_KEY');
@@ -162,7 +227,7 @@ function handleMedia(): void
             return;
     }
 
-    respond(405, ["message" => "Unauthorized method"]);
+    respond(405, ["success" => false, "message" => "Unauthorized method"]);
 }
 
 function respond(int $status, array|string $data): void
@@ -202,4 +267,94 @@ function getEnvOrFail(string $key): string
 function getRequestUrl()
 {
     return Uri::parse($_SERVER['REQUEST_URI']);
+}
+
+function hashPayload(array $payload)
+{
+    return hash_hmac('sha256', json_encode($payload), getEnvOrFail("TOKEN_KEY"));
+}
+
+function createToken()
+{
+    $payload = [
+        "user" => "editor",
+        "exp" => time() + 60 * 60,
+    ];
+
+    $signature = hashPayload($payload);
+
+    return base64_encode(json_encode($payload)) . "." . $signature;
+}
+
+
+function checkToken()
+{
+    $headers = getallheaders();
+
+    $token = null;
+
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+    } else {
+        foreach ($headers as $name => $value) {
+            if ($name === 'Authorization') {
+                $parts = explode(' ', $value);
+
+                if (count($parts) < 2) {
+                    return false;
+                }
+
+                [$bearer, $jwt] = $parts;
+
+                if (trim($bearer) !== "Bearer") {
+                    return false;
+                }
+
+                $token =  trim($jwt);
+            }
+        }
+    }
+
+    if (!isset($token)) {
+        return false;
+    }
+
+    $payload = readToken($token);
+
+    if (isset($payload)) {
+        return true;
+    }
+
+    return false;
+}
+
+function readToken(string $token)
+{
+    $parts = explode('.', $token);
+
+    if (count($parts) !== 2) {
+        return null;
+    }
+
+    [$encodedPayload, $signature] = $parts;
+    $payload = json_decode(base64_decode($encodedPayload), true);
+
+    if (!isset($payload, $payload["exp"], $payload["user"])) {
+        return null;
+    }
+
+    if (!hash_equals($signature, hashPayload($payload))) {
+        return null;
+    }
+
+    if ($payload["exp"] <= time()) {
+        return null;
+    }
+
+    return $payload;
+}
+
+function unauthorized()
+{
+    respond(401, ["success" => false, "message" => "Unauthorized"]);
 }

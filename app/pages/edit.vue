@@ -5,9 +5,28 @@ import { ComponentEditor } from '@transient/nuxt/editor'
 import { irToSfc, type TransientComponentSchema } from '@transient/nuxt/ir'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { navigateTo, useRoute, useRouter } from '#imports'
+import { checkLogged } from '~/api/api'
+import PhotoField from '~/editor/PhotoField.vue'
+
+useSeoMeta({ robots: 'noindex, nofollow' })
 
 // /edit?page=a → /edit?page=b only changes the query: remount the editor
-definePageMeta({ key: (route) => route.fullPath })
+definePageMeta({
+  key: (route) => route.fullPath,
+  async middleware() {
+    if (import.meta.client && !(await checkLogged())) {
+      return navigateTo('/admin')
+    }
+  },
+})
+
+const fields = [
+  { component: 'Photo', prop: 'src', use: PhotoField },
+  { component: 'TextImgBlock', prop: 'src', use: PhotoField },
+  { component: 'Hero', prop: 'bgImage', use: PhotoField },
+  { component: 'Gallery', prop: 'images', use: PhotoField },
+  { component: 'Slider', prop: 'data', use: PhotoField },
+]
 
 const page = String(useRoute().query.page ?? 'index')
 const component = ref(structuredClone(schemas[page]))
@@ -39,15 +58,8 @@ onMounted(() => document.addEventListener('click', followLink, true))
 onBeforeUnmount(() => document.removeEventListener('click', followLink, true))
 
 const toast = ref<{ success: boolean; message: string } | null>(null)
-let toastTimer: ReturnType<typeof setTimeout> | undefined
-onBeforeUnmount(() => clearTimeout(toastTimer))
+
 const editor = useTemplateRef('editor')
-function showToast(success: boolean, message: string) {
-  clearTimeout(toastTimer)
-  toast.value = { success, message }
-  // an error stays until it is closed, it must not be missed
-  if (success) toastTimer = setTimeout(() => (toast.value = null), 8000)
-}
 
 async function publish(component: TransientComponentSchema) {
   const config = useRuntimeConfig()
@@ -60,18 +72,19 @@ async function publish(component: TransientComponentSchema) {
       method: 'PUT',
     })
     if (!result.success) throw new Error(result.message)
+    toast.value = {
+      success: true,
+      message: 'Publication réussie. Les modifications seront en ligne dans quelques minutes !',
+    }
 
-    showToast(
-      true,
-      'Publication réussie. Les modifications seront en ligne dans quelques minutes !',
-    )
     editor.value?.markAsSaved()
   } catch (e) {
     console.error(e)
-    showToast(
-      false,
-      "La publication a échoué : les modifications ne sont pas en ligne. Si l'erreur persiste, contactez Dodo :).",
-    )
+    toast.value = {
+      success: false,
+      message:
+        "La publication a échoué : les modifications ne sont pas en ligne. Si l'erreur persiste, contactez Dodo :).",
+    }
   }
 }
 </script>
@@ -81,20 +94,13 @@ async function publish(component: TransientComponentSchema) {
   <ComponentEditor
     v-else
     ref="editor"
+    :fields="fields"
     @publish="publish"
     v-model="component"
     :dictionnary="schemas"
     :components="components"
   />
-  <div
-    v-if="toast"
-    class="notification publish-toast"
-    :class="toast.success ? 'is-success' : 'is-danger'"
-    role="alert"
-  >
-    <button type="button" class="delete" aria-label="Fermer" @click="toast = null" />
-    {{ toast.message }}
-  </div>
+  <Toast v-model="toast" />
 </template>
 
 <style scoped>
