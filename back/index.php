@@ -47,7 +47,7 @@ $routes = [
 
         handleMedia();
     },
-    "#^\/api\/pages\/.*$#" => function () {
+    "#^\/api\/pages\/publish\/.*$#" => function () {
         if (!checkToken()) {
             return unauthorized();
         }

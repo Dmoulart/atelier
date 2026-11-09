@@ -1,20 +1,8 @@
-export const token = ref()
-
-export async function login(password: string) {
+export async function api(route: string | URL | Request, init?: RequestInit | undefined) {
   const config = useRuntimeConfig()
   const BASE_URL = `${config.public.BACK_URL}`
   try {
-    const response = await fetch(`${BASE_URL}/auth/login`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify({
-        password,
-      }),
-    })
-
+    const response = await fetch(`${BASE_URL}${route}`, { ...init, credentials: 'include' })
     if (response.ok) {
       const content = await response.json()
 
@@ -22,37 +10,46 @@ export async function login(password: string) {
         throw new Error(content.message)
       }
 
-      token.value = content.token
-
-      return true
+      return { data: content, err: null }
+    } else {
+      throw new Error(`${route} [${response.status}]: ${response.statusText}`)
     }
-    return false
   } catch (e) {
-    console.error(e)
-    return false
+    return { data: null, err: e }
   }
 }
 
-export async function checkLogged() {
-  const config = useRuntimeConfig()
-  const BASE_URL = `${config.public.BACK_URL}`
-  try {
-    const response = await fetch(`${BASE_URL}/auth/logged`, {
-      method: 'GET',
-      credentials: 'include',
-    })
-    if (response.ok) {
-      const content = await response.json()
+export async function login(password: string) {
+  const { err } = await api('/auth/login', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      password,
+    }),
+  })
 
-      if (!content.success) {
-        throw new Error(content.message)
-      }
-
-      return true
-    }
-    return false
-  } catch (e) {
-    console.error(e)
+  if (err) {
     return false
   }
+
+  return true
+}
+
+export async function checkLogged() {
+  const { err } = await api('/auth/logged')
+
+  if (err) {
+    return false
+  }
+
+  return true
+}
+
+export async function publishPage(name: string, component: string) {
+  return await api(`/pages/publish/${name}`, {
+    method: 'PUT',
+    body: component,
+  })
 }

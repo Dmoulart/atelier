@@ -5,7 +5,7 @@ import { ComponentEditor } from '@transient/nuxt/editor'
 import { irToSfc, type TransientComponentSchema } from '@transient/nuxt/ir'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { navigateTo, useRoute, useRouter } from '#imports'
-import { checkLogged } from '~/api/api'
+import { checkLogged, publishPage } from '~/api/api'
 import PhotoField from '~/editor/PhotoField.vue'
 
 useSeoMeta({ robots: 'noindex, nofollow' })
@@ -62,29 +62,19 @@ const toast = ref<{ success: boolean; message: string } | null>(null)
 const editor = useTemplateRef('editor')
 
 async function publish(component: TransientComponentSchema) {
-  const config = useRuntimeConfig()
-  const url = `${config.public.BACK_URL}/${component.tag}`
-
-  try {
-    const sfc = irToSfc(component, schemas)
-    const result = await $fetch<{ message: string; success: boolean }>(url, {
-      body: sfc,
-      method: 'PUT',
-    })
-    if (!result.success) throw new Error(result.message)
-    toast.value = {
-      success: true,
-      message: 'Publication réussie. Les modifications seront en ligne dans quelques minutes !',
-    }
-
-    editor.value?.markAsSaved()
-  } catch (e) {
-    console.error(e)
+  const { err } = await publishPage(component.tag, irToSfc(component, schemas))
+  if (err) {
     toast.value = {
       success: false,
       message:
         "La publication a échoué : les modifications ne sont pas en ligne. Si l'erreur persiste, contactez Dodo :).",
     }
+  } else {
+    toast.value = {
+      success: true,
+      message: 'Publication réussie. Les modifications seront en ligne dans quelques minutes !',
+    }
+    editor.value?.markAsSaved()
   }
 }
 </script>
@@ -102,13 +92,3 @@ async function publish(component: TransientComponentSchema) {
   />
   <Toast v-model="toast" />
 </template>
-
-<style scoped>
-.publish-toast {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 9999;
-  max-width: min(28rem, calc(100vw - 2rem));
-}
-</style>
