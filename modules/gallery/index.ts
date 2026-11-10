@@ -1,13 +1,13 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { defineNuxtModule } from '@nuxt/kit'
 
-// placeholders are only used by the heroes: collect their `bg-image="..."` from the pages
+// placeholders are only used by the heroes: collect their `background-image="..."` from the pages
 const heroImages = (): Set<string> =>
   new Set(
     readdirSync('app/pages', { recursive: true, encoding: 'utf8' })
       .filter((f) => f.endsWith('.vue'))
       .flatMap((f) => [
-        ...readFileSync(`app/pages/${f}`, 'utf8').matchAll(/<Hero[^>]*\sbg-image="([^"]+)"/g),
+        ...readFileSync(`app/pages/${f}`, 'utf8').matchAll(/<Hero[^>]*\sbackground-image="([^"]+)"/g),
       ])
       .map((m) => m[1]!),
   )

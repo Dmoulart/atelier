@@ -23,7 +23,7 @@ definePageMeta({
 const fields = [
   { component: 'Photo', prop: 'src', use: PhotoField },
   { component: 'TextImgBlock', prop: 'src', use: PhotoField },
-  { component: 'Hero', prop: 'bgImage', use: PhotoField },
+  { component: 'Hero', prop: 'backgroundImage', use: PhotoField },
   { component: 'Gallery', prop: 'images', use: PhotoField },
   { component: 'Slider', prop: 'data', use: PhotoField },
 ]

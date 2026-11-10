@@ -3,7 +3,7 @@
     title="Art Thérapie - Atelier de St-Gué"
     description="Démarche créatrice accompagnée, qui utilise la création artistique dans un but thérapeutique, l'Art Thérapie se pratique aussi à l'Atelier de St-Guénolé."
   />
-  <Hero bg-image="/gallery/CreationsEtCommandes/11.jpg">
+  <Hero background-image="/gallery/CreationsEtCommandes/11.jpg">
     <h1>Art thérapie</h1>
   </Hero>
   <Content align="center">
@@ -68,7 +68,9 @@
 
     <TextImgBlock src="/assets/mediums/acrylic.jpg" alt="Acrylique"> Acrylique </TextImgBlock>
 
-    <TextImgBlock src="/assets/mediums/ink.jpg" alt="Dessin et encre"> Dessin et encre </TextImgBlock>
+    <TextImgBlock src="/assets/mediums/ink.jpg" alt="Dessin et encre">
+      Dessin et encre
+    </TextImgBlock>
 
     <TextImgBlock src="/assets/mediums/mosaic.jpg" alt="Collage et mosaïque">
       Collage et mosaïque

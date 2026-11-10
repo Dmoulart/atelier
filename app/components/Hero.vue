@@ -1,22 +1,25 @@
 <template>
-  <Section class="hero-section" view="fill" :parallax="{src: bgImage, transition: false}">
+  <Section class="hero-section" view="fill" :parallax="{src: backgroundImage, transition: false}">
     <slot />
   </Section>
 </template>
 <script setup lang="ts">
-const { bgImage } = defineProps<{ bgImage: string }>()
+const {
+  backgroundImage,
+  imageDescription = "Une magnifique oeuvre de l'atelier de Saint-Guénolé",
+} = defineProps<{ backgroundImage: string; imageDescription?: string }>()
 
 // the hero is the page cover: it is also its sharing image.
 // social networks need an absolute url, and not all of them read webp
 const { BASE_URL } = useRuntimeConfig().public
 const img = useImage()
-const ogImage = computed(() => img(bgImage, { format: 'jpeg', width: 1280, height: 1024 }))
+const ogImage = computed(() => img(backgroundImage, { format: 'jpeg', width: 1280, height: 1024 }))
 
 useSeoMeta({
   ogImage: () => new URL(ogImage.value, BASE_URL).href,
   ogImageWidth: 1280,
   ogImageHeight: 1024,
-  ogImageAlt: "Une magnifique oeuvre de l'atelier de Saint-Guénolé",
+  ogImageAlt: () => imageDescription,
   ogType: 'website',
 })
 </script>

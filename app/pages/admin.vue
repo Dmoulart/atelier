@@ -1,5 +1,5 @@
 <template>
-  <main class="login">
+  <main class="login" :style="{ backgroundImage: `url(${bg})` }">
     <form class="card" @submit.prevent="submit">
       <h1>Edition</h1>
       <p class="hint">Connectez-vous pour éditer le site.</p>
@@ -13,7 +13,6 @@
         required
         v-model="password"
       >
-
       <button type="submit">Envoyer</button>
     </form>
     <Toast v-model="toast" />
@@ -35,6 +34,7 @@ definePageMeta({
 
 useSeoMeta({ robots: 'noindex, nofollow' })
 
+const bg = useImage()('/gallery/ArtTherap1.jpg', { width: 1920 })
 const password = ref('')
 const toast = ref()
 
@@ -48,13 +48,13 @@ async function submit(){
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .login {
   min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 1rem;
-  background: linear-gradient(135deg, #f5f7fa, #e4e9f2);
+  background: center / cover no-repeat;
 }
 .card {
   width: 100%;
@@ -79,20 +79,20 @@ input {
 }
 input:focus {
   outline: none;
-  border-color: #3273dc;
-  box-shadow: 0 0 0 3px rgb(50 115 220 / .2);
+  border-color: $link;
+  box-shadow: 0 0 0 3px rgba($link, .25);
 }
 button {
   margin-top: 1rem;
   padding: .8rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
-  background: #3273dc;
+  color: rgba(253, 247, 247, 0.9);
+  background: $link;
   border: 0;
   border-radius: 8px;
   cursor: pointer;
   transition: background .15s;
 }
-button:hover { background: #2760b8; }
+button:hover { background: darken($link, 5%); }
 </style>
