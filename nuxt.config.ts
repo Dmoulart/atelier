@@ -1,13 +1,9 @@
 import { env } from 'node:process'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    '@nuxt/image',
-    './modules/gallery',
-    '@nuxtjs/google-fonts',
-    '@transient/nuxt',
-  ],
+  modules: ['@nuxt/image', './modules/gallery', '@nuxtjs/google-fonts', '@transient/nuxt'],
   transient: { route: '/edit' },
+  components: [{ path: '~/components', pathPrefix: false }],
   compatibilityDate: '2025-06-08',
   css: ['~/style/global.scss'],
   devtools: { enabled: true },

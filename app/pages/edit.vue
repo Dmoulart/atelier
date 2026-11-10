@@ -24,7 +24,6 @@ const fields = [
   { component: 'Photo', prop: 'src', use: PhotoField },
   { component: 'TextImgBlock', prop: 'src', use: PhotoField },
   { component: 'Hero', prop: 'backgroundImage', use: PhotoField },
-  { component: 'Gallery', prop: 'images', use: PhotoField },
   { component: 'Slider', prop: 'data', use: PhotoField },
 ]
 
@@ -77,6 +76,16 @@ async function publish(component: TransientComponentSchema) {
     editor.value?.markAsSaved()
   }
 }
+const rules = [
+  {
+    select: ':path("**/*/components/blocks/**/*")',
+    can: 'add-component',
+  },
+  {
+    select: 'Hero',
+    cannot: ['move-component', 'delete-component'],
+  },
+]
 </script>
 
 <template>
@@ -89,6 +98,7 @@ async function publish(component: TransientComponentSchema) {
     v-model="component"
     :dictionnary="schemas"
     :components="components"
+    :rules="rules"
   />
   <Toast v-model="toast" />
 </template>
