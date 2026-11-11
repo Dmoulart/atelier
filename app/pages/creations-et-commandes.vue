@@ -1,9 +1,8 @@
 <template>
-  <Seo
-    title="Créations et commandes - Atelier de St-Gué"
-    description="L’atelier vous propose des créations personnelles comme du mobilier, de l’art de la table, des tableaux, des fresques intérieures et extérieures. Toutes vos envies ou projets personnels peuvent être réalisés avec un devis sur mesure."
-  />
-  <Hero background-image="/gallery/Commandes/poissonSculture.jpg">
+  <Hero
+    seo-title="Créations et commandes - Atelier de St-Gué"
+    seo-description="L’atelier vous propose des créations personnelles comme du mobilier, de l’art de la table, des tableaux, des fresques intérieures et extérieures. Toutes vos envies ou projets personnels peuvent être réalisés avec un devis sur mesure."
+    background-image="/gallery/Commandes/poissonSculture.jpg">
     <h1>Créations et commandes</h1>
   </Hero>
 

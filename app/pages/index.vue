@@ -1,8 +1,7 @@
 <template>
-  <Seo
-    description="L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch."
-  />
-  <Hero background-image="/gallery/ArtTherap1.jpg">
+  <Hero
+    seo-description="L’Atelier de St-Gué est un lieu de création, d’échange et de partage autour des arts plastiques situé en Pays Bigouden à Saint-Guénolé, Penmarch."
+    background-image="/gallery/ArtTherap1.jpg">
     <h1>
       L ' Atelier <br>
       &nbsp;de Saint-Gué

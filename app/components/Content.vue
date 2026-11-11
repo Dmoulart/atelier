@@ -13,7 +13,11 @@
       <div v-if="$slots.media" class="content-block__media">
         <slot name="media" />
       </div>
-      <div class="content-block__text" :class="{'content-block__text--spread': !$slots.media}">
+      <div
+        v-if="$slots.default"
+        class="content-block__text"
+        :class="{'content-block__text--spread': !$slots.media}"
+      >
         <slot />
       </div>
     </div>
@@ -41,6 +45,9 @@ const props = defineProps<{
   }
 
   &__text {
+    // fills the room left by the media, even while empty (a block just added in the editor)
+    flex: 1;
+
     &--spread {
       width: 100%;
     }
@@ -88,7 +95,9 @@ const props = defineProps<{
       gap: 48px;
     }
 
+    // a fixed share: the text no longer pushes it back, it would grow up to its max-width
     &__media {
+      flex: 0 0 40%;
       max-width: 50%;
     }
 

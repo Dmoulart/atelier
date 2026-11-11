@@ -7,7 +7,15 @@
 const {
   backgroundImage,
   imageDescription = "Une magnifique oeuvre de l'atelier de Saint-Guénolé",
-} = defineProps<{ backgroundImage: string; imageDescription?: string }>()
+  seoTitle,
+  seoDescription,
+} = defineProps<{
+  backgroundImage: string
+  imageDescription?: string
+  // the page title and description in search results and shared links
+  seoTitle?: string
+  seoDescription?: string
+}>()
 
 // the hero is the page cover: it is also its sharing image.
 // social networks need an absolute url, and not all of them read webp
@@ -16,6 +24,12 @@ const img = useImage()
 const ogImage = computed(() => img(backgroundImage, { format: 'jpeg', width: 1280, height: 1024 }))
 
 useSeoMeta({
+  title: () => seoTitle,
+  ogTitle: () => seoTitle,
+  twitterTitle: () => seoTitle,
+  description: () => seoDescription,
+  ogDescription: () => seoDescription,
+  twitterDescription: () => seoDescription,
   ogImage: () => new URL(ogImage.value, BASE_URL).href,
   ogImageWidth: 1280,
   ogImageHeight: 1024,

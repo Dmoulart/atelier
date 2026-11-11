@@ -1,9 +1,8 @@
 <template>
-  <Seo
-    title="Cours et Stages - Atelier de St-Gué"
-    description="L’atelier organise à l’année des cours et des stages pour enfants ados et adultes, groupes scolaires, colonies, etc. Dans une ambiance calme et conviviale, venez réaliser une mosaïque. Laissez votre créativité s'exprimer"
-  />
-  <Hero background-image="/gallery/Ecole/VagueStJean.jpg">
+  <Hero
+    seo-title="Cours et Stages - Atelier de St-Gué"
+    seo-description="L’atelier organise à l’année des cours et des stages pour enfants ados et adultes, groupes scolaires, colonies, etc. Dans une ambiance calme et conviviale, venez réaliser une mosaïque. Laissez votre créativité s'exprimer"
+    background-image="/gallery/Ecole/VagueStJean.jpg">
     <h1>Cours et stages de mosaique</h1>
   </Hero>
 

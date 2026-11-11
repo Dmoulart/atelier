@@ -1,9 +1,8 @@
 <template>
-  <Seo
-    title="Art Thérapie - Atelier de St-Gué"
-    description="Démarche créatrice accompagnée, qui utilise la création artistique dans un but thérapeutique, l'Art Thérapie se pratique aussi à l'Atelier de St-Guénolé."
-  />
-  <Hero background-image="/gallery/CreationsEtCommandes/11.jpg">
+  <Hero
+    seo-title="Art Thérapie - Atelier de St-Gué"
+    seo-description="Démarche créatrice accompagnée, qui utilise la création artistique dans un but thérapeutique, l'Art Thérapie se pratique aussi à l'Atelier de St-Guénolé."
+    background-image="/gallery/CreationsEtCommandes/11.jpg">
     <h1>Art thérapie</h1>
   </Hero>
   <Quote>« L'ouverture de mon atelier d'artiste depuis 2005 m'a aidée à développer ma capacité créative
