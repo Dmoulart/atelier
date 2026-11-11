@@ -7,7 +7,9 @@ const heroImages = (): Set<string> =>
     readdirSync('app/pages', { recursive: true, encoding: 'utf8' })
       .filter((f) => f.endsWith('.vue'))
       .flatMap((f) => [
-        ...readFileSync(`app/pages/${f}`, 'utf8').matchAll(/<Hero[^>]*\sbackground-image="([^"]+)"/g),
+        ...readFileSync(`app/pages/${f}`, 'utf8').matchAll(
+          /<Hero[^>]*\sbackground-image="([^"]+)"/g,
+        ),
       ])
       .map((m) => m[1]!),
   )

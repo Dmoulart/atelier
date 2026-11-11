@@ -4,7 +4,6 @@ use Uri\Rfc3986\Uri;
 
 set_exception_handler(function (Throwable $e) {
     error_log($e->getMessage());
-    echo $e->getMessage();
     respond(500, ["success" => false, "message" => "Server error"]);
 });
 
@@ -131,7 +130,11 @@ function handlePage(): void
         return;
     }
 
-    $page = array_last(explode('/', $_SERVER['REQUEST_URI']));
+    $page = array_last(explode('/', getRequestUrl()->getPath()));
+    if (!preg_match('/^[a-z0-9-]+$/', $page)) {
+        respond(422, ["success" => false, "message" => "Invalid page"]);
+        return;
+    }
 
     $url = "$repoUrl/contents/app/pages/$page.vue";
     $headers = [
@@ -258,9 +261,12 @@ function cloudinary(string $url, array $options): array
 
 function getEnvOrFail(string $key): string
 {
-    $value = getenv($key);
-    if (!isset($value)) {
-        throw new Exception("Expected defined env value");
+    static $file = null;
+    $file ??= is_readable(__DIR__ . '/.env') ? parse_ini_file(__DIR__ . '/.env', false, INI_SCANNER_RAW) : [];
+    $value = $file[$key] ?? getenv($key);
+
+    if ($value === false || $value === '') {
+        throw new Exception("Missing env value $key");
     }
     return $value;
 }

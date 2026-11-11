@@ -1,0 +1,11 @@
+# Deployed as <webroot>/api/: every /api/* request goes to index.php
+Options -Indexes
+
+# never serve the .env (secrets) or any other dotfile
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]

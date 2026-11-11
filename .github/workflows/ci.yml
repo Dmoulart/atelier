@@ -33,13 +33,6 @@ jobs:
           key: bun-${{ runner.os }}-${{ hashFiles('bun.lock', 'transient/bun.lock') }}
           restore-keys: bun-${{ runner.os }}-
 
-      - name: Cache transient build
-        id: transient-dist
-        uses: actions/cache@v4
-        with:
-          path: transient/packages/*/dist
-          key: transient-dist-${{ steps.transient.outputs.commit }}
-
       - name: Build & link transient
         run: |
           cd transient && bun install && bun run build
@@ -49,4 +42,11 @@ jobs:
         run: bun install
 
       - name: Run build
-        run: bun run generate
+        # baked into the static html: repository variables (Settings > Secrets and variables > Variables)
+        env:
+          BASE_URL: ${{ vars.BASE_URL }}
+          BACK_URL: ${{ vars.BACK_URL }}
+          CLD_CLOUDNAME: ${{ vars.CLD_CLOUDNAME }}
+        run: |
+          : "${BASE_URL:?}" "${BACK_URL:?}" "${CLD_CLOUDNAME:?}"
+          bun run generate
