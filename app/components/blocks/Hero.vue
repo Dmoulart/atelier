@@ -12,13 +12,10 @@ const {
 } = defineProps<{
   backgroundImage: string
   imageDescription?: string
-  // the page title and description in search results and shared links
   seoTitle?: string
   seoDescription?: string
 }>()
 
-// the hero is the page cover: it is also its sharing image.
-// social networks need an absolute url, and not all of them read webp
 const { BASE_URL } = useRuntimeConfig().public
 const img = useImage()
 const ogImage = computed(() => img(backgroundImage, { format: 'jpeg', width: 1280, height: 1024 }))

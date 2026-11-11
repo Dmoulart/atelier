@@ -1,11 +1,9 @@
-<!-- A titled text. `highlight` turns it into a centered callout on a tinted background. -->
 <template>
   <Content
     class="text-block"
     :class="{ 'text-block--highlight': highlight }"
     :align="highlight ? 'center' : undefined"
   >
-    <!-- never an h1: the page title belongs to the Hero -->
     <template v-if="title">
       <h3 v-if="titleSize === 'small'" class="has-text-centered">{{ title }}</h3>
       <h2 v-else class="has-text-centered">{{ title }}</h2>

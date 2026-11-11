@@ -1,4 +1,3 @@
-<!-- An optional title and intro text, then a carousel of photos. -->
 <template>
   <Content class="photo-carousel">
     <h2 v-if="title" :class="{ 'has-text-centered': centerTitle }">{{ title }}</h2>

@@ -1,6 +1,4 @@
-<!-- Intro text, contact form, then the address and phone of the Atelier. -->
 <template>
-  <!-- the other pages link to /#contact -->
   <Content id="contact" align="center">
     <h2>{{ title }}</h2>
     <slot />
@@ -27,7 +25,5 @@ const { phone, showForm = true } = defineProps<{
   showForm?: boolean
 }>()
 
-// "06 26 67 58 83" -> "tel:+33626675883"
-// phone is empty while the editor previews a fresh block
 const phoneHref = computed(() => `tel:${(phone ?? '').replace(/\s/g, '').replace(/^0/, '+33')}`)
 </script>

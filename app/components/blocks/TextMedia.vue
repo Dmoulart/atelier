@@ -1,6 +1,4 @@
-<!-- A text next to a media. The text is typed in place, everything else is a prop. -->
 <template>
-  <!-- a portrait media is tall: the section fills the screen so the text has room next to it -->
   <Content :align="mediaSide" :view="mediaShape === 'portrait' ? 'fill' : undefined">
     <template #media>
       <Photo :src="media" :alt="mediaAlt" :shape="mediaShape" />
