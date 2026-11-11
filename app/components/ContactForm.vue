@@ -40,13 +40,17 @@
   </form>
 </template>
 <script setup lang="ts">
-useHead({
-  script: [
-    {
-      id: 'ratufa_loader',
-      src: 'https://www.ratufa.io/c/ld.js?f=mye86exj&n=n1.ratufa.io',
-      defer: true,
-    },
-  ],
-})
+// Ratufa hooks the form on the live site only: in the editor there is nothing to send,
+// and its loader complains about the previews where the form isn't in the document
+if (!useRoute().path.startsWith('/edit')) {
+  useHead({
+    script: [
+      {
+        id: 'ratufa_loader',
+        src: 'https://www.ratufa.io/c/ld.js?f=mye86exj&n=n1.ratufa.io',
+        defer: true,
+      },
+    ],
+  })
+}
 </script>

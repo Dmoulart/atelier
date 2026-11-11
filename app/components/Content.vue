@@ -6,9 +6,6 @@
       'content-block--align-center': props.align === 'center',
       'content-block--view-fill': props.view === 'fill',
     }"
-    :style="{
-      background,
-    }"
     :view="props.view"
     v-bind="$attrs"
   >
@@ -26,7 +23,6 @@
 const props = defineProps<{
   view?: 'fill'
   align?: 'left' | 'right' | 'center'
-  background?: string
 }>()
 </script>
 <style lang="scss">

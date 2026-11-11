@@ -8,11 +8,7 @@
       &nbsp;de Saint-Gué
     </h1>
   </Hero>
-  <Content view="fill">
-    <template #media>
-      <Photo src="/gallery/mlmb.jpg" alt="Marie-Laure Barcelo Moulart" />
-    </template>
-    <h2>L'atelier..</h2>
+  <TextMedia title="L'atelier.." media="/gallery/mlmb.jpg" media-alt="Marie-Laure Barcelo Moulart">
     <p>
       L’Atelier de St-Gué est un
       <strong>lieu de création, d’échange et de partage</strong>
@@ -26,13 +22,14 @@
       <NuxtLink to="/cours-et-stages">cours et stages de mosaïque</NuxtLink>
       ponctuels ou réguliers et ouverts à toutes et tous.
     </p>
-  </Content>
+  </TextMedia>
 
-  <Content align="left" view="fill">
-    <template #media>
-      <Photo src="/gallery/CreationsEtCommandes/8.jpg" alt="Tableau" />
-    </template>
-    <h2>L'art thérapie</h2>
+  <TextMedia
+    title="L'art thérapie"
+    media="/gallery/CreationsEtCommandes/8.jpg"
+    media-alt="Tableau"
+    media-side="left"
+  >
     <p>
       Vous pouvez bénéficier à l’Atelier de
       <NuxtLink to="art-therapie">séances d’art thérapie</NuxtLink>
@@ -47,27 +44,18 @@
       </NuxtLink
       >ou de lui passer une commande personnalisée.
     </p>
-  </Content>
+  </TextMedia>
 
   <Divider />
-  <Content align="center" id="contact">
-    <h2>Contact</h2>
+  <Contact
+    title="Contact"
+    address="135 Rue de la Joie, 29760 Penmarc'h"
+    maps-url="https://goo.gl/maps/YQBsrJZ2gzBfUy3A6"
+    phone="06 26 67 58 83"
+  >
     <p>
       Vous avez une question, une suggestion ou souhaitez simplement prendre contact ? N'hésitez pas
       à m'envoyer un petit mot. 🙃
     </p>
-
-    <ContactForm />
-
-    <h3 class="mt-5">Retrouver l'Atelier</h3>
-
-    <ContactDetails>
-      <Picto class="py-2" icon="fa-solid fa-location-dot" :size="20">
-        <a href="https://goo.gl/maps/YQBsrJZ2gzBfUy3A6"> 135 Rue de la Joie, 29760 Penmarc'h </a>
-      </Picto>
-      <Picto class="py-2" icon="fa-solid fa-phone" :size="20">
-        <a href="tel:+33626675883">06 26 67 58 83</a>
-      </Picto>
-    </ContactDetails>
-  </Content>
+  </Contact>
 </template>

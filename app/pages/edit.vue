@@ -21,10 +21,10 @@ definePageMeta({
 })
 
 const fields = [
-  { component: 'Photo', prop: 'src', use: PhotoField },
-  { component: 'TextImgBlock', prop: 'src', use: PhotoField },
   { component: 'Hero', prop: 'backgroundImage', use: PhotoField },
-  { component: 'Slider', prop: 'images', use: PhotoField },
+  { component: 'TextMedia', prop: 'media', use: PhotoField },
+  { component: 'PhotoCarousel', prop: 'images', use: PhotoField },
+  { component: 'PhotoBanner', prop: 'photo', use: PhotoField },
 ]
 
 const page = String(useRoute().query.page ?? 'index')

@@ -7,17 +7,9 @@
     <h1>Créations et commandes</h1>
   </Hero>
 
-  <Content>
-    <h2>Des œuvres personnalisées</h2>
-    <p>
-      L’atelier vous propose des créations personnelles comme du mobilier, de l’art de la table, des
-      tableaux, des fresques intérieures et extérieures. Toutes vos envies ou projets personnels
-      peuvent être réalisés avec un devis sur mesure. Pour toute information supplémentaire,
-      <NuxtLink to="/#contact">contacter l’Atelier.</NuxtLink>
-    </p>
-    <Slider
-      class="my-5"
-      :images='[
+  <PhotoCarousel
+    title="Des œuvres personnalisées"
+    :images='[
         {"src": "/gallery/CreationsEtCommandes/1.jpg", "caption": "Numéro de maison 29 : Numéro de maison sur filet à coller"},
         {"src": "/gallery/CreationsEtCommandes/2.jpg", "caption": "Sculptures de la mer, réalisation en bois flotté"},
         {"src": "/gallery/CreationsEtCommandes/3.jpg", "caption": "Miroir vitrail et fond béton"},
@@ -30,7 +22,13 @@
         {"src": "/gallery/CreationsEtCommandes/10.jpg", "caption": "Console sur pieds en fonte, ancienne machine à coudre, inspiration Odorico"},
         {"src": "/gallery/CreationsEtCommandes/11.jpg", "caption": "Console sur pieds en fonte, ancienne machine à coudre, inspiration Odorico"},
         {"src": "/gallery/CreationsEtCommandes/12.jpg", "caption": "Faïence ancienne, travail pique assiette"}
-      ]'
-    />
-  </Content>
+    ]'
+  >
+    <p>
+      L’atelier vous propose des créations personnelles comme du mobilier, de l’art de la table, des
+      tableaux, des fresques intérieures et extérieures. Toutes vos envies ou projets personnels
+      peuvent être réalisés avec un devis sur mesure. Pour toute information supplémentaire,
+      <NuxtLink to="/#contact">contacter l’Atelier.</NuxtLink>
+    </p>
+  </PhotoCarousel>
 </template>
