@@ -44,3 +44,17 @@ jobs:
       - name: Run build
         run: |
           bun run generate
+
+      - name: Deploy
+        if: github.event_name == 'push'
+        env:
+          SSHPASS: ${{ secrets.SSH_PASSWORD }}
+          SERVER: ${{ vars.SERVER }}
+          TARGET: ${{ vars.SSH_USER }}@${{ vars.SERVER }}:${{ vars.DEPLOY_PATH }}
+        run: |
+          sudo apt-get install -y sshpass
+          mkdir -p ~/.ssh && ssh-keyscan "$SERVER" >> ~/.ssh/known_hosts
+          # the back is served from <webroot>/api/
+          cp -r back/. .output/public/api/
+          # excluded = never sent nor deleted: the server's api/.env stays untouched
+          sshpass -e rsync -avz --delete --exclude '.env' .output/public/ "$TARGET/"

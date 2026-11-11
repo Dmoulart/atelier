@@ -1,8 +1,7 @@
 Options -Indexes
+
 ErrorDocument 404 /404.html
 
 RewriteEngine On
-
-# force https
-RewriteCond %{HTTPS} off
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^atelier-saint-gue\.com$ [NC]
+RewriteRule ^ https://www.atelier-saint-gue.com%{REQUEST_URI} [R=301,L]

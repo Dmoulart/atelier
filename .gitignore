@@ -24,3 +24,5 @@ logs
 
 # MacOs Junk
 .DS_Store
+
+.backup

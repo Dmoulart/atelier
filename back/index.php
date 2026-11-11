@@ -1,7 +1,6 @@
 <?php
 
-use Uri\Rfc3986\Uri;
-
+// PHP >= 8.1 (array unpacking with string keys)
 set_exception_handler(function (Throwable $e) {
     error_log($e->getMessage());
     respond(500, ["success" => false, "message" => "Server error"]);
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     return;
 }
 
-$url = getRequestUrl();
+$path = getRequestPath();
 
 $routes = [
     "#^\/api\/auth/login$#" => function () {
@@ -58,7 +57,7 @@ $routes = [
 $found = false;
 
 foreach ($routes as $route => $handler) {
-    if (preg_match($route, $url->getPath())) {
+    if (preg_match($route, $path)) {
         call_user_func($handler);
         $found = true;
         break;
@@ -130,7 +129,7 @@ function handlePage(): void
         return;
     }
 
-    $page = array_last(explode('/', getRequestUrl()->getPath()));
+    $page = basename(getRequestPath());
     if (!preg_match('/^[a-z0-9-]+$/', $page)) {
         respond(422, ["success" => false, "message" => "Invalid page"]);
         return;
@@ -271,9 +270,9 @@ function getEnvOrFail(string $key): string
     return $value;
 }
 
-function getRequestUrl()
+function getRequestPath(): string
 {
-    return Uri::parse($_SERVER['REQUEST_URI']);
+    return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
 }
 
 function hashPayload(array $payload)
