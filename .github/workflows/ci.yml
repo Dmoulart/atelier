@@ -42,11 +42,5 @@ jobs:
         run: bun install
 
       - name: Run build
-        # baked into the static html: repository variables (Settings > Secrets and variables > Variables)
-        env:
-          BASE_URL: ${{ vars.BASE_URL }}
-          BACK_URL: ${{ vars.BACK_URL }}
-          CLD_CLOUDNAME: ${{ vars.CLD_CLOUDNAME }}
         run: |
-          : "${BASE_URL:?}" "${BACK_URL:?}" "${CLD_CLOUDNAME:?}"
           bun run generate

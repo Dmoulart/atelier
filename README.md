@@ -11,15 +11,9 @@ Le site web de l'Atelier de Saint-Guénolé.
 
 - [Bun](https://bun.sh) 1.4.4
 - [transient](https://github.com/Dmoulart/transient) (ref `alpha-0.1`) : la CI le clone, le build et le lie (`@transient/nuxt`)
-- Variables du repo (Settings > Secrets and variables > Actions > **Variables**) :
 
-| Variable        | Exemple                      |
-| --------------- | ---------------------------- |
-| `BASE_URL`      | `https://ton-domaine.fr`     |
-| `BACK_URL`      | `https://ton-domaine.fr/api` |
-| `CLD_CLOUDNAME` | nom du compte Cloudinary     |
-
-Elles sont écrites dans le HTML au build : sans elles, la CI échoue.
+Aucune variable à configurer : les valeurs du front (`BASE_URL`, `BACK_URL`, `CLD_CLOUDNAME`) sont publiques
+et ont leurs valeurs de prod par défaut dans `nuxt.config.ts`. En local, le `.env` à la racine les remplace.
 
 ### Hébergement (1&1)
 
@@ -38,8 +32,9 @@ Elles sont écrites dans le HTML au build : sans elles, la CI échoue.
 <racine web>/api/   ← back/index.php, back/.htaccess et le .env de prod
 ```
 
-Le `.env` de prod (modèle : `.env.example`) est déposé **une seule fois, à la main** dans `api/`.
-Il n'est pas versionné et le `.htaccess` empêche de le télécharger. Points à respecter :
+C'est le seul `.env` de prod : celui de l'API, qui contient les secrets (modèle : `.env.example`).
+Il est déposé **une seule fois, à la main** dans `api/`. Il n'est pas versionné et le `.htaccess`
+empêche de le télécharger. Points à respecter :
 
 - `ENV="PROD"`
 - `BASE_URL` sans slash final : il doit correspondre exactement à l'origine du site

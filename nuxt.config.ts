@@ -1,4 +1,6 @@
 import { env } from 'node:process'
+
+const cloudName = env.CLD_CLOUDNAME ?? 'hjtioq99'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ['@nuxt/image', './modules/gallery', '@nuxtjs/google-fonts', '@transient/nuxt'],
@@ -29,7 +31,7 @@ export default defineNuxtConfig({
   image: {
     provider: 'cloudinary',
     cloudinary: {
-      baseURL: `https://res.cloudinary.com/${env.CLD_CLOUDNAME}/image/upload`,
+      baseURL: `https://res.cloudinary.com/${cloudName}/image/upload`,
       modifiers: { fit: 'fill' }, // same crop as ipx's default "cover", cloudinary would distort otherwise
     },
     screens: {
@@ -43,8 +45,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      BASE_URL: env.BASE_URL || 'http://localhost:3000',
-      BACK_URL: env.BACK_URL,
+      BASE_URL: env.BASE_URL || 'https://www.atelier-saint-gue.com',
+      BACK_URL: env.BACK_URL || 'https://www.atelier-saint-gue.com/api',
+      CLD_CLOUDNAME: cloudName,
     },
   },
   experimental: {
