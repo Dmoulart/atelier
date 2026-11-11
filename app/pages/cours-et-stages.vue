@@ -76,7 +76,7 @@
     media-alt="Tarifs des cours de l'atelier de Saint-Guénolé"
     media-shape="original"
     link-label="Télécharger la brochure."
-    link-url="atelier-de-st-gue-tarifs-cours-et-stages.pdf"
+    link-url="/atelier-de-st-gue-tarifs-cours-et-stages.pdf"
   >
     <p>Une séance dure 2 heures ; deux séances minimum. Tarifs dégressifs à partir de la 3ème et 7ème
       séance. Modes de règlement acceptés : chèques et espèces.</p>
