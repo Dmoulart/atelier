@@ -21,7 +21,7 @@ const heroImages = (): Set<string> =>
 export default defineNuxtModule({
   setup(_options, nuxt) {
     nuxt.hooks.hook('build:before', async () => {
-      const cloud = process.env.CLD_CLOUDNAME
+      const cloud = nuxt.options.runtimeConfig.public.CLD_CLOUDNAME
       if (!cloud) {
         console.warn('Gallery module - CLD_CLOUDNAME missing, keeping existing placeholders file')
         return
