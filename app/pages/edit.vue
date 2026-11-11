@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import components from 'virtual:transient/components'
 import schemas from 'virtual:transient/schemas'
-import { ComponentEditor } from '@transient/nuxt/editor'
+import { ComponentEditor, type Rule } from '@transient/nuxt/editor'
 import { irToSfc, type TransientComponentSchema } from '@transient/nuxt/ir'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { navigateTo, useRoute, useRouter } from '#imports'
@@ -76,14 +76,14 @@ async function publish(component: TransientComponentSchema) {
     editor.value?.markAsSaved()
   }
 }
-const rules = [
+const rules: Rule[] = [
   {
     select: ':path("**/*/components/blocks/**/*")',
     can: 'add-component',
   },
   {
-    select: 'Hero',
-    cannot: ['move-component', 'delete-component'],
+    select: 'Hero:first-child',
+    cannot: ['move-element', 'delete-element'],
   },
 ]
 </script>
