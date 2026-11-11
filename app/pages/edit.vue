@@ -7,6 +7,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { navigateTo, useRoute, useRouter } from '#imports'
 import { checkLogged, publishPage } from '~/api/api'
 import PhotoField from '~/editor/PhotoField.vue'
+import TextAreaField from '~/editor/TextAreaField.vue'
 
 useSeoMeta({ robots: 'noindex, nofollow' })
 
@@ -22,6 +23,8 @@ definePageMeta({
 
 const fields = [
   { component: 'Hero', prop: 'backgroundImage', use: PhotoField },
+  { component: 'Hero', prop: 'seoDescription', use: TextAreaField },
+  { component: 'Hero', prop: 'imageDescription', use: TextAreaField },
   { component: 'TextMedia', prop: 'media', use: PhotoField },
   { component: 'PhotoCarousel', prop: 'images', use: PhotoField },
   { component: 'PhotoBanner', prop: 'photo', use: PhotoField },
