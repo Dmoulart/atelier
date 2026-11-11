@@ -7,5 +7,7 @@ Options -Indexes
 </FilesMatch>
 
 RewriteEngine On
+# required on IONOS: without it the relative target resolves to a wrong path (404)
+RewriteBase /api/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [L]
