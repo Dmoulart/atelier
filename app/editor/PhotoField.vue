@@ -17,6 +17,42 @@
       </span>
     </button>
 
+    <ol v-if="multiple && current.length" class="photo-field__captions">
+      <li
+        v-for="(photo, i) in current"
+        :key="photo.src"
+        :class="{
+          'is-dragged': dragFrom === i,
+          'is-drop-before': dragFrom !== null && dragOver === i && i < dragFrom,
+          'is-drop-after': dragFrom !== null && dragOver === i && i > dragFrom,
+        }"
+        @dragover.prevent.stop="dragOver = i"
+        @drop.prevent.stop="dragFrom !== null && move(dragFrom, i)"
+      >
+        <button
+          ref="handles"
+          type="button"
+          class="photo-field__handle"
+          draggable="true"
+          :aria-label="`Déplacer ${fileName(photo.src)} (flèches haut et bas)`"
+          @dragstart="onDragStart($event, i)"
+          @dragend="dragFrom = dragOver = null"
+          @keydown.up.prevent="move(i, i - 1)"
+          @keydown.down.prevent="move(i, i + 1)"
+        >
+          ⠿
+        </button>
+        <img :src="thumbnail(photo.src)" alt="">
+        <textarea
+          :value="photo.caption"
+          rows="2"
+          placeholder="Légende"
+          :aria-label="`Légende de ${fileName(photo.src)}`"
+          @change="setCaption(i, ($event.target as HTMLTextAreaElement).value)"
+        />
+      </li>
+    </ol>
+
     <!-- esc: closes the dialog, it must not reach the editor which would close its panel too -->
     <dialog
       ref="dialog"
@@ -284,6 +320,42 @@ function createFolder() {
   newFolder.value = ''
 }
 
+// an empty caption drops the key rather than writing caption: ""
+function setCaption(index: number, value: string) {
+  emit(
+    'update:modelValue',
+    current.value.map((photo, i) => {
+      if (i !== index) return photo
+      const { caption: _, ...rest } = photo
+      return value.trim() ? { ...rest, caption: value.trim() } : rest
+    }),
+  )
+}
+
+// reorder: drag the handle, or arrow keys on it
+const dragFrom = ref<number | null>(null)
+const dragOver = ref<number | null>(null)
+const handles = useTemplateRef<HTMLButtonElement[]>('handles')
+
+function onDragStart(event: DragEvent, index: number) {
+  dragFrom.value = index
+  if (!event.dataTransfer) return
+  event.dataTransfer.effectAllowed = 'move'
+  event.dataTransfer.setData('text/plain', '') // firefox won't drag without data
+  const row = (event.target as HTMLElement).closest('li')
+  if (row) event.dataTransfer.setDragImage(row, 0, 0)
+}
+
+function move(from: number, to: number) {
+  if (to < 0 || to >= current.value.length || from === to) return
+  const list = [...current.value]
+  list.splice(to, 0, ...list.splice(from, 1))
+  emit('update:modelValue', list)
+  dragFrom.value = dragOver.value = null
+  // the moved row is re-rendered: keep the focus on its handle
+  nextTick(() => handles.value?.[to]?.focus())
+}
+
 function confirmPicked() {
   emit('update:modelValue', picked.value)
   dialog.value?.close()
@@ -453,6 +525,89 @@ label:has(input:focus-visible) {
     font-size: 0.8125rem;
     color: var(--muted);
     background: var(--surface);
+  }
+
+  &__captions {
+    display: grid;
+    gap: 0.375rem;
+    margin-top: 0.5rem;
+
+    li {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+
+      &.is-dragged {
+        opacity: 0.4;
+      }
+
+      // where the dragged photo will land, in the middle of the gap
+      &.is-drop-before::before,
+      &.is-drop-after::after {
+        position: absolute;
+        right: 0;
+        left: 0;
+        height: 2px;
+        content: '';
+        background: var(--accent);
+        border-radius: 1px;
+      }
+
+      &.is-drop-before::before {
+        top: -0.25rem;
+      }
+
+      &.is-drop-after::after {
+        bottom: -0.25rem;
+      }
+    }
+
+    img {
+      flex: none;
+      width: 2.5rem;
+      height: 2.5rem;
+      object-fit: cover;
+      border-radius: 0.25rem;
+    }
+
+    textarea {
+      flex: 1;
+      min-width: 0;
+      padding: 0.375rem 0.5rem;
+      font: inherit;
+      font-size: 0.8125rem;
+      resize: vertical;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 0.5rem;
+
+      &:focus {
+        border-color: var(--accent);
+        outline: none;
+      }
+    }
+  }
+
+  &__handle {
+    flex: none;
+    align-self: stretch;
+    padding: 0 0.125rem;
+    color: var(--muted);
+    cursor: grab;
+    background: none;
+    border: 0;
+    border-radius: 0.25rem;
+
+    &:hover {
+      color: var(--ink);
+      background: var(--surface);
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
   }
 
   &__label {
