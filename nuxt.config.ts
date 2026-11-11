@@ -1,6 +1,6 @@
 import { env } from 'node:process'
 
-const cloudName = env.CLD_CLOUDNAME ?? 'hjtioq99'
+const cloudName = env.CLD_CLOUDNAME || 'hjtioq99'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ['@nuxt/image', './modules/gallery', '@nuxtjs/google-fonts', '@transient/nuxt'],
