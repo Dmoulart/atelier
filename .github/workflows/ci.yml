@@ -14,10 +14,36 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Checkout transient
+        uses: actions/checkout@v4
+        with:
+          repository: Dmoulart/transient
+          ref: alpha-0.1
+          path: transient
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: latest
+          bun-version: 1.4.4
+
+      - name: Cache bun
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock', 'transient/bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
+      - name: Cache transient build
+        id: transient-dist
+        uses: actions/cache@v4
+        with:
+          path: transient/packages/*/dist
+          key: transient-dist-${{ steps.transient.outputs.commit }}
+
+      - name: Build & link transient
+        run: |
+          cd transient && bun install && bun run build
+          cd packages/nuxt && bun link
 
       - name: Install dependencies
         run: bun install
