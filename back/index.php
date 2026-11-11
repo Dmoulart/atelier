@@ -139,8 +139,8 @@ function handlePage(): void
         "Accept: application/vnd.github+json",
         "User-Agent: atelier-editor",
     ];
-
-    $get = curl_init("$url?ref=nuxt4");
+    $branch = 'main';
+    $get = curl_init("$url?ref=$branch");
     curl_setopt_array($get, [CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $headers]);
     $sha = json_decode(curl_exec($get), true)['sha'] ?? null;
 
@@ -152,7 +152,7 @@ function handlePage(): void
         CURLOPT_HTTPHEADER     => $headers,
         CURLOPT_POSTFIELDS     => json_encode(array_filter([
             "message" => "[editor] page $page edition",
-            "branch"  => "nuxt4",
+            "branch"  => "$branch",
             "content" => base64_encode($file),
             "sha"     => $sha,
         ])),
