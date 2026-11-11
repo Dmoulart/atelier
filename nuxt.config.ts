@@ -10,9 +10,11 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@transient/nuxt',
     '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
   ],
   transient: { route: '/edit' },
-  site: { url: baseUrl },
+  // trailing slash: same urls as the canonicals (the host serves /page/)
+  site: { url: baseUrl, trailingSlash: true },
   sitemap: { exclude: ['/edit', '/admin'] },
   components: [{ path: '~/components', pathPrefix: false }],
   compatibilityDate: '2025-06-08',
