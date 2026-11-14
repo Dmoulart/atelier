@@ -6,6 +6,8 @@ import { irToSfc, type TransientComponentSchema } from '@transient/nuxt/ir'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { navigateTo, useRoute, useRouter } from '#imports'
 import { checkLogged, publishPage } from '~/api/api'
+import ColorField from '~/editor/ColorField.vue'
+import DateField from '~/editor/DateField.vue'
 import PageExplorer from '~/editor/PageExplorer.vue'
 import PhotoField from '~/editor/PhotoField.vue'
 import TextAreaField from '~/editor/TextAreaField.vue'
@@ -26,13 +28,32 @@ const fields = [
   { component: 'Hero', prop: 'backgroundImage', use: PhotoField },
   { component: 'Hero', prop: 'seoDescription', use: TextAreaField },
   { component: 'Hero', prop: 'imageDescription', use: TextAreaField },
+  { component: 'NewsHero', prop: 'date', use: DateField },
+  { component: 'NewsHero', prop: 'color', use: ColorField },
+  { component: 'NewsHero', prop: 'updated', use: DateField },
+  { component: 'NewsHero', prop: 'image', use: PhotoField },
+  { component: 'NewsHero', prop: 'seoDescription', use: TextAreaField },
+  { component: 'NewsHero', prop: 'imageDescription', use: TextAreaField },
+  { component: 'TextBlock', prop: 'highlightColor', use: ColorField },
   { component: 'TextMedia', prop: 'media', use: PhotoField },
   { component: 'PhotoCarousel', prop: 'images', use: PhotoField },
   { component: 'PhotoBanner', prop: 'photo', use: PhotoField },
+  { component: 'Image', prop: 'image', use: PhotoField },
 ]
 
 const page = String(useRoute().query.page ?? 'index')
-const component = ref(structuredClone(schemas[page]))
+const content = useRoute().query.content?.toString()
+
+const component = ref(structuredClone(schemas[content ?? page]))
+
+// a new article from the placeholder is published today, not on the placeholder's date
+const newsHero = content && component.value?.template.elements.find((el) => el.tag === 'NewsHero')
+if (newsHero) {
+  newsHero.attributes.date = {
+    type: 'literal',
+    expression: new Date().toISOString().slice(0, 10),
+  }
+}
 
 // internal links open the linked page in the editor instead of the site.
 // While editing, a click edits the link: cmd/ctrl + click follows it.
@@ -89,13 +110,29 @@ const rules: Rule[] = [
     select: 'Hero:first-child',
     cannot: ['move-element', 'delete-element'],
   },
+  {
+    select: 'NewsHero:first-child',
+    cannot: ['move-element', 'delete-element'],
+  },
 ]
 const pageExplorerIsOpen = ref(false)
 
+function editPage(name: string) {
+  const dirty = JSON.stringify(component.value) !== JSON.stringify(schemas[page])
+  if (dirty && !confirm('Les modifications non publiées seront perdues. Continuer ?')) return
+  navigateTo({ path: '/edit', query: { page: name } })
+}
 </script>
 
 <template>
-  <PageExplorer v-if="pageExplorerIsOpen" @close="pageExplorerIsOpen =false"/>
+  <PageExplorer
+    v-if="pageExplorerIsOpen"
+    @close="pageExplorerIsOpen = false"
+    @edit="editPage"
+    @add="(path) => {
+      navigateTo({ path: '/edit', query: { page: path, content: path.includes('news') ? 'NewsPlaceholder' :'PagePlaceholder'} })
+    }"
+  />
   <button type="button" class="button editor__pages" @click="pageExplorerIsOpen = true">
     Voir toutes les pages
   </button>

@@ -9,6 +9,9 @@
       height="312"
       sizes="sm:100vw md:50vw lg:50vw"
     />
+    <figcaption class="is-italic has-text-centered" :style="{margin: '4px'}" v-if="caption">
+      {{ caption }}
+    </figcaption>
   </figure>
   <nuxt-img
     v-else
@@ -26,5 +29,6 @@ const { shape = 'portrait' } = defineProps<{
   src: string
   alt: string
   shape?: 'portrait' | 'landscape' | 'original'
+  caption?: string
 }>()
 </script>

@@ -35,7 +35,7 @@
       qui stimuleront votre créativité et vos sens artistiques.</p>
   </TextMedia>
 
-  <TextBlock highlight>
+  <TextBlock highlight-color="#f0f8ff">
     <p>L’atelier vous propose des séances de 2 heures qui se déroulent soit le
       <strong>matin de 10h à 12h</strong>
       soit

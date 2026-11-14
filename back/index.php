@@ -130,7 +130,7 @@ function handlePage(): void
     }
 
     $page = basename(getRequestPath());
-    if (!preg_match('/^[a-z0-9-]+$/', $page)) {
+    if (!preg_match('/^[a-z0-9-\/]+$/', $page)) {
         respond(422, ["success" => false, "message" => "Invalid page"]);
         return;
     }
@@ -141,7 +141,7 @@ function handlePage(): void
         "Accept: application/vnd.github+json",
         "User-Agent: atelier-editor",
     ];
-    $branch = 'main';
+    $branch = 'next';
     $get = curl_init("$url?ref=$branch");
     curl_setopt_array($get, [CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $headers]);
     $sha = json_decode(curl_exec($get), true)['sha'] ?? null;

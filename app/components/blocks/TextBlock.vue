@@ -1,8 +1,12 @@
 <template>
   <Content
     class="text-block"
-    :class="{ 'text-block--highlight': highlight }"
-    :align="highlight ? 'center' : undefined"
+    :class="{
+      'text-block--highlight': background,
+      'text-block--dark': background && !isLightColor(background),
+    }"
+    :style="{ background }"
+    :align="background ? 'center' : undefined"
   >
     <template v-if="title">
       <h3 v-if="titleSize === 'small'" class="has-text-centered">{{ title }}</h3>
@@ -15,18 +19,35 @@
   </Content>
 </template>
 <script setup lang="ts">
-const { titleSize = 'large' } = defineProps<{
+const { titleSize = 'large', highlightColor } = defineProps<{
   title?: string
   titleSize?: 'large' | 'small'
-  highlight?: boolean
+  highlightColor?: string
   linkLabel?: string
   linkUrl?: string
 }>()
+
+const background = computed(() => highlightColor || undefined)
 </script>
 <style lang="scss">
 .text-block--highlight {
-  background: aliceblue;
   margin-block: 3rem;
+}
+
+// a dark highlight color: light text, bulma colors the titles and strong on their own
+.text-block--dark {
+  &,
+  h2,
+  h3,
+  strong,
+  a {
+    color: #fff;
+  }
+
+  // white like the text: the underline tells them apart
+  a {
+    text-decoration: underline;
+  }
 }
 
 // consecutive text blocks read as one group
