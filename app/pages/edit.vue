@@ -6,6 +6,7 @@ import { irToSfc, type TransientComponentSchema } from '@transient/nuxt/ir'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { navigateTo, useRoute, useRouter } from '#imports'
 import { checkLogged, publishPage } from '~/api/api'
+import PageExplorer from '~/editor/PageExplorer.vue'
 import PhotoField from '~/editor/PhotoField.vue'
 import TextAreaField from '~/editor/TextAreaField.vue'
 
@@ -89,9 +90,15 @@ const rules: Rule[] = [
     cannot: ['move-element', 'delete-element'],
   },
 ]
+const pageExplorerIsOpen = ref(false)
+
 </script>
 
 <template>
+  <PageExplorer v-if="pageExplorerIsOpen" @close="pageExplorerIsOpen =false"/>
+  <button type="button" class="button editor__pages" @click="pageExplorerIsOpen = true">
+    Voir toutes les pages
+  </button>
   <p v-if="!component">Unknown page "{{ page }}"</p>
   <ComponentEditor
     v-else
@@ -105,3 +112,15 @@ const rules: Rule[] = [
   />
   <Toast v-model="toast" />
 </template>
+
+<style lang="scss">
+.editor{
+  &__pages{
+    position: fixed;
+    top:0;
+    left: 0;
+    margin: 10px;
+    z-index: 1000;
+  }
+}
+</style>
