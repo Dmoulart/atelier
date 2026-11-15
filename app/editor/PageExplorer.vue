@@ -25,29 +25,53 @@
       <button type="button" aria-label="Fermer" @click="dialog?.close()">×</button>
     </header>
 
-    <form v-if="adding !== null" class="page-explorer__new" @submit.prevent="create">
-      <label for="page-explorer-name">Nom de la page</label>
-      <input
-        id="page-explorer-name"
-        v-model="name"
-        type="text"
-        placeholder="Ex : Stage d'été 2027"
-        autocomplete="off"
-        autofocus
-        :aria-invalid="!!error"
-        aria-describedby="page-explorer-url page-explorer-error"
-      >
+    <form v-if="adding !== null" class="page-explorer__form" @submit.prevent="create">
+      <!-- the full width scroller keeps the scrollbar on the dialog's edge, __new centers the fields -->
+      <div class="page-explorer__content page-explorer__content--form">
+        <div class="page-explorer__new">
+          <label for="page-explorer-name">Nom de la page</label>
+          <input
+            id="page-explorer-name"
+            v-model="name"
+            type="text"
+            placeholder="Ex : Stage d'été 2027"
+            autocomplete="off"
+            autofocus
+            :aria-invalid="!!error"
+            aria-describedby="page-explorer-url page-explorer-error"
+          >
 
-      <p id="page-explorer-url" class="page-explorer__url">
-        <span>Adresse de la page</span>
-        <output>
-          {{ host }}/{{ adding ? `${adding}/` : '' }}<strong>{{ slug || '…' }}</strong>/
-        </output>
-      </p>
+          <p id="page-explorer-url" class="page-explorer__url">
+            <span>Adresse de la page</span>
+            <output>
+              {{ host }}/{{ adding ? `${adding}/` : '' }}<strong>{{ slug || '…' }}</strong>/
+            </output>
+          </p>
 
-      <p v-if="error" id="page-explorer-error" class="page-explorer__error" role="alert">
-        {{ error }}
-      </p>
+          <p v-if="error" id="page-explorer-error" class="page-explorer__error" role="alert">
+            {{ error }}
+          </p>
+
+          <fieldset class="page-explorer__prefill">
+            <legend><span>(facultatif, modifiable ensuite)</span></legend>
+            <div class="page-explorer__photo">
+              <label :for="`${id}-image`">Photo principale</label>
+              <PhotoField
+                :id="`${id}-image`"
+                :prop="hero.props[heroImage]!"
+                mode="fill"
+                :model-value="prefilled[heroImage]"
+                @update:model-value="prefilled[heroImage] = $event"
+              />
+            </div>
+            <SeoField
+              :prop="hero.props.seo!"
+              :model-value="prefilled.seo as Record<string, string | undefined>"
+              @update:model-value="prefilled.seo = $event"
+            />
+          </fieldset>
+        </div>
+      </div>
 
       <div class="page-explorer__actions">
         <button type="button" @click="adding = null">Annuler</button>
@@ -100,10 +124,17 @@ import components from 'virtual:transient/components'
 import schemas from 'virtual:transient/schemas'
 import { ComponentItem } from '@transient/nuxt/editor'
 import type { TransientComponentSchema } from '@transient/nuxt/ir'
+import PhotoField from './PhotoField.vue'
+import SeoField from './SeoField.vue'
 
 // edit: the page's schema name
-// add: the new page's file path under app/pages, without .vue ("news/mon-article"), and its name
-const emit = defineEmits<{ close: []; edit: [name: string]; add: [path: string, title: string] }>()
+// add: the new page's file path under app/pages, without .vue ("news/mon-article"), its name,
+// and the attributes picked for its hero, by prop name: { title?, image | backgroundImage, seo }
+const emit = defineEmits<{
+  close: []
+  edit: [name: string]
+  add: [path: string, title: string, prefilled: Record<string, unknown> | null]
+}>()
 
 type Page = { name: string; schema: TransientComponentSchema; slug: string }
 
@@ -145,6 +176,21 @@ const addLabel = (path: string) => (path ? `Nouvelle page ${groupLabel(path)}` :
 // new page: the group it goes in, null while browsing the pages
 const adding = ref<string | null>(null)
 const name = ref('')
+const prefilled = ref<Record<string, unknown>>({})
+const id = useId()
+
+// the hero the new page starts with, same choice as edit.vue's placeholders
+const hero = computed(() => schemas[adding.value === 'news' ? 'NewsHero' : 'Hero']!)
+const heroImage = computed(() => (adding.value === 'news' ? 'image' : 'backgroundImage'))
+
+// emptied fields are left out: "" would overwrite the placeholder's text with nothing
+function filled(value: unknown): unknown {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const entries = Object.entries(value).filter(([, v]) => filled(v) !== undefined)
+    return entries.length ? Object.fromEntries(entries) : undefined
+  }
+  return value === '' || value == null ? undefined : value
+}
 
 // esc on the new page form goes back to the pages, it only closes the dialog from the pages
 function onCancel(event: Event) {
@@ -155,6 +201,7 @@ function onCancel(event: Event) {
 
 function startAdding(path: string) {
   name.value = ''
+  prefilled.value = {}
   adding.value = path
 }
 
@@ -193,7 +240,16 @@ const error = computed(() => {
 
 function create() {
   if (error.value || !slug.value || adding.value === null) return
-  emit('add', adding.value ? `${adding.value}/${slug.value}` : slug.value, name.value.trim())
+  emit(
+    'add',
+    adding.value ? `${adding.value}/${slug.value}` : slug.value,
+    name.value.trim(),
+    (filled({
+      ...prefilled.value,
+      // the page's name is the hero's title, when it has one (NewsHero; Hero's h1 is in its slot)
+      ...('title' in hero.value.props && { title: name.value.trim() }),
+    }) as Record<string, unknown> | undefined) ?? null,
+  )
 }
 </script>
 
@@ -281,6 +337,19 @@ html:has(.page-explorer[open]) {
     padding: 1.25rem 1.5rem 1.5rem;
     overflow-y: auto;
     background: var(--surface);
+
+    &--form {
+      padding: 2rem 1.5rem;
+      background: #fff;
+    }
+  }
+
+  // header, scrolling fields, actions: the actions stay in view
+  &__form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
   }
 
   &__group + &__group {
@@ -406,12 +475,10 @@ html:has(.page-explorer[open]) {
 
   &__new {
     display: flex;
-    flex: 1;
     flex-direction: column;
     gap: 0.5rem;
-    width: min(32rem, 100%);
+    width: min(52rem, 100%);
     margin: 0 auto;
-    padding: 2.5rem 1.5rem;
 
     label {
       font-size: 0.875rem;
@@ -439,6 +506,41 @@ html:has(.page-explorer[open]) {
         border-color: var(--danger);
         box-shadow: 0 0 0 3px #fdecea;
       }
+    }
+  }
+
+  // photo on the left at a fixed width and as tall as the seo texts, which get the rest of the width
+  &__prefill {
+    display: grid;
+    grid-template-columns: 16rem 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0 0;
+    padding: 1rem 1.25rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+
+    legend {
+      padding: 0 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+
+      span {
+        font-weight: 400;
+        color: var(--muted);
+      }
+    }
+
+  }
+
+  // label, then the PhotoField in fill mode on the remaining height
+  &__photo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .photo-field {
+      flex: 1;
+      min-height: 0;
     }
   }
 
@@ -483,7 +585,8 @@ html:has(.page-explorer[open]) {
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid var(--line);
 
     button {
       padding: 0.625rem 1.25rem;
@@ -524,6 +627,10 @@ html:has(.page-explorer[open]) {
   @media (max-width: 45rem) {
     &__content {
       padding: 1rem;
+    }
+
+    &__prefill {
+      grid-template-columns: 1fr;
     }
 
     &__grid {

@@ -1,6 +1,6 @@
 <!-- Custom editor field: picks one photo (string prop) or several (list prop) in the Cloudinary gallery -->
 <template>
-  <div class="photo-field">
+  <div class="photo-field" :class="{ 'photo-field--fill': mode === 'fill' }">
     <button :id="id" type="button" class="photo-field__trigger" @click="open">
       <span
         v-if="current.length"
@@ -204,7 +204,13 @@ type Upload = {
   message: string
 }
 
-const props = defineProps<{ id?: string; prop: TransientProp; modelValue?: unknown }>()
+const props = defineProps<{
+  id?: string
+  prop: TransientProp
+  modelValue?: unknown
+  // fit (default): a 7rem preview. fill: the preview takes its container's whole height
+  mode?: 'fit' | 'fill'
+}>()
 const emit = defineEmits<{ 'update:modelValue': [value: string | Photo[]] }>()
 
 const MAX_SIZE = 10 * 1024 * 1024 // cloudinary free plan
@@ -478,6 +484,7 @@ label:has(input:focus-visible) {
   &__trigger {
     display: block;
     width: 100%;
+    height: 100%;
     padding: 0;
     overflow: hidden;
     color: var(--ink);
@@ -505,6 +512,27 @@ label:has(input:focus-visible) {
       height: 7rem;
       object-fit: cover;
     }
+  }
+
+  &--fill {
+    height: 100%;
+  }
+
+  &--fill &__trigger {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // the preview grows, the "Changer la photo" label keeps its height
+  &--fill &__thumbs,
+  &--fill &__empty {
+    flex: 1;
+    height: auto;
+    min-height: 7rem;
+  }
+
+  &--fill &__thumbs img {
+    height: 100%;
   }
 
   &__more {

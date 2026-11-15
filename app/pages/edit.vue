@@ -2,7 +2,7 @@
 import components from 'virtual:transient/components'
 import schemas from 'virtual:transient/schemas'
 import { ComponentEditor, type Rule } from '@transient/nuxt/editor'
-import { irToSfc, type TransientComponentSchema } from '@transient/nuxt/ir'
+import { type BindingValue, irToSfc, type TransientComponentSchema } from '@transient/nuxt/ir'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { navigateTo, useRoute, useRouter } from '#imports'
 import { checkLogged, publishPage } from '~/api/api'
@@ -40,23 +40,26 @@ const fields = [
 ]
 
 const title = useRoute().query.title
+const prefilled = useRoute().query.prefilled
+  ? JSON.parse(useRoute().query.prefilled as string)
+  : null
 const page = String(useRoute().query.page ?? 'index')
 const content = useRoute().query.content?.toString()
 
 const component = ref(structuredClone(schemas[content ?? page]))
 
-// a new article from the placeholder is published today, not on the placeholder's date
-const newsHero = content && component.value?.template.elements.find((el) => el.tag === 'NewsHero')
-if (newsHero) {
-  if (title) {
-    newsHero.attributes.title = {
-      type: 'literal',
-      expression: title,
+if (prefilled) {
+  const hero =
+    content &&
+    component.value?.template.elements.find((el) => el.tag === 'NewsHero' || el.tag === 'Hero')
+
+  if (hero) {
+    for (const [key, value] of Object.entries(prefilled)) {
+      hero.attributes[key] = {
+        type: 'literal',
+        expression: value as BindingValue,
+      }
     }
-  }
-  newsHero.attributes.date = {
-    type: 'literal',
-    expression: new Date().toISOString().slice(0, 10),
   }
 }
 
@@ -134,8 +137,8 @@ function editPage(slug: string) {
     v-if="pageExplorerIsOpen"
     @close="pageExplorerIsOpen = false"
     @edit="editPage"
-    @add="(slug, title) => {
-      navigateTo({ path: '/edit', query: { page: slug, title, content: slug.includes('news') ? 'NewsPlaceholder' :'PagePlaceholder'} })
+    @add="(slug, title, prefilled) => {
+      navigateTo({ path: '/edit', query: { page: slug, title, content: slug.includes('news') ? 'NewsPlaceholder' :'PagePlaceholder', prefilled: prefilled ? JSON.stringify(prefilled) : null} })
     }"
   />
   <button type="button" class="button editor__pages" @click="pageExplorerIsOpen = true">
