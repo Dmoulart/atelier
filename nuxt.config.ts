@@ -16,10 +16,12 @@ export default defineNuxtConfig({
   transient: { route: '/edit' },
   // trailing slash: same urls as the canonicals (the host serves /page/)
   site: { url: baseUrl, trailingSlash: true },
-  sitemap: { exclude: ['/edit', '/admin'] },
+  // discoverImages: the trailing slash ends up on the images' urls too (…/gallery/mlmb/), they'd 404.
+  // Google finds the images on the pages anyway
+  sitemap: { exclude: ['/edit', '/admin'], discoverImages: false },
   components: [{ path: '~/components', pathPrefix: false }],
   compatibilityDate: '2025-06-08',
-  css: ['~/style/global.scss'],
+  css: ['~/style/global.scss', '~/style/icons.scss'],
   devtools: { enabled: true },
   vite: {
     css: {

@@ -1,9 +1,5 @@
 <template>
-  <Section
-    v-if="latest.length"
-    class="news"
-    :style="{ '--surface': color }"
-  >
+  <Section v-if="latest.length" class="news" :style="{ '--surface': color }">
     <template v-if="title">
       <h3 v-if="titleSize === 'small'" class="has-text-centered title is-3">{{ title }}</h3>
       <h2 v-else class="has-text-centered title is-2">{{ title }}</h2>
@@ -15,9 +11,8 @@
           class="news__card"
           :style="{ '--news-color': item.color || '#dcc3ba' }"
         >
-          <!-- the photo on an offset tile of the article's band color -->
           <span class="news__frame">
-            <!-- decorative: the title right below says what the link is -->
+
             <NuxtImg
               v-if="item.image"
               class="news__image"

@@ -4,20 +4,11 @@
   </NuxtLayout>
 </template>
 <script setup lang="ts">
+// icons: the few Font Awesome ones the site uses are in style/icons.scss
 useHead({
   htmlAttrs: {
     lang: 'fr',
   },
-  link: [
-    {
-      rel: 'stylesheet',
-      href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
-      integrity:
-        'sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==',
-      crossorigin: 'anonymous',
-      referrerpolicy: 'no-referrer',
-    },
-  ],
 })
 // import FontFaceObserver from "fontfaceobserver";
 // @todo : work on fallback font
