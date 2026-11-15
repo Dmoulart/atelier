@@ -1,5 +1,6 @@
 <template>
-  <NewsHero :seo="{description:'Un court résumé de l\'article, affiché sous le titre, dans les résultats de recherche et dans la liste des actualités.',imageDescription:'Une oeuvre de l\'atelier de Saint-Guénolé'}"
+  <NewsHero
+    :seo="{description:'Un court résumé de l\'article, affiché sous le titre, dans les résultats de recherche et dans la liste des actualités.',imageDescription:'Une oeuvre de l\'atelier de Saint-Guénolé'}"
     title="Titre de l'article"
     date="2026-11-14"
     image="/gallery/ArtTherap1.jpg"
@@ -29,6 +30,10 @@
     <p>
       Tu peux faire remonter ou redescendre la section sélectionnée à l'aide des flêches à gauche.
     </p>
-    <p>Et enfin, quand tu as finis <strong>cliquer sur Publier</strong> ! Les modifications seront effectives dans la minute.</p>
+    <p>
+      Et enfin, quand tu as finis <strong>cliquer sur Publier</strong> ! Les modifications seront
+      effectives dans la minute.
+    </p>
   </TextBlock>
+  <News title="Les autres actualités de l'atelier"/>
 </template>

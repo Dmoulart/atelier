@@ -53,14 +53,7 @@ const {
 
 const siteName = "L'Atelier de St-Guénolé"
 
-// "2026-11-14" -> "14 novembre 2026". A date only string is UTC midnight: format it in UTC too
-const format = (value?: string) => {
-  const parsed = value ? new Date(value) : null
-  return parsed && !Number.isNaN(parsed.getTime())
-    ? new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeZone: 'UTC' }).format(parsed)
-    : ''
-}
-const published = computed(() => format(date))
+const published = computed(() => formatDate(date))
 
 const { BASE_URL } = useRuntimeConfig().public
 const route = useRoute()
