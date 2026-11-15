@@ -18,3 +18,8 @@ $divider-color: #d4d3d3;
   }
 }
 </style>
+<transient>
+  {
+    "thumbnail": "/blocks/Divider.svg"
+  }
+</transient>

@@ -27,3 +27,8 @@ const { phone, showForm = true } = defineProps<{
 
 const phoneHref = computed(() => `tel:${(phone ?? '').replace(/\s/g, '').replace(/^0/, '+33')}`)
 </script>
+<transient>
+  {
+    "thumbnail": "/blocks/Contact.svg"
+  }
+</transient>

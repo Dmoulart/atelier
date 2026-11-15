@@ -206,3 +206,8 @@ useHead({ htmlAttrs: { style: () => `--hero-surface: ${color}` } })
   }
 }
 </style>
+<transient>
+  {
+    "thumbnail": "/blocks/NewsHero.svg"
+  }
+</transient>

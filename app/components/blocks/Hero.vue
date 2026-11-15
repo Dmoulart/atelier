@@ -63,3 +63,8 @@ useSeoMeta({
   }
 }
 </style>
+<transient>
+  {
+    "thumbnail": "/blocks/Hero.svg"
+  }
+</transient>

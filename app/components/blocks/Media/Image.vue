@@ -10,3 +10,8 @@ defineProps<{
   caption?: string
 }>()
 </script>
+<transient>
+  {
+    "thumbnail": "/blocks/Image.svg"
+  }
+</transient>

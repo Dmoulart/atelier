@@ -57,3 +57,8 @@ section.text-block:not(.text-block--highlight):has(+ section.text-block:not(.tex
   padding-bottom: 0;
 }
 </style>
+<transient>
+  {
+    "thumbnail": "/blocks/Text.svg"
+  }
+</transient>

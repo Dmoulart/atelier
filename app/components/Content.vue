@@ -13,11 +13,7 @@
       <div v-if="$slots.media" class="content-block__media">
         <slot name="media" />
       </div>
-      <div
-        v-if="$slots.default"
-        class="content-block__text"
-        :class="{'content-block__text--spread': !$slots.media}"
-      >
+      <div class="content-block__text" :class="{'content-block__text--spread': !$slots.media}">
         <slot />
       </div>
     </div>

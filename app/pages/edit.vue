@@ -126,15 +126,7 @@ const rules: Rule[] = [
   },
   {
     select: 'Hero, NewsHero',
-    cannot: 'add-component',
-  },
-  {
-    select: 'Hero:first-child',
-    cannot: ['move-element', 'delete-element'],
-  },
-  {
-    select: 'NewsHero:first-child',
-    cannot: ['move-element', 'delete-element'],
+    cannot: ['add-component', 'delete-element'],
   },
 ]
 const pageExplorerIsOpen = ref(false)

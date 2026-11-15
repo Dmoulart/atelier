@@ -12,3 +12,8 @@ defineProps<{
   images: Array<{ src: string; caption?: string }>
 }>()
 </script>
+<transient>
+  {
+    "thumbnail": "/blocks/Gallery.svg"
+  }
+</transient>

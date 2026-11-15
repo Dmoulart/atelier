@@ -211,3 +211,8 @@ const latest = computed(() =>
   }
 }
 </style>
+<transient>
+  {
+    "thumbnail": "/blocks/News.svg"
+  }
+</transient>

@@ -14,3 +14,8 @@ section.section:has(+ .photo-banner) {
   padding-bottom: 0;
 }
 </style>
+<transient>
+  {
+    "thumbnail": "/blocks/Banner.svg"
+  }
+</transient>

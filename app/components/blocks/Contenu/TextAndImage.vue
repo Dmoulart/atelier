@@ -22,3 +22,8 @@ const { mediaSide = 'right', mediaShape = 'portrait' } = defineProps<{
   linkUrl?: string
 }>()
 </script>
+<transient>
+  {
+    "thumbnail": "/blocks/TextAndImage.svg"
+  }
+</transient>

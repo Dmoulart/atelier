@@ -3,3 +3,8 @@
     <blockquote><slot /></blockquote>
   </Content>
 </template>
+<transient>
+  {
+    "thumbnail": "/blocks/Quote.svg"
+  }
+</transient>
