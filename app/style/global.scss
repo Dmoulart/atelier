@@ -14,7 +14,8 @@
 @import "~/style/vars";
 
 html {
-    scroll-behavior: smooth;
+    // no scroll-behavior: smooth here, it would also animate the return to the top on every page
+    // change. The anchors are smooth through router.options.scrollBehaviorType (nuxt.config)
     overflow-x: hidden;
 
     // Use special settings when font is not loaded to avoid CLS

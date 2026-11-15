@@ -32,11 +32,11 @@ const fields = [
   { component: 'NewsHero', prop: 'updated', use: DateField },
   { component: 'NewsHero', prop: 'image', use: PhotoField },
   { component: 'NewsHero', prop: 'seo', use: SeoField },
-  { component: 'TextBlock', prop: 'highlightColor', use: ColorField },
+  { component: 'Text', prop: 'highlightColor', use: ColorField },
   { component: 'News', prop: 'color', use: ColorField },
-  { component: 'TextMedia', prop: 'media', use: PhotoField },
-  { component: 'PhotoCarousel', prop: 'images', use: PhotoField },
-  { component: 'PhotoBanner', prop: 'photo', use: PhotoField },
+  { component: 'TextAndImage', prop: 'media', use: PhotoField },
+  { component: 'Gallery', prop: 'images', use: PhotoField },
+  { component: 'Banner', prop: 'photo', use: PhotoField },
   { component: 'Image', prop: 'image', use: PhotoField },
 ]
 
@@ -123,6 +123,10 @@ const rules: Rule[] = [
   {
     select: ':path("**/*/components/blocks/**/*")',
     can: 'add-component',
+  },
+  {
+    select: 'Hero, NewsHero',
+    cannot: 'add-component',
   },
   {
     select: 'Hero:first-child',

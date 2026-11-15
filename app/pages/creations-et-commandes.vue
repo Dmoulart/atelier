@@ -4,7 +4,7 @@
     <h1>Créations et commandes</h1>
   </Hero>
 
-  <PhotoCarousel
+  <Gallery
     title="Des œuvres personnalisées"
     :images='[
         {"src": "/gallery/CreationsEtCommandes/1.jpg", "caption": "Numéro de maison 29 : Numéro de maison sur filet à coller"},
@@ -25,5 +25,5 @@
       tableaux, des fresques intérieures et extérieures. Toutes vos envies ou projets personnels
       peuvent être réalisés avec un devis sur mesure. Pour toute information supplémentaire,
       <NuxtLink to="/#contact">contacter l’Atelier.</NuxtLink></p>
-  </PhotoCarousel>
+  </Gallery>
 </template>

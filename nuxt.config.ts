@@ -69,6 +69,8 @@ export default defineNuxtConfig({
   experimental: {
     payloadExtraction: false,
   },
+  // smooth scroll for the anchors only: a page change goes back to the top at once
+  router: { options: { scrollBehaviorType: 'smooth' } },
   routeRules: {
     '/**': { prerender: true },
   },
