@@ -1,11 +1,8 @@
 <template>
   <Content
     class="text-block"
-    :class="{
-      'text-block--highlight': background,
-      'text-block--dark': background && !isLightColor(background),
-    }"
-    :style="{ background }"
+    :class="{ 'text-block--highlight': background }"
+    :style="background && { '--surface': background }"
     :align="background ? 'center' : undefined"
   >
     <template v-if="title">
@@ -30,22 +27,23 @@ const { titleSize = 'large', highlightColor } = defineProps<{
 const background = computed(() => highlightColor || undefined)
 </script>
 <style lang="scss">
+// ink or white text, whichever reads on the color. Bulma colors the titles and strong on their own
 .text-block--highlight {
-  margin-block: 3rem;
-}
+  @include on-surface(var(--surface));
 
-// a dark highlight color: light text, bulma colors the titles and strong on their own
-.text-block--dark {
+  margin-block: 3rem;
+  background: var(--surface);
+
   &,
   h2,
   h3,
-  strong,
-  a {
-    color: #fff;
+  strong {
+    color: var(--on-surface);
   }
 
-  // white like the text: the underline tells them apart
+  // the accent shade that reads on the color, underlined: a light accent is close to white
   a {
+    color: var(--on-surface-accent);
     text-decoration: underline;
   }
 }

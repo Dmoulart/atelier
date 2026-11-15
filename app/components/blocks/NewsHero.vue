@@ -1,8 +1,8 @@
 <template>
   <Section
     class="news-hero"
-    :class="{ 'news-hero--with-image': image, 'news-hero--light': isLightColor(color) }"
-    :style="{ background: color }"
+    :class="{ 'news-hero--with-image': image }"
+    :style="{ '--surface': color }"
   >
     <div class="news-hero__body">
       <div class="news-hero__text">
@@ -105,18 +105,18 @@ useHead({
     },
   ],
 })
+
+// the navbar isn't inside the band: <html> hands it the band's color to compute its own contrast
+useHead({ htmlAttrs: { style: () => `--hero-surface: ${color}` } })
 </script>
 
 <style lang="scss">
 .news-hero {
   // white on a dark band, ink on a light one: no other shade, it would lose contrast on some colors
-  --news-text: #fff;
+  @include on-surface(var(--surface));
 
-  color: var(--news-text);
-
-  &--light {
-    --news-text: #23201d;
-  }
+  color: var(--on-surface);
+  background: var(--surface);
 
   // the transparent navbar sits on the band
   &.section {
@@ -140,7 +140,7 @@ useHead({
   &__date {
     font-size: 0.875rem;
     font-weight: 700;
-    color: var(--news-text);
+    color: var(--on-surface);
     text-transform: uppercase;
     letter-spacing: 0.12em;
   }
@@ -149,7 +149,7 @@ useHead({
     font-size: clamp(2.25rem, 6vw, 4rem);
     font-weight: 700;
     line-height: 1.1;
-    color: var(--news-text);
+    color: var(--on-surface);
     overflow-wrap: break-word;
   }
 
@@ -157,7 +157,7 @@ useHead({
     max-width: 40rem;
     font-size: 1.125rem;
     line-height: 1.7;
-    color: var(--news-text);
+    color: var(--on-surface);
   }
 
   &__image {
@@ -192,14 +192,17 @@ useHead({
   margin-top: 0;
 }
 
-// the navbar's links are light: dark on a light band (closed menu only, the open one has its own background)
-.page:has(.news-hero--light:first-of-type) .navbar--transparent {
+// the navbar's links read on the band: ink on a light one, white on a dark one
+// (closed menu only, the open one has its own background)
+.page:has(.news-hero:first-of-type) .navbar--transparent {
+  @include on-surface(var(--hero-surface));
+
   .navbar-menu:not(.is-active) .navbar-item {
-    color: #23201d;
+    color: var(--on-surface);
   }
 
   .navbar-burger:not(.is-active) span {
-    background-color: #23201d;
+    background-color: var(--on-surface);
   }
 }
 </style>

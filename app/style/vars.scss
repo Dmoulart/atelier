@@ -14,6 +14,21 @@ $font-white: rgb(238, 230, 230);
 $navbar-background-color: transparent;
 $navbar-item-color: $font-white;
 
+// Colors that read on a colored background, computed by the browser from the background itself:
+// --on-surface: ink or white, whichever contrasts more (the switch, OKLCH lightness 0.6, is where
+// WCAG's contrast with each is the same). --on-surface-accent: terracotta, or a light peach on dark.
+// (0.6 - l) * 1000 is far below 0 or far above 1: the clamp makes it a switch.
+// Older browsers keep ink and terracotta.
+@mixin on-surface($surface) {
+    --on-surface: #23201d;
+    --on-surface-accent: #b4532a;
+
+    @supports (color: oklch(from red l c h)) {
+        --on-surface: oklch(from #{$surface} clamp(0.25, (0.6 - l) * 1000, 1) 0.008 60);
+        --on-surface-accent: oklch(from #{$surface} clamp(0.55, (0.6 - l) * 1000, 0.85) 0.13 45);
+    }
+}
+
 %caption {
     position: absolute;
     bottom: 0;

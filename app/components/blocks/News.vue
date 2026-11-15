@@ -2,8 +2,7 @@
   <Section
     v-if="latest.length"
     class="news"
-    :class="{ 'news--dark': !isLightColor(color) }"
-    :style="{ background: color }"
+    :style="{ '--surface': color }"
   >
     <template v-if="title">
       <h3 v-if="titleSize === 'small'" class="has-text-centered title is-3">{{ title }}</h3>
@@ -82,19 +81,14 @@ const latest = computed(() =>
 
 <style lang="scss">
 .news {
-  // a dark background: light text, like TextBlock's dark highlight
-  &--dark {
-    &,
-    .title,
-    .news__more {
-      color: #fff;
-    }
+  // ink or white text, terracotta or light accent: whichever reads on the color
+  @include on-surface(var(--surface));
 
-    .news__card:hover .news__title,
-    .news__card:focus-visible .news__title {
-      color: inherit;
-      text-decoration: underline;
-    }
+  color: var(--on-surface);
+  background: var(--surface);
+
+  .title {
+    color: var(--on-surface);
   }
 
   > h2,
@@ -117,7 +111,7 @@ const latest = computed(() =>
     &:hover,
     &:focus-visible {
       .news__title {
-        color: #b4532a;
+        color: var(--on-surface-accent);
       }
 
       // the photo and its tile move apart
@@ -199,7 +193,7 @@ const latest = computed(() =>
     margin-top: auto;
     padding-top: 0.25rem;
     font-weight: 700;
-    color: #b4532a;
+    color: var(--on-surface-accent);
 
     span {
       display: inline-block;
