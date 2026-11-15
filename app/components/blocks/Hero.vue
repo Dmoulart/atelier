@@ -4,33 +4,30 @@
   </Section>
 </template>
 <script setup lang="ts">
-const {
-  backgroundImage,
-  imageDescription = "Une magnifique oeuvre de l'atelier de Saint-Guénolé",
-  seoTitle,
-  seoDescription,
-} = defineProps<{
+const { backgroundImage, seo = {} } = defineProps<{
   backgroundImage: string
-  imageDescription?: string
-  seoTitle?: string
-  seoDescription?: string
+  seo?: { title?: string; description?: string; imageDescription?: string }
 }>()
+
+const seoTitle = () => seo.title
+const seoDescription = () => seo.description
+const imageDescription = () => seo.imageDescription || "Une magnifique oeuvre de l'atelier de Saint-Guénolé"
 
 const { BASE_URL } = useRuntimeConfig().public
 const img = useImage()
 const ogImage = computed(() => img(backgroundImage, { format: 'jpeg', width: 1280, height: 1024 }))
 
 useSeoMeta({
-  title: () => seoTitle,
-  ogTitle: () => seoTitle,
-  twitterTitle: () => seoTitle,
-  description: () => seoDescription,
-  ogDescription: () => seoDescription,
-  twitterDescription: () => seoDescription,
+  title: seoTitle,
+  ogTitle: seoTitle,
+  twitterTitle: seoTitle,
+  description: seoDescription,
+  ogDescription: seoDescription,
+  twitterDescription: seoDescription,
   ogImage: () => new URL(ogImage.value, BASE_URL).href,
   ogImageWidth: 1280,
   ogImageHeight: 1024,
-  ogImageAlt: () => imageDescription,
+  ogImageAlt: imageDescription,
   ogType: 'website',
 })
 </script>

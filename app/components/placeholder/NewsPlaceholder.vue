@@ -1,10 +1,8 @@
 <template>
-  <NewsHero
+  <NewsHero :seo="{description:'Un court résumé de l\'article, affiché sous le titre, dans les résultats de recherche et dans la liste des actualités.',imageDescription:'Une oeuvre de l\'atelier de Saint-Guénolé'}"
     title="Titre de l'article"
     date="2026-11-14"
-    seo-description="Un court résumé de l'article, affiché sous le titre, dans les résultats de recherche et dans la liste des actualités."
     image="/gallery/ArtTherap1.jpg"
-    image-description="Une oeuvre de l'atelier de Saint-Guénolé"
   />
   <TextBlock title="Le titre de ma section 🦤">
     <p>Le début de mon super article !</p>

@@ -10,7 +10,7 @@ import ColorField from '~/editor/ColorField.vue'
 import DateField from '~/editor/DateField.vue'
 import PageExplorer from '~/editor/PageExplorer.vue'
 import PhotoField from '~/editor/PhotoField.vue'
-import TextAreaField from '~/editor/TextAreaField.vue'
+import SeoField from '~/editor/SeoField.vue'
 
 useSeoMeta({ robots: 'noindex, nofollow' })
 
@@ -26,14 +26,12 @@ definePageMeta({
 
 const fields = [
   { component: 'Hero', prop: 'backgroundImage', use: PhotoField },
-  { component: 'Hero', prop: 'seoDescription', use: TextAreaField },
-  { component: 'Hero', prop: 'imageDescription', use: TextAreaField },
+  { component: 'Hero', prop: 'seo', use: SeoField },
   { component: 'NewsHero', prop: 'date', use: DateField },
   { component: 'NewsHero', prop: 'color', use: ColorField },
   { component: 'NewsHero', prop: 'updated', use: DateField },
   { component: 'NewsHero', prop: 'image', use: PhotoField },
-  { component: 'NewsHero', prop: 'seoDescription', use: TextAreaField },
-  { component: 'NewsHero', prop: 'imageDescription', use: TextAreaField },
+  { component: 'NewsHero', prop: 'seo', use: SeoField },
   { component: 'TextBlock', prop: 'highlightColor', use: ColorField },
   { component: 'TextMedia', prop: 'media', use: PhotoField },
   { component: 'PhotoCarousel', prop: 'images', use: PhotoField },
@@ -41,6 +39,7 @@ const fields = [
   { component: 'Image', prop: 'image', use: PhotoField },
 ]
 
+const title = useRoute().query.title
 const page = String(useRoute().query.page ?? 'index')
 const content = useRoute().query.content?.toString()
 
@@ -49,6 +48,12 @@ const component = ref(structuredClone(schemas[content ?? page]))
 // a new article from the placeholder is published today, not on the placeholder's date
 const newsHero = content && component.value?.template.elements.find((el) => el.tag === 'NewsHero')
 if (newsHero) {
+  if (title) {
+    newsHero.attributes.title = {
+      type: 'literal',
+      expression: title,
+    }
+  }
   newsHero.attributes.date = {
     type: 'literal',
     expression: new Date().toISOString().slice(0, 10),
@@ -129,8 +134,8 @@ function editPage(slug: string) {
     v-if="pageExplorerIsOpen"
     @close="pageExplorerIsOpen = false"
     @edit="editPage"
-    @add="(slug) => {
-      navigateTo({ path: '/edit', query: { page: slug, content: slug.includes('news') ? 'NewsPlaceholder' :'PagePlaceholder'} })
+    @add="(slug, title) => {
+      navigateTo({ path: '/edit', query: { page: slug, title, content: slug.includes('news') ? 'NewsPlaceholder' :'PagePlaceholder'} })
     }"
   />
   <button type="button" class="button editor__pages" @click="pageExplorerIsOpen = true">

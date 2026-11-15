@@ -8,17 +8,18 @@
       <div class="news-hero__text">
         <time v-if="published" class="news-hero__date" :datetime="date">{{ published }}</time>
         <h1>{{ title }}</h1>
-        <p v-if="seoDescription" class="news-hero__lead">{{ seoDescription }}</p>
+        <p v-if="seo.description" class="news-hero__lead">{{ seo.description }}</p>
       </div>
       <NuxtImg
         v-if="image"
         class="news-hero__image"
         :src="image"
-        :alt="imageDescription"
+        :alt="seo.imageDescription ?? ''"
         format="webp"
         width="640"
         height="480"
         sizes="sm:100vw md:50vw lg:480px"
+        preload
         loading="eager"
         fetchpriority="high"
       />
@@ -31,22 +32,20 @@ const {
   title,
   date,
   image,
-  imageDescription = '',
-  seoDescription,
+  seo = {},
   updated,
   author = 'Marie-Laure Barcelo Moulart',
   color = '#dcc3ba',
 } = defineProps<{
-  color?: string
   /** the big title, also the article's headline for Google */
   title: string
-  /** publication date, YYYY-MM-DD */
-  date: string
   /** a photo next to the title, also the one shared on social networks */
   image?: string
-  imageDescription?: string
-  /** a short summary: under the title, in the search results and in the news list */
-  seoDescription?: string
+  /** publication date, YYYY-MM-DD */
+  date: string
+  color?: string
+  /** description: a short summary, under the title, in the search results and in the news list */
+  seo?: { description?: string; imageDescription?: string }
   /** date of the last real update, YYYY-MM-DD */
   updated?: string
   author?: string
@@ -80,11 +79,11 @@ useSeoMeta({
   title: () => `${title} - Atelier de St-Gué`,
   ogTitle: () => title,
   twitterTitle: () => title,
-  description: () => seoDescription,
-  ogDescription: () => seoDescription,
-  twitterDescription: () => seoDescription,
+  description: () => seo.description,
+  ogDescription: () => seo.description,
+  twitterDescription: () => seo.description,
   ogImage,
-  ogImageAlt: () => imageDescription,
+  ogImageAlt: () => seo.imageDescription,
   ogType: 'article',
   // an emptied date field gives "": no date rather than an invalid one
   articlePublishedTime: () => date || undefined,
@@ -102,7 +101,7 @@ useHead({
           '@context': 'https://schema.org',
           '@type': 'BlogPosting',
           headline: title,
-          description: seoDescription,
+          description: seo.description,
           datePublished: date || undefined,
           dateModified: updated || date || undefined,
           image: ogImage.value ? [ogImage.value] : undefined,
