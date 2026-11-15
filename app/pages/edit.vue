@@ -33,6 +33,7 @@ const fields = [
   { component: 'NewsHero', prop: 'image', use: PhotoField },
   { component: 'NewsHero', prop: 'seo', use: SeoField },
   { component: 'TextBlock', prop: 'highlightColor', use: ColorField },
+  { component: 'News', prop: 'color', use: ColorField },
   { component: 'TextMedia', prop: 'media', use: PhotoField },
   { component: 'PhotoCarousel', prop: 'images', use: PhotoField },
   { component: 'PhotoBanner', prop: 'photo', use: PhotoField },
@@ -97,7 +98,11 @@ const publishing = ref(false)
 
 async function publish(component: TransientComponentSchema) {
   publishing.value = true
-  const { err } = await publishPage(page, irToSfc(component, schemas)).finally(() => {
+  // ?page= is the route name of an existing page ("news-stage"), the file of a new one ("news/foo").
+  // The back writes app/pages/<file>.vue: take the existing page's file from its schema
+  // @todo: normalize the page query param use.
+  const file = (schemas[page] && /\/pages\/(.+)\.vue$/.exec(schemas[page].path)?.[1]) || page
+  const { err } = await publishPage(file, irToSfc(component, schemas)).finally(() => {
     publishing.value = false
   })
   if (err) {
