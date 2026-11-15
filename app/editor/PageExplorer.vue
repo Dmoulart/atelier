@@ -126,17 +126,20 @@ const pages = computed(() =>
 
 const count = computed(() => pages.value.length)
 
-const pagesByPath = computed(
-  () =>
-    Object.groupBy(
-      pages.value,
-      (page) => /\/(?<path>.*)\//.exec(page.slug)?.groups?.path ?? '',
-    ) as Record<string, Page[]>,
-)
+const pagesByPath = computed(() => {
+  const byPath = Object.groupBy(
+    pages.value,
+    (page) => /\/(?<path>.*)\//.exec(page.slug)?.groups?.path ?? '',
+  ) as Record<string, Page[]>
+
+  if (!('news' in byPath)) {
+    byPath.news = []
+  }
+  return byPath
+})
 
 // "" -> "Pages", "news" -> "News"
-const groupLabel = (path: string) =>
-  path ? path.charAt(0).toUpperCase() + path.slice(1) : 'Pages'
+const groupLabel = (path: string) => (path ? path.charAt(0).toUpperCase() + path.slice(1) : 'Pages')
 const addLabel = (path: string) => (path ? `Nouvelle page ${groupLabel(path)}` : 'Nouvelle page')
 
 // new page: the group it goes in, null while browsing the pages
