@@ -45,20 +45,20 @@ $routes = [
 
         handleMedia();
     },
-    "#^\/api\/pages\/publish\/.*$#" => function () {
+    "#^\/api\/pages\/publish\/(.*)$#" => function ($params) {
         if (!checkToken()) {
             return unauthorized();
         }
 
-        handlePage();
+        handlePage($params);
     }
 ];
 
 $found = false;
 
 foreach ($routes as $route => $handler) {
-    if (preg_match($route, $path)) {
-        call_user_func($handler);
+    if (preg_match($route, $path, $matches)) {
+        call_user_func($handler, count($matches) > 1 ? urldecode($matches[1]) : null);
         $found = true;
         break;
     }
@@ -113,12 +113,14 @@ function handleLogin(): void
 }
 
 
-function handlePage(): void
+function handlePage(string|null $params): void
 {
+    $path = $params ?? '';
     $repoUrl = getEnvOrFail('REPO_BASE_URL');
     $token = getEnvOrFail('GH_TOKEN');
-
-    if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+    
+    $method = $_SERVER['REQUEST_METHOD'];
+    if ($method !== 'PUT') {
         respond(405, ["erreur" => "Unauthorized method"]);
         return;
     }
@@ -129,13 +131,12 @@ function handlePage(): void
         return;
     }
 
-    $page = basename(getRequestPath());
-    if (!preg_match('/^[a-z0-9-\/]+$/', $page)) {
+    if (!preg_match('/^[a-z0-9-\/]+$/', $path)) {
         respond(422, ["success" => false, "message" => "Invalid page"]);
         return;
     }
 
-    $url = "$repoUrl/contents/app/pages/$page.vue";
+    $url = "$repoUrl/contents/app/pages/$path.vue";
     $headers = [
         "Authorization: Bearer $token",
         "Accept: application/vnd.github+json",
@@ -153,7 +154,7 @@ function handlePage(): void
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER     => $headers,
         CURLOPT_POSTFIELDS     => json_encode(array_filter([
-            "message" => "[editor] page $page edition",
+            "message" => "[editor] page $path edition",
             "branch"  => "$branch",
             "content" => base64_encode($file),
             "sha"     => $sha,

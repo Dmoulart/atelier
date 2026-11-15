@@ -86,7 +86,7 @@ const toast = ref<{ success: boolean; message: string } | null>(null)
 const editor = useTemplateRef('editor')
 
 async function publish(component: TransientComponentSchema) {
-  const { err } = await publishPage(component.tag, irToSfc(component, schemas))
+  const { err } = await publishPage(page, irToSfc(component, schemas))
   if (err) {
     toast.value = {
       success: false,
@@ -117,10 +117,10 @@ const rules: Rule[] = [
 ]
 const pageExplorerIsOpen = ref(false)
 
-function editPage(name: string) {
+function editPage(slug: string) {
   const dirty = JSON.stringify(component.value) !== JSON.stringify(schemas[page])
   if (dirty && !confirm('Les modifications non publiées seront perdues. Continuer ?')) return
-  navigateTo({ path: '/edit', query: { page: name } })
+  navigateTo({ path: '/edit', query: { page: slug } })
 }
 </script>
 
@@ -129,8 +129,8 @@ function editPage(name: string) {
     v-if="pageExplorerIsOpen"
     @close="pageExplorerIsOpen = false"
     @edit="editPage"
-    @add="(path) => {
-      navigateTo({ path: '/edit', query: { page: path, content: path.includes('news') ? 'NewsPlaceholder' :'PagePlaceholder'} })
+    @add="(slug) => {
+      navigateTo({ path: '/edit', query: { page: slug, content: slug.includes('news') ? 'NewsPlaceholder' :'PagePlaceholder'} })
     }"
   />
   <button type="button" class="button editor__pages" @click="pageExplorerIsOpen = true">

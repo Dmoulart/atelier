@@ -71,8 +71,8 @@ export async function signUpload(filename: string, folder: string) {
   return data as { url: string; fields: Record<string, string> }
 }
 
-export async function publishPage(name: string, component: string) {
-  return await api(`/pages/publish/${name}`, {
+export async function publishPage(slug: string, component: string) {
+  return await api(`/pages/publish/${encodeURIComponent(slug)}`, {
     method: 'PUT',
     body: component,
   })
