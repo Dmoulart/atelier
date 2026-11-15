@@ -93,8 +93,13 @@ const toast = ref<{ success: boolean; message: string } | null>(null)
 
 const editor = useTemplateRef('editor')
 
+const publishing = ref(false)
+
 async function publish(component: TransientComponentSchema) {
-  const { err } = await publishPage(page, irToSfc(component, schemas))
+  publishing.value = true
+  const { err } = await publishPage(page, irToSfc(component, schemas)).finally(() => {
+    publishing.value = false
+  })
   if (err) {
     toast.value = {
       success: false,
@@ -149,6 +154,7 @@ function editPage(slug: string) {
     v-else
     ref="editor"
     :fields="fields"
+    :publishing="publishing"
     @publish="publish"
     v-model="component"
     :dictionnary="schemas"

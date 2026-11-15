@@ -1,4 +1,3 @@
-<!-- the atelier's three latest news, from the news pages' NewsHero (see modules/news) -->
 <template>
   <Section v-if="latest.length" class="news">
     <template v-if="title">
@@ -8,7 +7,6 @@
     <ul class="news__list">
       <li v-for="item in latest" :key="item.path">
         <NuxtLink :to="item.path" class="news__card">
-          <!-- decorative: the title right below says what the link is -->
           <NuxtImg
             v-if="item.image"
             class="news__image"
@@ -20,12 +18,10 @@
             sizes="sm:100vw md:33vw lg:360px"
             loading="lazy"
           />
-          <!-- no photo: the article's band color -->
           <span v-else class="news__image" :style="{ background: item.color || '#dcc3ba' }" />
           <time v-if="item.date" class="news__date" :datetime="item.date">
             {{ formatDate(item.date) }}
           </time>
-          <!-- one level under the block's title -->
           <component :is="titleSize === 'small' ? 'h4' : 'h3'" class="news__title">
             {{ item.title }}
           </component>
@@ -45,6 +41,7 @@ const { title = "Les actualités de l'atelier...", titleSize = 'large' } = defin
 }>()
 
 type News = {
+  name: string
   path: string
   image?: string
   color?: string
@@ -54,12 +51,13 @@ type News = {
 }
 
 const route = useRoute()
-// the module sorts them newest first
-const latest = (news as News[])
-  .filter((news) => {
-    return news.path !== route.path
-  })
-  .slice(0, 3)
+// the page showing the block: the edited one in the editor (?page=news-stage), else the route itself
+const current = computed(() => route.query.page ?? route.name)
+
+// the module sorts them newest first; an article doesn't list itself
+const latest = computed(() =>
+  (news as News[]).filter((item) => item.name !== current.value).slice(0, 3),
+)
 </script>
 
 <style lang="scss">

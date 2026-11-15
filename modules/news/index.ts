@@ -22,6 +22,8 @@ export default defineNuxtModule({
             if (!hero) return []
             const attr = (name: string) => hero.attributes[name]?.expression
             return {
+              // Nuxt's route name for pages/news/<file>.vue, also the editor's ?page=
+              name: `news-${basename(file, '.vue')}`,
               // the host serves every page with a trailing slash
               path: `/news/${basename(file, '.vue')}/`,
               image: attr('image'),
