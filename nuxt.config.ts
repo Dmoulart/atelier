@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     './modules/gallery',
     '@nuxtjs/google-fonts',
     '@transient/nuxt',
+    './modules/news',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
   ],
