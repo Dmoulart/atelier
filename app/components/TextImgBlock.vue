@@ -1,6 +1,13 @@
 <template>
   <div class="text-img-block my-4">
+    <img
+      v-if="!src"
+      src="/placeholder.svg"
+      :alt="alt"
+      style="object-fit: none; background: #e8dfd5"
+    />
     <nuxt-img
+      v-else
       :src="src"
       :alt="alt"
       format="webp"

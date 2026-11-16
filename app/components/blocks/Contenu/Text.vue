@@ -9,7 +9,7 @@
       <h3 v-if="titleSize === 'small'" class="has-text-centered">{{ title }}</h3>
       <h2 v-else class="has-text-centered">{{ title }}</h2>
     </template>
-    <slot />
+    <div class="text-block__text"><slot></slot></div>
     <p v-if="linkLabel && linkUrl" class="has-text-centered is-size-4 mt-3">
       <a :href="linkUrl">{{ linkLabel }}</a>
     </p>
@@ -27,6 +27,15 @@ const { titleSize = 'large', highlightColor } = defineProps<{
 const background = computed(() => highlightColor || undefined)
 </script>
 <style lang="scss">
+.tr-root .text-block__text{
+  flex: 1;
+  // empty in the editor: reads as an input placeholder, in the block thumbnails grey
+  &:empty:before{
+    content: '✍️ Écrire ici…';
+    font-style: italic;
+    color: #b3aba2;
+  }
+}
 // ink or white text, whichever reads on the color. Bulma colors the titles and strong on their own
 .text-block--highlight {
   @include on-surface(var(--surface));

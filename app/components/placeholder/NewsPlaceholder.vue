@@ -16,24 +16,25 @@
       sont modifiables que depuis le paneau.
     </p>
   </Text>
+  <Text title="Mon deuxième titre 🧀" highlight-color="#f0f8ff">
+    <p>
+      Lorsque une section est sélectionnée tu verras apparaître un petit bouton + en bas. Il te
+      permet d'ajouter de nouvelles sections à la suite.
+    </p>
+    <p>Tu peux supprimer la section sélectionnée à l'aide la poubelle en haut à droite.</p>
+    <p>
+      Tu peux faire remonter ou redescendre la section sélectionnée à l'aide des flêches à gauche.
+    </p>
+  </Text>
   <Divider />
   <Quote
-    >Lorsque une section est sélectionnée tu verras apparaître un petit bouton + en bas. Il te
-    permet d'ajouter de nouvelles sections à la suite.</Quote
+    >Et enfin, quand tu as finis tu peux <strong>cliquer sur Publier</strong> ! Les modifications
+    seront effectives dans la minute.</Quote
   >
   <Image
     image="/gallery/ArtTherap1"
     alternative-text="Un oeuvre de l'Atelier représentant des oiseaux."
   />
-  <Text title="Mon deuxième titre 🧀" highlight-color="#f0f8ff">
-    <p>Tu peux supprimer la section sélectionnée à l'aide la poubelle en haut à droite.</p>
-    <p>
-      Tu peux faire remonter ou redescendre la section sélectionnée à l'aide des flêches à gauche.
-    </p>
-    <p>
-      Et enfin, quand tu as finis <strong>cliquer sur Publier</strong> ! Les modifications seront
-      effectives dans la minute.
-    </p>
-  </Text>
-  <News title="Les autres actualités de l'atelier"/>
+
+  <News title="Les autres actualités de l'atelier" />
 </template>
