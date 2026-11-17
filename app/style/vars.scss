@@ -23,9 +23,11 @@ $navbar-item-color: $font-white;
     --on-surface: #23201d;
     --on-surface-accent: #b4532a;
 
+    // l * alpha + 1 - alpha: a see-through color shows the light page behind it ("transparent" is black at alpha 0).
+    // / 1: left out, the alpha is the surface's own, a transparent surface would give transparent text
     @supports (color: oklch(from red l c h)) {
-        --on-surface: oklch(from #{$surface} clamp(0.25, (0.6 - l) * 1000, 1) 0.008 60);
-        --on-surface-accent: oklch(from #{$surface} clamp(0.55, (0.6 - l) * 1000, 0.85) 0.13 45);
+        --on-surface: oklch(from #{$surface} clamp(0.25, (0.6 - (l * alpha + 1 - alpha)) * 1000, 1) 0.008 60 / 1);
+        --on-surface-accent: oklch(from #{$surface} clamp(0.55, (0.6 - (l * alpha + 1 - alpha)) * 1000, 0.85) 0.13 45 / 1);
     }
 }
 

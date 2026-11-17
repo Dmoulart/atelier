@@ -1,15 +1,14 @@
 <!-- a custom field: one of the suggested colors, or any other one. The value is its "#rrggbb" code -->
 <template>
   <div class="color-field">
-    <!-- only without a default: a band that must have a color (NewsHero) can't be cleared -->
+    <!-- with a default, an empty value falls back to it: "transparent" is the way out -->
     <button
-      v-if="!prop.default"
       type="button"
       class="color-field__swatch color-field__none"
-      :aria-pressed="!selected"
+      :aria-pressed="!selected || selected === 'transparent'"
       aria-label="Aucune couleur"
       title="Aucune couleur"
-      @click="emit('update:modelValue', '')"
+      @click="emit('update:modelValue', prop.default ? 'transparent' : '')"
     />
     <button
       v-for="color in palette"
@@ -53,7 +52,10 @@ const selected = computed(() =>
     .toLowerCase(),
 )
 const custom = computed(
-  () => !!selected.value && !palette.some(({ value }) => value === selected.value),
+  () =>
+    !!selected.value &&
+    selected.value !== 'transparent' &&
+    !palette.some(({ value }) => value === selected.value),
 )
 </script>
 

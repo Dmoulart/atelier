@@ -1,7 +1,7 @@
 <!-- no src yet (block just added in the editor): placeholder in the block thumbnails style -->
 <template>
   <figure v-if="shape === 'landscape'" class="image is-4-by-5">
-    <img v-if="!src" src="/placeholder.svg" :alt="alt" style="object-fit: none; background: #e8dfd5" width="416" height="312" />
+    <img v-if="!src" src="/placeholder.svg" :alt="alt" style="object-fit: contain; object-position: bottom; background: #d6cfc7" width="416" height="312" />
     <nuxt-img
       v-else
       :src="src"
@@ -18,7 +18,7 @@
   </figure>
   <img
     v-else-if="!src"
-    src="/placeholder.svg" :alt="alt" style="object-fit: none; background: #e8dfd5"
+    src="/placeholder.svg" :alt="alt" style="object-fit: contain; object-position: bottom; background: #d6cfc7"
     :width="shape === 'portrait' ? 400 : 416"
     :height="shape === 'portrait' ? 600 : 312"
   />

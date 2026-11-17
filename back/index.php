@@ -142,7 +142,7 @@ function handlePage(string|null $params): void
         "Accept: application/vnd.github+json",
         "User-Agent: atelier-editor",
     ];
-    $branch = 'next';
+    $branch = 'main';
     $get = curl_init("$url?ref=$branch");
     curl_setopt_array($get, [CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $headers]);
     $sha = json_decode(curl_exec($get), true)['sha'] ?? null;

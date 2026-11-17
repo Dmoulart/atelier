@@ -4,7 +4,7 @@
       v-if="!src"
       src="/placeholder.svg"
       :alt="alt"
-      style="object-fit: none; background: #e8dfd5"
+      style="object-fit: contain; object-position: bottom; background: #d6cfc7"
     />
     <nuxt-img
       v-else

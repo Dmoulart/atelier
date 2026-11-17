@@ -21,7 +21,15 @@
       @click="$emit('close')"
     >
       <figure class="carousel__figure">
+        <img
+          v-if="!src"
+          src="/placeholder.svg"
+          class="carousel__img"
+          style="object-position: bottom; background: #d6cfc7"
+          alt=""
+        />
         <nuxt-img
+          v-else
           :src="src"
           class="carousel__img"
           :fetchpriority="i === 0 ? 'medium' : 'low'"
