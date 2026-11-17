@@ -44,7 +44,6 @@ html {
                 @extend .has-text-centered !optional;
             }
         }
-
         // automatic title bulma styling inside content
         h#{$i} {
             @extend .is-#{$i} !optional;
@@ -61,4 +60,9 @@ blockquote {
     line-height: 2;
     font-size: 1.25rem;
     text-align: center;
+}
+// an empty line typed in the editor (Enter twice) is an empty <p>: without content it has no
+// height and its margins collapse, the line vanished once the section was left
+p:empty::before {
+    content: "\200b";
 }

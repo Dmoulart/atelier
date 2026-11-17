@@ -62,9 +62,6 @@ section.text-block + section.text-block:not(.text-block--highlight),
 section.photo-carousel + section.text-block:not(.text-block--highlight) {
   padding-top: 0;
 }
-section.text-block:not(.text-block--highlight):has(+ section.text-block:not(.text-block--highlight)) {
-  padding-bottom: 0;
-}
 </style>
 <transient>
   {
